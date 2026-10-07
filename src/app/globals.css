@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f3f0ea;
+  --color-paper-deep: #e8e3d9;
+  --color-ink: #161514;
+  --color-ink-soft: #57524b;
+  --color-ink-muted: #8a847a;
+  --color-rule: rgb(22 21 20 / 0.14);
+  --color-rule-strong: rgb(22 21 20 / 0.32);
+  --color-accent: #d4441c;
+  --color-accent-ink: #a5330f;
+  --color-night: #141312;
+  --color-night-soft: #a8a196;
+
+  --font-sans: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  --text-display: clamp(2.6rem, 1.4rem + 5.6vw, 6.75rem);
+  --text-display--line-height: 0.98;
+  --text-display--letter-spacing: -0.035em;
+  --text-title: clamp(2rem, 1.3rem + 3vw, 4rem);
+  --text-title--line-height: 1;
+  --text-title--letter-spacing: -0.03em;
+  --text-heading: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+  --text-heading--line-height: 1.1;
+  --text-heading--letter-spacing: -0.02em;
+  --text-lede: clamp(1.125rem, 1.02rem + 0.45vw, 1.375rem);
+  --text-lede--line-height: 1.45;
+  --text-label: 0.6875rem;
+  --text-label--line-height: 1.3;
+  --text-label--letter-spacing: 0.08em;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-page-in: page-in 0.5s var(--ease-out-soft) both;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes page-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-7px) rotate(var(--float-tilt, 1deg));
+    }
+  }
+}
+
+/* Page container: consistent gutters across the site. */
+@utility shell {
+  width: 100%;
+  max-width: 90rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (width >= 48rem) {
+    padding-inline: 2rem;
+  }
+  @media (width >= 80rem) {
+    padding-inline: 3rem;
+  }
+}
+
+/* Mono uppercase micro-label used for metadata throughout. */
+@utility label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  line-height: var(--text-label--line-height);
+  letter-spacing: var(--text-label--letter-spacing);
+  text-transform: uppercase;
+}
+
+/* Graph-paper dot grid — the "sketchbook" surface behind the doodles. */
+@utility dot-grid {
+  background-image: radial-gradient(circle at 1px 1px, rgb(22 21 20 / 0.16) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+
+/* Diagonal hatch for unfilled media slots. */
+@utility hatch {
+  background-color: var(--color-paper-deep);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 10px,
+    rgb(22 21 20 / 0.05) 10px 11px
+  );
+}
+
+@layer base {
+  html {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    scroll-behavior: smooth;
+    overflow-x: clip;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-paper);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+
+  [id] {
+    scroll-margin-top: 6rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
