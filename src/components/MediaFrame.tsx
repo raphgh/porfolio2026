@@ -4,19 +4,13 @@ import { AutoVideo } from "./AutoVideo";
 
 type Props = {
   media?: Media;
-  /** Tailwind aspect class, e.g. `aspect-[16/10]`. */
   aspect?: string;
-  /** Text shown in the empty slot. */
   placeholder?: string;
   sizes?: string;
   priority?: boolean;
   className?: string;
 };
 
-/**
- * Fixed-ratio media slot. With no media it renders a labelled hatch so the
- * layout is honest about what's missing instead of using stock imagery.
- */
 export function MediaFrame({
   media,
   aspect = "aspect-[16/10]",
@@ -26,12 +20,20 @@ export function MediaFrame({
   className = "",
 }: Props) {
   return (
-    <div className={`relative overflow-hidden bg-paper-deep ${aspect} ${className}`}>
+    <div
+      className={`relative overflow-hidden rounded-2xl border border-navy/40 bg-paper-deep ${aspect} ${className}`}
+    >
       {!media && (
         <div className="hatch absolute inset-0 flex items-end justify-between p-3 md:p-4">
-          <span className="label text-ink-muted">{placeholder}</span>
-          <span aria-hidden className="label text-ink-muted">
-            +
+          {placeholder ? (
+            <span className="label rounded-full border border-navy/30 bg-white px-2.5 py-1 text-navy">
+              {placeholder}
+            </span>
+          ) : (
+            <span />
+          )}
+          <span aria-hidden className="font-mono text-sm text-mustard-deep">
+            ✦
           </span>
         </div>
       )}

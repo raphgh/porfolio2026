@@ -15,7 +15,7 @@ export type DoodleConfig = {
   mobile?: Placement;
 };
 
-/** Positions are relative to the doodle stage, not the page. */
+/** Positions are relative to the hero (the doodle stage), framing the centered intro. */
 export const doodles: DoodleConfig[] = [
   {
     id: "terminal",
@@ -23,8 +23,8 @@ export const doodles: DoodleConfig[] = [
     Art: Terminal,
     tilt: -4,
     float: 7,
-    desktop: { top: "4%", left: "0%", size: "44%" },
-    mobile: { top: "8%", left: "2%", size: "6.25rem" },
+    desktop: { top: "8%", left: "1%", size: "13%" },
+    mobile: { top: "1.25rem", left: "0%", size: "5.5rem" },
   },
   {
     id: "guitar",
@@ -32,8 +32,8 @@ export const doodles: DoodleConfig[] = [
     Art: Guitar,
     tilt: 14,
     float: 8.5,
-    desktop: { top: "0%", left: "58%", size: "42%" },
-    mobile: { top: "2%", left: "64%", size: "7rem" },
+    desktop: { top: "3%", left: "86%", size: "10%" },
+    mobile: { top: "0.5rem", left: "calc(100% - 5.5rem)", size: "4.75rem" },
   },
   {
     id: "computer",
@@ -41,8 +41,8 @@ export const doodles: DoodleConfig[] = [
     Art: Computer,
     tilt: 3,
     float: 6.5,
-    desktop: { top: "30%", left: "16%", size: "54%" },
-    mobile: { top: "36%", left: "28%", size: "7.25rem" },
+    desktop: { top: "40%", left: "80%", size: "15%" },
+    mobile: { top: "calc(100% - 7rem)", left: "calc(50% - 3.25rem)", size: "6.5rem" },
   },
   {
     id: "headphones",
@@ -50,7 +50,7 @@ export const doodles: DoodleConfig[] = [
     Art: Headphones,
     tilt: -10,
     float: 9,
-    desktop: { top: "40%", left: "66%", size: "34%" },
+    desktop: { top: "44%", left: "8%", size: "9%" },
   },
   {
     id: "camera",
@@ -58,8 +58,8 @@ export const doodles: DoodleConfig[] = [
     Art: Camera,
     tilt: -7,
     float: 7.5,
-    desktop: { top: "60%", left: "0%", size: "38%" },
-    mobile: { top: "52%", left: "2%", size: "5.75rem" },
+    desktop: { top: "72%", left: "2%", size: "11%" },
+    mobile: { top: "calc(100% - 5.5rem)", left: "0%", size: "5rem" },
   },
   {
     id: "coffee",
@@ -67,8 +67,8 @@ export const doodles: DoodleConfig[] = [
     Art: Coffee,
     tilt: 6,
     float: 6,
-    desktop: { top: "64%", left: "62%", size: "32%" },
-    mobile: { top: "56%", left: "72%", size: "5.5rem" },
+    desktop: { top: "74%", left: "88%", size: "8%" },
+    mobile: { top: "calc(100% - 5.5rem)", left: "calc(100% - 5.25rem)", size: "4.5rem" },
   },
   {
     id: "pencil",
@@ -76,6 +76,6 @@ export const doodles: DoodleConfig[] = [
     Art: Pencil,
     tilt: 0,
     float: 10,
-    desktop: { top: "18%", left: "40%", size: "26%" },
+    desktop: { top: "24%", left: "14%", size: "6%" },
   },
 ];

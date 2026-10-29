@@ -36,12 +36,15 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
       </div>
 
       {next && next !== project && (
-        <nav aria-label="Next project" className="mt-28 border-t border-ink pt-6">
-          <Link href={`/work/${next.slug}`} className="group flex flex-col gap-2">
-            <span className="label text-ink-soft">Next project</span>
-            <span className="flex items-baseline gap-4 text-title font-medium">
+        <nav aria-label="Next project" className="mt-28">
+          <Link
+            href={`/work/${next.slug}`}
+            className="group flex flex-col gap-3 rounded-[1.5rem] border border-navy bg-navy p-6 text-white transition-colors hover:bg-navy-deep md:p-10"
+          >
+            <span className="label text-mustard-soft">Next project</span>
+            <span className="display flex items-baseline gap-4 text-title">
               {next.title}
-              <span aria-hidden className="text-[0.6em] transition-transform duration-300 group-hover:translate-x-2 group-hover:text-accent">
+              <span aria-hidden className="text-[0.6em] transition-transform duration-300 group-hover:translate-x-2">
                 →
               </span>
             </span>

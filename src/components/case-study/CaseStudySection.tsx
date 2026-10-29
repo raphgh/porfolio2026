@@ -30,21 +30,26 @@ export const sectionTitles: Record<CaseStudySectionKind, string> = {
 export const sectionId = (section: Section, i: number) => `${String(i + 1).padStart(2, "0")}-${section.kind}`;
 export const sectionTitle = (section: Section) => section.title ?? sectionTitles[section.kind];
 
-/**
- * Three-column editorial layout on large screens: sticky section label,
- * main content, and margin notes (WHY THIS?, TRADEOFF…).
- */
 export function CaseStudySection({ section, index }: { section: Section; index: number }) {
   const notes = section.blocks.filter((b) => b.type === "note");
   const content = section.blocks.filter((b) => b.type !== "note");
   const id = sectionId(section, index);
 
   return (
-    <section aria-labelledby={`${id}-title`} id={id} className="grid grid-cols-12 gap-x-8 gap-y-6 border-t border-rule pt-6">
+    <section
+      aria-labelledby={`${id}-title`}
+      id={id}
+      className="grid grid-cols-12 gap-x-4 gap-y-6 border-t border-silver-soft pt-6 md:gap-x-8"
+    >
       <div className="col-span-12 lg:col-span-3">
         <div className="lg:sticky lg:top-24">
-          <p className="label text-ink-muted">{String(index + 1).padStart(2, "0")}</p>
-          <h2 id={`${id}-title`} className="mt-1 text-heading font-medium">
+          <span
+            aria-hidden
+            className="mb-3 grid size-9 place-items-center rounded-full bg-navy font-mono text-sm text-white"
+          >
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <h2 id={`${id}-title`} className="display text-heading text-navy">
             {sectionTitle(section)}
           </h2>
         </div>

@@ -1,34 +1,26 @@
 import type { ScrapbookItem } from "@/data/types";
 import { MediaFrame } from "./MediaFrame";
 
-/** Taped-in snapshots — deliberately small and loose, a scrapbook not a portfolio. */
 export function AboutGallery({ items, compact = false }: { items: ScrapbookItem[]; compact?: boolean }) {
   return (
     <ul
-      className={`grid gap-y-10 ${
-        compact ? "grid-cols-3 gap-x-3 sm:gap-x-6" : "grid-cols-2 gap-x-5 sm:grid-cols-3 md:gap-x-10 md:gap-y-14"
+      className={`grid gap-4 ${
+        compact ? "grid-cols-3 gap-3 sm:gap-4" : "grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6"
       }`}
     >
       {items.map((item, i) => (
-        <li
-          key={item.caption}
-          style={{ "--tilt": `${item.tilt ?? 0}deg` } as React.CSSProperties}
-          className={`group relative ${!compact && i % 3 === 1 ? "sm:translate-y-8" : ""}`}
-        >
-          <figure className="relative rotate-(--tilt) bg-[#fbfaf6] p-2 pb-0 shadow-[0_1px_2px_rgb(0_0_0/0.06),0_10px_24px_-14px_rgb(0_0_0/0.35)] transition-transform duration-500 ease-out group-hover:rotate-0 group-hover:-translate-y-1 md:p-2.5 md:pb-0">
-            <span
-              aria-hidden
-              className="absolute -top-2.5 left-1/2 z-10 h-5 w-14 -translate-x-1/2 -rotate-3 bg-[#e6dcc4]/85 mix-blend-multiply"
-            />
+        <li key={item.caption} className="group">
+          <figure className="overflow-hidden rounded-2xl border border-navy/30 bg-white transition-colors group-hover:border-navy">
             <MediaFrame
               media={item.media}
               aspect="aspect-[4/5]"
               placeholder={compact ? "" : "Photo"}
               sizes="(min-width: 640px) 25vw, 45vw"
+              className="rounded-none border-0"
             />
-            <figcaption className="label flex items-center justify-between py-2.5 text-ink md:py-3">
+            <figcaption className="flex items-center justify-between px-3 py-2.5 text-sm text-navy">
               {item.caption}
-              <span aria-hidden className="text-ink-muted">
+              <span aria-hidden className="font-mono text-xs text-charcoal-muted">
                 {String(i + 1).padStart(2, "0")}
               </span>
             </figcaption>

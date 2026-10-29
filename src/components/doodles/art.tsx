@@ -21,7 +21,7 @@ const Stroke = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Fill = ({ children }: { children: React.ReactNode }) => (
-  <g fill="var(--color-accent)" opacity={0.9} transform="translate(3 3)">
+  <g fill="var(--doodle-fill, var(--color-powder))" transform="translate(3 3)">
     {children}
   </g>
 );
@@ -59,7 +59,7 @@ export function Guitar({ className }: ArtProps) {
       </Fill>
       <Stroke>
         <path d="M60 44 C71 44 76 51 75 59 C74 65 70 67 73 70 C83 74 85 84 83 92 C80 103 70 108 60 108 C50 108 40 103 37 92 C35 84 37 74 47 70 C50 67 46 65 45 59 C44 51 49 44 60 44 Z" />
-        <circle cx="60" cy="78" r="7.5" fill="var(--color-paper)" />
+        <circle cx="60" cy="78" r="7.5" fill="var(--color-card)" />
         <path d="M56 45 L56.5 15 M64 45 L63.5 15" />
         <path d="M53 15 L67 15 L68 4 L52 4 Z" />
         <path d="M51 7 L48 7 M51 12 L48 12 M69 7 L72 7 M69 12 L72 12" strokeWidth={1.8} />

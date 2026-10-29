@@ -8,9 +8,9 @@ type Props = {
 };
 
 export function ArrowLink({ href, children, external, className = "" }: Props) {
-  const classes = `label group inline-flex items-center gap-2 border-b border-current pb-1 transition-colors hover:text-accent-ink ${className}`;
+  const classes = `label group inline-flex h-10 items-center gap-2.5 rounded-full border border-navy bg-white px-4 text-navy transition-colors hover:bg-navy hover:text-white ${className}`;
   const arrow = (
-    <span aria-hidden className="inline-block transition-transform duration-300 group-hover:translate-x-1">
+    <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">
       {external ? "↗" : "→"}
     </span>
   );

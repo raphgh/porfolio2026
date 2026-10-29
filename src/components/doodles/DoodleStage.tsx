@@ -5,11 +5,6 @@ import { useCallback, useRef, useState } from "react";
 import { Doodle, type DoodleHandle } from "./Doodle";
 import { doodles } from "./doodles";
 
-/**
- * The hero's sketchbook surface. Doodles are decorative (hidden from
- * assistive tech); the Shuffle / Reset buttons give keyboard and screen-reader
- * users the same playful behaviour without dragging.
- */
 export function DoodleStage({ className = "" }: { className?: string }) {
   const stageRef = useRef<HTMLDivElement>(null);
   const handles = useRef(new Map<string, DoodleHandle>());
@@ -33,7 +28,7 @@ export function DoodleStage({ className = "" }: { className?: string }) {
     const stage = stageRef.current?.getBoundingClientRect();
     if (!stage) return;
     handles.current.forEach((h) => {
-      if (!h.el.offsetParent) return; // hidden at this breakpoint
+      if (!h.el.offsetParent) return;
       const { x, y } = target(h, stage);
       const transition = reduceMotion
         ? { duration: 0 }
@@ -58,7 +53,7 @@ export function DoodleStage({ className = "" }: { className?: string }) {
   };
 
   return (
-    <div className={`relative ${className}`}>
+    <div className={`pointer-events-none ${className}`}>
       <svg width="0" height="0" className="absolute" aria-hidden focusable="false">
         <defs>
           <filter id="sketch" x="-10%" y="-10%" width="120%" height="120%">
@@ -68,18 +63,12 @@ export function DoodleStage({ className = "" }: { className?: string }) {
         </defs>
       </svg>
 
-      <div
-        aria-hidden
-        className="dot-grid pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black_35%,transparent_75%)]"
-      />
-
       <div ref={stageRef} aria-hidden className="absolute inset-0">
         {doodles.map((d, i) => (
           <Doodle
             key={d.id}
             doodle={d}
             index={i}
-            stageRef={stageRef}
             zIndex={order.indexOf(d.id) + 1}
             onLift={lift}
             register={register}
@@ -87,12 +76,14 @@ export function DoodleStage({ className = "" }: { className?: string }) {
         ))}
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 z-20 flex items-end justify-between gap-4 pointer-events-none">
+      <div className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-2 max-lg:hidden">
         <p
           aria-hidden
-          className={`label text-ink-muted transition-opacity duration-500 ${touched ? "opacity-0" : "opacity-100"}`}
+          className={`-rotate-2 font-hand text-[1.45rem] leading-none text-berry transition-opacity duration-500 ${
+            touched ? "opacity-0" : "opacity-100"
+          }`}
         >
-          ↖ Drag things around
+          go on, drag them anywhere ↗
         </p>
         <div className="pointer-events-auto flex gap-1">
           <StageButton onClick={shuffle}>Shuffle</StageButton>
@@ -109,7 +100,7 @@ function StageButton({ children, onClick }: { children: React.ReactNode; onClick
       type="button"
       onClick={onClick}
       aria-label={`${children} sketchbook objects`}
-      className="label border border-rule-strong bg-paper px-2.5 py-1.5 text-ink-soft transition-colors hover:border-ink hover:text-ink"
+      className="rounded-full border border-rule-strong bg-card px-3 py-1 text-sm transition-colors hover:border-ink"
     >
       {children}
     </button>

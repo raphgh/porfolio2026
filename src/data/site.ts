@@ -4,7 +4,7 @@
  */
 export const site = {
   name: "Raphaelle Ghanem",
-  shortName: "RG",
+  shortName: "rg",
   title: "Software Engineer",
   description:
     "Software engineering student building products end-to-end — from backend systems and APIs to interfaces and experiences.",
@@ -28,10 +28,29 @@ export const hero = {
   capabilities: ["Backend", "APIs", "Full-stack", "Infrastructure", "Interfaces", "Product"],
 } as const;
 
+/** Primary site navigation (header / footer). Route paths are unchanged. */
 export const nav = [
-  { label: "Work", href: "/work" },
+  { label: "Projects", href: "/work" },
   { label: "Experience", href: "/experience" },
-  { label: "Extracurriculars", href: "/extracurriculars" },
   { label: "Lab", href: "/lab" },
   { label: "About", href: "/about" },
+] as const;
+
+/** Stacked landing-page cards — includes Home as the first card. */
+export const stackNav = [
+  { label: "Home", href: "/" },
+  { label: "Projects", href: "/work" },
+  { label: "Experience", href: "/experience" },
+  { label: "Lab", href: "/lab" },
+  { label: "About", href: "/about" },
+] as const;
+
+/** Confirmed stack from the site itself — expand as real tools are added to data. */
+export const technologies = [
+  { name: "React", group: "Frameworks" as const },
+  { name: "Next.js", group: "Frameworks" as const },
+  { name: "TypeScript", group: "Languages" as const },
+  { name: "Tailwind CSS", group: "Tools" as const },
+  { name: "Motion", group: "Tools" as const },
+  { name: "Vercel", group: "Infrastructure" as const },
 ] as const;

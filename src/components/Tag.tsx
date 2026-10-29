@@ -1,23 +1,23 @@
 type Props = {
   items: readonly string[];
   className?: string;
-  /** Visually emphasise the first tag (the project's primary type). */
   emphasizeFirst?: boolean;
 };
 
-/** Inline, dot-separated metadata list. Deliberately not pill-shaped. */
 export function TagList({ items, className = "", emphasizeFirst = false }: Props) {
   if (!items.length) return null;
   return (
-    <ul className={`label flex flex-wrap items-center gap-x-2 gap-y-1 ${className}`}>
+    <ul className={`label flex flex-wrap items-center gap-2 ${className}`}>
       {items.map((item, i) => (
-        <li key={item} className="flex items-center gap-2">
-          {i > 0 && (
-            <span aria-hidden className="opacity-50">
-              ·
-            </span>
-          )}
-          <span className={emphasizeFirst && i === 0 ? "text-accent-ink" : undefined}>{item}</span>
+        <li
+          key={item}
+          className={`rounded-full border px-2.5 py-0.5 ${
+            emphasizeFirst && i === 0
+              ? "border-mustard bg-mustard-soft text-charcoal"
+              : "border-current/40"
+          }`}
+        >
+          {item}
         </li>
       ))}
     </ul>
@@ -27,8 +27,8 @@ export function TagList({ items, className = "", emphasizeFirst = false }: Props
 export function Tag({ children, active = false }: { children: React.ReactNode; active?: boolean }) {
   return (
     <span
-      className={`label inline-flex h-7 items-center border px-2.5 transition-colors ${
-        active ? "border-ink bg-ink text-paper" : "border-rule-strong text-ink-soft"
+      className={`label inline-flex h-7 items-center rounded-full border px-2.5 ${
+        active ? "border-navy bg-navy text-white" : "border-navy/40 bg-white text-navy"
       }`}
     >
       {children}

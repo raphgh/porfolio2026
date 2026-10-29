@@ -1,22 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Geist_Mono, Instrument_Sans, Instrument_Serif } from "next/font/google";
+import { Geist_Mono, Instrument_Serif } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { ThreadTrail } from "@/components/ThreadTrail";
 import { MotionProvider } from "@/components/MotionProvider";
 import { site } from "@/data/site";
 import "./globals.css";
 
-const sans = Instrument_Sans({
-  variable: "--font-instrument-sans",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const serif = Instrument_Serif({
-  variable: "--font-instrument-serif",
+const display = Instrument_Serif({
+  variable: "--font-instrument",
   subsets: ["latin"],
   weight: "400",
-  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -42,7 +36,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f3f0ea",
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -50,22 +44,22 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${sans.variable} ${serif.variable} ${mono.variable} antialiased`}
+      className={`${display.variable} ${mono.variable} antialiased`}
     >
-      <body className="flex min-h-dvh flex-col">
+      <body className="flex min-h-dvh flex-col bg-white text-charcoal">
         <noscript>
-          {/* Scroll reveals start hidden; without JS they'd never appear. */}
           <style>{`[style*="opacity:0"]{opacity:1!important;transform:none!important}`}</style>
         </noscript>
         <a
           href="#main"
-          className="label sr-only z-[100] bg-ink px-4 py-3 text-paper focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+          className="label sr-only z-[100] rounded-full bg-mustard px-4 py-3 text-charcoal focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
         >
           Skip to content
         </a>
         <MotionProvider>
+          <ThreadTrail />
           <Navbar />
-          <main id="main" className="flex-1">
+          <main id="main" className="relative z-10 flex-1">
             {children}
           </main>
           <Footer />

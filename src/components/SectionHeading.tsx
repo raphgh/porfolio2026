@@ -2,7 +2,6 @@ import { ArrowLink } from "./ArrowLink";
 
 type Props = {
   index?: string;
-  /** Small mono line beside the index. */
   kicker?: string;
   title: string;
   description?: string;
@@ -15,26 +14,35 @@ type Props = {
 export function SectionHeading({ index, kicker, title, description, action, as: H = "h2", tone = "light", id }: Props) {
   const dark = tone === "dark";
   return (
-    <header
-      className={`grid grid-cols-12 gap-x-6 gap-y-5 border-t pt-5 md:gap-x-8 ${
-        dark ? "border-paper/70" : "border-ink"
-      }`}
-    >
-      <p className={`label col-span-12 md:col-span-3 ${dark ? "text-night-soft" : "text-ink-soft"}`}>
-        {index && <span className={dark ? "text-paper" : "text-ink"}>({index})</span>}
-        {index && kicker && " — "}
-        {kicker}
-      </p>
+    <header className="grid grid-cols-12 gap-x-4 gap-y-4 md:gap-x-8">
+      <div className="col-span-12 flex items-center gap-3 md:col-span-3 md:flex-col md:items-start md:gap-2 md:pt-2">
+        {index && (
+          <span
+            className={`label inline-flex rounded-full border px-2.5 py-1 ${
+              dark ? "border-white/30 text-mustard-soft" : "border-navy/30 bg-navy-tint text-navy"
+            }`}
+          >
+            {index}
+          </span>
+        )}
+        {kicker && <p className={`label ${dark ? "text-white/60" : "text-charcoal-muted"}`}>{kicker}</p>}
+      </div>
       <div className="col-span-12 flex min-w-0 flex-col gap-5 md:col-span-9">
-        <H id={id} className="text-title font-medium uppercase">
-          {title}
+        <H id={id} className={`display text-title lowercase ${dark ? "text-white" : "text-navy"}`}>
+          {title.toLowerCase()}
         </H>
         {(description || action) && (
           <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-10">
             {description && (
-              <p className={`max-w-md leading-snug ${dark ? "text-night-soft" : "text-ink-soft"}`}>{description}</p>
+              <p className={`max-w-md text-lg leading-snug ${dark ? "text-white/75" : "text-charcoal-soft"}`}>
+                {description}
+              </p>
             )}
-            {action && <ArrowLink href={action.href} className="shrink-0">{action.label}</ArrowLink>}
+            {action && (
+              <ArrowLink href={action.href} className="shrink-0">
+                {action.label}
+              </ArrowLink>
+            )}
           </div>
         )}
       </div>
