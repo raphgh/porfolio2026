@@ -15,7 +15,7 @@ export default function ExtracurricularsPage() {
       <PageHeader
         kicker="(03) — Beyond the job"
         title="Extracurriculars"
-        intro="Hackathons, community initiatives, and the things I organise or show up for — mostly about people, not code."
+        intro="Hackathons, community initiatives, and the things I organise or show up for."
       />
       <div className="flex flex-col gap-20 md:gap-32">
         {extracurriculars.map((item, i) => (

@@ -5,7 +5,7 @@ import { experienceEntries } from "@/data/experience";
 
 export const metadata: Metadata = {
   title: "Experience",
-  description: "Professional software engineering experience — teams, systems, and impact.",
+  description: "Professional work experience — companies, teams, and impact.",
 };
 
 export default function ExperiencePage() {
