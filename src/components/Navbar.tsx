@@ -20,9 +20,10 @@ export function Navbar() {
           >
             <span
               aria-hidden
-              className="grid size-8 place-items-center rounded-full border border-navy bg-navy-tint font-mono text-[0.75rem] lowercase text-navy transition-transform duration-300 ease-(--ease-out-soft) group-hover:-rotate-6 group-hover:bg-mustard-soft"
+              className="size-8 shrink-0 overflow-hidden transition-transform duration-300 ease-(--ease-out-soft) group-hover:-rotate-6"
             >
-              {site.shortName}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logos/me.jpg" alt="" className="size-full object-cover" />
             </span>
             <span className="display text-[1.15rem] leading-none text-navy max-[380px]:sr-only">
               {site.name.toLowerCase()}

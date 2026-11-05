@@ -13,9 +13,9 @@ export const site = {
   /** Drop the real file at /public/resume.pdf. */
   resume: "/resume.pdf",
   contact: {
-    email: "",
-    github: "",
-    linkedin: "",
+    email: "rghan086@uottawa.ca",
+    github: "https://github.com/raphgh",
+    linkedin: "https://www.linkedin.com/in/raphaelle-ghanem/",
   },
 } as const;
 

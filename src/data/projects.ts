@@ -153,6 +153,16 @@ export const projects: Project[] = [
   },
   {
     slug: "project-two",
+    title: "This Website!",
+    summary: placeholder("My personal website."),
+    role: placeholder("Developer"),
+    tags: ["FRONTEND", "UI/UX"],
+    stack: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Motion UI"],
+    featured: true,
+    caseStudy: { sections: fullStackCaseStudy },
+  },
+  {
+    slug: "project-three",
     title: "Insite",
     summary: placeholder("An application that ."),
     role: placeholder("Ideator"),
@@ -162,7 +172,7 @@ export const projects: Project[] = [
     caseStudy: { sections: fullStackCaseStudy },
   },
   {
-    slug: "project-three",
+    slug: "project-four",
     title: "New Omelet",
     summary: "An Android application that allows users to order hardware and software parts, with a real-time inventory system.",
     role: placeholder("Role"),

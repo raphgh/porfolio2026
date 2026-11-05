@@ -87,20 +87,20 @@ export default function AboutPage() {
         <SectionHeading
           id="makes-title"
           kicker="Outside software"
-          title="A few things I make"
-          description="Not a creative portfolio — just evidence there’s a person behind the commits."
+          title="A few things I do"
+          description=""
         />
         <Reveal className="mt-12 md:mt-16">
           <AboutGallery items={scrapbook} />
         </Reveal>
       </section>
 
-      <section aria-labelledby="elsewhere-title" className="mt-28 md:mt-36">
+      {/*<section aria-labelledby="elsewhere-title" className="mt-28 md:mt-36">
         <h2 id="elsewhere-title" className="display mb-6 text-heading text-navy">
           Elsewhere
         </h2>
         <ContactLinks />
-      </section>
+      </section>*/}
     </div>
   );
 }

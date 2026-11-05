@@ -5,7 +5,7 @@ import { projects } from "@/data/projects";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description: "Projects I’ve built — across backend, full-stack, systems, and interfaces.",
+  description: "Projects I’ve built outside of professional roles.",
 };
 
 export default function WorkPage() {
@@ -14,7 +14,7 @@ export default function WorkPage() {
       <PageHeader
         kicker="(01) — Projects"
         title="Projects"
-        intro="Things I’ve worked on outside of professional roles!"
+        intro="Things I’ve worked on outside of professional roles."
       />
       <WorkIndex projects={projects} />
     </div>
