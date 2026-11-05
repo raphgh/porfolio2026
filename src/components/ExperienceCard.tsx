@@ -9,8 +9,107 @@ export function entryDates(entry: Experience) {
   return formatDates(earliest.start, latest.end);
 }
 
-export function ExperienceCard({ entry, index = 0 }: { entry: Experience; index?: number }) {
+function companyInitials(name: string) {
+  const parts = name.replace(/[()]/g, "").split(/\s+/).filter(Boolean);
+  if (parts.length === 1) return parts[0].slice(0, 3).toUpperCase();
+  return parts
+    .slice(0, 3)
+    .map((p) => p[0])
+    .join("")
+    .toUpperCase();
+}
+
+function CompanyLogo({ entry }: { entry: Experience }) {
+  if (entry.logo) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element -- local logo assets from /public/logos
+      <img
+        src={entry.logo}
+        alt={`${entry.company} logo`}
+        className="h-16 w-auto max-w-[11rem] object-contain md:h-20 md:max-w-[13rem]"
+      />
+    );
+  }
+
+  return (
+    <span aria-hidden className="font-mono text-[0.7rem] tracking-[0.08em] text-navy">
+      {companyInitials(entry.company)}
+    </span>
+  );
+}
+
+/** Full experience content — used inside the gallery detail dialog. */
+export function ExperienceDetail({
+  entry,
+  titleId,
+  centered = false,
+}: {
+  entry: Experience;
+  titleId?: string;
+  centered?: boolean;
+}) {
   const grouped = entry.roles.length > 1;
+  const role = entry.roles[0];
+
+  return (
+    <div className={`mx-auto flex w-full max-w-2xl flex-col gap-8 ${centered ? "items-center text-center" : ""}`}>
+      <header className={`flex flex-col gap-4 ${centered ? "items-center" : "items-start"}`}>
+        <CompanyLogo entry={entry} />
+        <div>
+          <h2 id={titleId} className="display text-title text-navy">
+            {entry.companyUrl ? (
+              <a
+                href={entry.companyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-mustard-deep"
+              >
+                {entry.company}
+              </a>
+            ) : (
+              entry.company
+            )}
+          </h2>
+          {entry.descriptor && <p className="mt-2 text-charcoal-soft">{entry.descriptor}</p>}
+        </div>
+      </header>
+
+      <dl
+        className={`grid w-full grid-cols-2 gap-x-6 gap-y-4 border-y border-silver-soft py-5 sm:grid-cols-4 ${
+          centered ? "text-center" : ""
+        }`}
+      >
+        <div>
+          <dt className="label text-charcoal-muted">Year</dt>
+          <dd className="mt-1 text-navy">{entryDates(entry)}</dd>
+        </div>
+        <div>
+          <dt className="label text-charcoal-muted">Role</dt>
+          <dd className="mt-1 text-navy">{role?.title}</dd>
+        </div>
+        <div>
+          <dt className="label text-charcoal-muted">Type</dt>
+          <dd className="mt-1 text-navy">{role?.employmentType}</dd>
+        </div>
+        <div>
+          <dt className="label text-charcoal-muted">Location</dt>
+          <dd className="mt-1 text-navy">{role?.location}</dd>
+        </div>
+      </dl>
+
+      <ol className={`w-full ${grouped ? "flex flex-col gap-12" : "flex flex-col"}`}>
+        {entry.roles.map((r, i) => (
+          <li key={i}>
+            <RoleDetail role={r} showMeta={grouped} centered={centered} />
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
+
+/** Legacy full-page card layout (kept for any remaining callers). */
+export function ExperienceCard({ entry, index = 0 }: { entry: Experience; index?: number }) {
   const locations = Array.from(new Set(entry.roles.map((r) => r.location)));
   const types = Array.from(new Set(entry.roles.map((r) => r.employmentType)));
 
@@ -28,56 +127,30 @@ export function ExperienceCard({ entry, index = 0 }: { entry: Experience; index?
         </span>
       </div>
 
-      <div className="grid grid-cols-12 gap-x-4 gap-y-8 p-5 pt-6 md:gap-x-8 md:p-8">
-        <div className="col-span-12 md:col-span-3">
+      <div className="p-5 pt-6 md:p-8">
+        <div className="mb-4 flex items-center gap-3">
           <span aria-hidden className="label text-mustard-deep">
             {String(index + 1).padStart(2, "0")}
           </span>
         </div>
-        <div className="col-span-12 flex flex-col gap-8 md:col-span-9">
-          <header>
-            <h2 id={`${entry.id}-company`} className="display text-title text-navy">
-              {entry.companyUrl ? (
-                <a href={entry.companyUrl} target="_blank" rel="noopener noreferrer" className="hover:text-mustard-deep">
-                  {entry.company}
-                </a>
-              ) : (
-                entry.company
-              )}
-            </h2>
-            {entry.descriptor && <p className="mt-2 text-charcoal-soft">{entry.descriptor}</p>}
-            {grouped && <p className="label mt-2 text-charcoal-muted">{entry.roles.length} roles</p>}
-          </header>
-
-          <ol
-            className={
-              grouped
-                ? "flex flex-col gap-12 border-l border-dashed border-silver pl-6 md:pl-8"
-                : "flex flex-col"
-            }
-          >
-            {entry.roles.map((role, i) => (
-              <li key={i} className="relative">
-                {grouped && (
-                  <span
-                    aria-hidden
-                    className="absolute top-1.5 -left-[calc(1.5rem+5px)] size-2.5 rounded-full border border-navy bg-mustard md:-left-[calc(2rem+5px)]"
-                  />
-                )}
-                <RoleDetail role={role} showMeta={grouped} />
-              </li>
-            ))}
-          </ol>
-        </div>
+        <ExperienceDetail entry={entry} titleId={`${entry.id}-company`} />
       </div>
     </article>
   );
 }
 
-function RoleDetail({ role, showMeta }: { role: Role; showMeta: boolean }) {
+function RoleDetail({
+  role,
+  showMeta,
+  centered = false,
+}: {
+  role: Role;
+  showMeta: boolean;
+  centered?: boolean;
+}) {
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-1">
+    <div className={`flex flex-col gap-6 ${centered ? "items-center" : ""}`}>
+      <div className={`flex flex-col gap-1 ${centered ? "items-center" : ""}`}>
         <h3 className="display text-heading text-navy">
           {role.title} <span className="text-charcoal-soft">— {role.employmentType}</span>
         </h3>
@@ -88,16 +161,27 @@ function RoleDetail({ role, showMeta }: { role: Role; showMeta: boolean }) {
         )}
       </div>
 
-      <p className="max-w-[40rem] text-lede text-pretty">{role.overview}</p>
+      <p className={`max-w-[40rem] text-lede text-pretty ${centered ? "mx-auto" : ""}`}>{role.overview}</p>
+
+      {role.note && (
+        <aside
+          className={`max-w-[40rem] rounded-2xl border border-dashed border-mustard/50 bg-mustard-soft/40 px-4 py-3 text-sm text-charcoal-soft ${
+            centered ? "mx-auto text-center" : ""
+          }`}
+        >
+          <p className="label mb-1 text-mustard-deep">Also</p>
+          <p>{role.note}</p>
+        </aside>
+      )}
 
       {role.technologies.length > 0 && (
-        <div className="flex flex-col gap-2">
+        <div className={`flex flex-col gap-2 ${centered ? "items-center" : ""}`}>
           <h4 className="label text-charcoal-muted">Technologies</h4>
-          <TagList items={role.technologies} className="text-navy" />
+          <TagList items={role.technologies} className={`text-navy ${centered ? "justify-center" : ""}`} />
         </div>
       )}
 
-      <div className="grid gap-6 sm:grid-cols-2">
+      <div className={`grid w-full gap-6 sm:grid-cols-2 ${centered ? "text-left" : ""}`}>
         <DetailList title="What I worked on" items={role.responsibilities} />
         <DetailList title="Selected impact" items={role.accomplishments} accent />
       </div>
@@ -116,7 +200,8 @@ function RoleDetail({ role, showMeta }: { role: Role; showMeta: boolean }) {
 }
 
 function DetailList({ title, items, accent }: { title: string; items: string[]; accent?: boolean }) {
-  if (!items.length) return null;
+  const filled = items.filter((item) => item.trim().length > 0);
+  if (!filled.length) return null;
   return (
     <div
       className={`flex flex-col gap-1 rounded-2xl border p-4 ${
@@ -125,7 +210,7 @@ function DetailList({ title, items, accent }: { title: string; items: string[]; 
     >
       <h4 className="label mb-2 text-charcoal-muted">{title}</h4>
       <ul className="flex flex-col gap-2">
-        {items.map((item, i) => (
+        {filled.map((item, i) => (
           <li key={i} className="flex gap-3">
             <span aria-hidden className={accent ? "text-mustard-deep" : "text-navy"}>
               {accent ? "★" : "›"}

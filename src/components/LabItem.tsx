@@ -29,8 +29,14 @@ export function LabHeader() {
   );
 }
 
+function isLiveHref(href?: string) {
+  return Boolean(href && href !== "#");
+}
+
 export function LabItem({ item, showDescription = false }: { item: LabExperiment; showDescription?: boolean }) {
-  const title = item.link ? (
+  const live = isLiveHref(item.link?.href);
+
+  const title = live && item.link ? (
     <a
       href={item.link.href}
       target="_blank"
@@ -46,12 +52,18 @@ export function LabItem({ item, showDescription = false }: { item: LabExperiment
 
   return (
     <article
-      className={`group relative grid gap-x-6 gap-y-2 border-b border-dashed border-silver px-4 py-5 transition-colors last:border-b-0 hover:bg-navy-tint/50 md:px-5 md:py-6 ${columns}`}
+      className={`group relative grid items-start gap-x-6 gap-y-2 border-b border-dashed border-silver px-4 py-5 transition-colors last:border-b-0 hover:bg-navy-tint/50 md:px-5 md:py-6 ${columns}`}
     >
-      <div className="flex flex-col gap-1.5">
-        <h3 className="flex flex-wrap items-center gap-3 text-[1.15rem] leading-tight font-medium">
+      <div className="flex min-w-0 flex-col gap-1.5">
+        <h3 className="flex flex-wrap items-center gap-2.5 text-[1.15rem] leading-tight font-medium">
+          {item.media?.type === "image" && (
+            <span className="relative z-10 inline-block size-7 shrink-0 overflow-hidden rounded-md border border-navy/25 bg-navy-tint">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={item.media.src} alt={item.media.alt} className="size-full object-cover" />
+            </span>
+          )}
           {item.status && (
-            <span className={`label rounded-full border px-2 py-0.5 ${statusStyle[item.status]}`}>
+            <span className={`label relative z-10 rounded-full border px-2 py-0.5 ${statusStyle[item.status]}`}>
               <span className="sr-only">Status: </span>
               {item.status}
             </span>
@@ -59,7 +71,7 @@ export function LabItem({ item, showDescription = false }: { item: LabExperiment
           {title}
         </h3>
         {showDescription && item.description && (
-          <p className="text-sm text-charcoal-soft md:pl-1">{item.description}</p>
+          <p className="relative z-10 text-sm text-charcoal-soft md:pl-1">{item.description}</p>
         )}
       </div>
       <Cell label="Date">{item.date}</Cell>
@@ -71,7 +83,7 @@ export function LabItem({ item, showDescription = false }: { item: LabExperiment
 
 function Cell({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <p className="label flex gap-3 text-charcoal-soft md:block md:pt-1.5">
+    <p className="label relative z-10 flex gap-3 text-charcoal-soft md:block md:pt-1.5">
       <span className="w-24 shrink-0 text-charcoal-muted md:sr-only">{label}</span>
       <span className="normal-case tracking-normal text-charcoal md:text-charcoal-soft">{children}</span>
     </p>

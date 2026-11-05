@@ -9,6 +9,8 @@ type Props = {
   sizes?: string;
   priority?: boolean;
   className?: string;
+  /** How the image fills the frame. Mockups usually want `contain`. */
+  fit?: "cover" | "contain";
 };
 
 export function MediaFrame({
@@ -18,6 +20,7 @@ export function MediaFrame({
   sizes = "(min-width: 1024px) 50vw, 100vw",
   priority,
   className = "",
+  fit = "cover",
 }: Props) {
   return (
     <div
@@ -44,7 +47,7 @@ export function MediaFrame({
           fill
           sizes={sizes}
           priority={priority}
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+          className={`${fit === "contain" ? "object-contain" : "object-cover"} transition-transform duration-700 ease-out group-hover:scale-[1.025]`}
         />
       )}
       {media?.type === "video" && <AutoVideo media={media} />}

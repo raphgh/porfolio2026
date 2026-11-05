@@ -103,6 +103,7 @@ export function ProjectHero({ project }: { project: Project }) {
         aspect="aspect-[4/3] md:aspect-[21/9]"
         sizes="100vw"
         priority
+        fit="contain"
       />
     </header>
   );

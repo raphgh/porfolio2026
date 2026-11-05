@@ -6,11 +6,17 @@ import type { Experience } from "./types";
  * Several terms at the same company? Add them to one entry's `roles` array.
  * `display: "grouped"` nests them under the company; `"separate"` lists each
  * role on its own.
+ *
+ * Logos live in `/public/logos/`. Point each entry's `logo` at the file path
+ * (e.g. `/logos/nokia.jpg`). Omit `logo` to fall back to initials.
  */
 export const experience: Experience[] = [
   {
     id: "experience-one",
     company: "Nokia",
+    shortName: "Nokia",
+    logo: "/logos/nokia.jpg",
+    thumbnail: "/logos/nokia.jpg",
     display: "grouped",
     roles: [
       {
@@ -24,29 +30,36 @@ export const experience: Experience[] = [
         responsibilities: [""],
         accomplishments: ["Accomplishment 1", "Accomplishment 2", "Accomplishment 3"],
       },
-    ],
+    ], 
   },
   {
     id: "experience-two",
     company: "Nokia",
+    shortName: "Nokia",
+    logo: "/logos/nokia2.webp",
+    thumbnail: "/logos/nokia2.webp",
     display: "grouped",
     roles: [
       {
         title: "Software Designer",
         employmentType: "Co-op",
-        start: "Sep 2026",
-        end: "Dec 2026",
+        start: "Sep 2025",
+        end: "Dec 2025",
         location: "Ottawa, ON",
         overview: "Designed and implemented software solutions for a variety of clients using a variety of technologies.",
         technologies: ["Java", "Spring Boot", "Docker", "Kubernetes"],
         responsibilities: ["Bridging Nokia’s NFM-P and NSP (Network Services Platform) by implementing a new dashlet within the NSP System Health Admin Dashboard, to display statuses and NFM-P data.", "Developing the backend for the microservice and implementing components using Java, Spring, REST APIs, Gradle, and Jenkins, and using tools such as IntelliJ, Linux, Podman, and Git/CVS throughout my term.", "Driving the project’s progression by working alongside cross-functional teams in NSP and UX, and refining Jira subtasks and workflows."],
         accomplishments: ["Accomplishment 1", "Accomplishment 2", "Accomplishment 3"],
+        note: "Also served as a Student Ambassador with NextGEN, supporting internal events and the student community at Nokia.",
       },
     ],
   },
   {
     id: "experience-three",
     company: "Canadian Intergovernmental Conference Secretariat (CICS)",
+    shortName: "CICS",
+    logo: "/logos/cics_50th_logo.webp",
+    thumbnail: "/logos/cics_50th_logo.webp",
     display: "grouped",
     roles: [
       {
@@ -65,36 +78,64 @@ export const experience: Experience[] = [
   {
     id: "experience-four",
     company: "Canadian Cancer Survivor Network (CCSN)",
+    shortName: "CCSN",
+    logo: "/logos/CCSN_Logo_EN_SQUARE.png",
+    thumbnail: "/logos/CCSN_Logo_EN_SQUARE.png",
     display: "grouped",
     roles: [
       {
         title: "Web Manager",
         employmentType: "Full-time",
-        start: "Apr 2025",
-        end: "July 2025",
+        start: "Apr 2024",
+        end: "July 2024",
         location: "Ottawa, ON",
         overview: "Researching up to date content for the Canadian Cancer Survivor Network (CCSN) website, about different types of cancer and how to support survivors.",
         technologies: ["Wordpress"],
         responsibilities: ["Improved website speed and efficiency through content optimization and WordPress enhancements.", "Reorganized content, reducing user navigation time and improving the overall user experience.","Updated outdated scientific information, ensuring 100% accuracy by sourcing the latest research and data."],
-        accomplishments: ["Updated 100+ pages of content", "Increased website speed by 30%", "Improved user experience by 20%"],
+        accomplishments: ["Updated 50+ pages of content", "Increased website speed by 30%", "Improved user experience by 20%"],
       },
     ],
   },
   {
     id: "experience-five",
     company: "La Rotonde",
+    shortName: "La Rotonde",
+    logo: "/logos/cropped-La-Rotonde_Favicon.png",
+    thumbnail: "/logos/la-rotonde.png",
     display: "grouped",
     roles: [
       {
         title: "Videographer",
         employmentType: "Part-time",
-        start: "Sep 2024",
-        end: "Apr 2025",
+        start: "Sep 2023",
+        end: "Apr 2024",
         location: "Ottawa, ON",
-        overview: "Creating content about and for the uOttawa community, giving francophone students, athletes, and faculty members a voice to share their stories and experiences.",
+        overview:"Creating content about and for the uOttawa community, giving francophone students, athletes, and faculty members a voice to share their stories and experiences.",
         technologies: ["Capcut", "Canva", "Slack"],
-        responsibilities: ["Attended weekly team meetings, attended student events, edited and produced videos, and uploaded videos to YouTube, Instagram, and TikTok."],
-        accomplishments: ["Produced 30+ videos","Inceased viewership by 20%", "Increased engagement by 30%"],
+        responsibilities: ["Attended weekly team meetings, attended student events, edited and produced videos, and uploaded videos to YouTube, Instagram, and TikTok.",],
+        accomplishments: ["Produced 30+ videos", "Increased viewership by 20%", "Increased engagement by 30%"],
+        note: "Covered major campus events including the Panda Game, Capital Hoops, and Colonel By at Ottawa TD Place.",
+      },
+    ],
+  },
+  {
+    id: "experience-six",
+    company: "Carleton University",
+    shortName: "Carleton University",
+    logo: "/logos/",
+    thumbnail: "/logos/",
+    display: "grouped",
+    roles: [
+      {
+        title: "Lab Assistant",
+        employmentType: "Part-time",
+        start: "March 2022",
+        end: "June 2022",
+        location: "Ottawa, ON",
+        overview:"",
+        technologies: [""],
+        responsibilities: [", , .",],
+        accomplishments: [" %"],
       },
     ],
   },

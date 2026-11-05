@@ -59,13 +59,25 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section aria-labelledby="tech-title" className="mt-28 md:mt-36">
-        <SectionHeading
-          id="tech-title"
-          kicker="Stack"
-          title="Technologies"
-          description="Tools I use or have used — confirmed by this site’s own stack. Expand as real projects land."
-        />
+      <section aria-labelledby="tech-title" className="mt-28 font-sans md:mt-36">
+        <header className="grid grid-cols-12 gap-x-4 gap-y-4 md:gap-x-8">
+          <div className="col-span-12 md:col-span-3 md:pt-2">
+            <p className="text-[0.72rem] font-medium tracking-[0.08em] text-charcoal-muted uppercase">
+              Stack
+            </p>
+          </div>
+          <div className="col-span-12 flex min-w-0 flex-col gap-4 md:col-span-9">
+            <h2
+              id="tech-title"
+              className="text-[clamp(1.75rem,1.2rem+1.8vw,2.5rem)] font-semibold tracking-[-0.03em] text-navy"
+            >
+              Technologies I’ve used
+            </h2>
+            <p className="max-w-md text-lg leading-snug text-charcoal-soft">
+              Languages, frameworks, editors, and the platforms I build with day to day.
+            </p>
+          </div>
+        </header>
         <Reveal className="mt-10 md:mt-14">
           <TechStack />
         </Reveal>

@@ -68,6 +68,7 @@ export function ProjectCard({
           placeholder={`${project.title} — cover`}
           aspect={mediaAspect ?? (feature ? "aspect-[16/10]" : "aspect-[4/3]")}
           sizes={feature ? "(min-width: 768px) 58vw, 100vw" : "(min-width: 768px) 45vw, 100vw"}
+          fit="contain"
         />
       </div>
 

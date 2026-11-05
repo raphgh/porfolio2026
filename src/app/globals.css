@@ -70,11 +70,26 @@
   --ease-card: cubic-bezier(0.33, 1, 0.68, 1);
 
   --animate-page-in: page-in 0.45s var(--ease-out-soft) both;
+  --animate-overlay-in: overlay-in 0.55s var(--ease-out-soft) both;
+  --animate-dialog-in: dialog-in 0.65s var(--ease-out-soft) both;
 
   @keyframes page-in {
     from {
       opacity: 0;
       transform: translateY(6px);
+    }
+  }
+
+  @keyframes overlay-in {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @keyframes dialog-in {
+    from {
+      opacity: 0;
+      transform: translateY(18px) scale(0.98);
     }
   }
 }

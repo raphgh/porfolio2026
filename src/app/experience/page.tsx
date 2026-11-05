@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ExperienceTimeline } from "@/components/ExperienceTimeline";
+import { ExperienceGallery } from "@/components/ExperienceGallery";
 import { PageHeader } from "@/components/PageHeader";
 import { experienceEntries } from "@/data/experience";
 
@@ -14,9 +14,9 @@ export default function ExperiencePage() {
       <PageHeader
         kicker="(02) — Professional"
         title="Experience"
-        intro="Where I’ve worked on real teams and production systems — what I worked on, the technology involved, and what changed because of it."
+        intro=" "
       />
-      <ExperienceTimeline entries={experienceEntries()} />
+      <ExperienceGallery entries={experienceEntries()} />
     </div>
   );
 }

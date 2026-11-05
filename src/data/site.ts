@@ -45,12 +45,35 @@ export const stackNav = [
   { label: "About", href: "/about" },
 ] as const;
 
-/** Confirmed stack from the site itself — expand as real tools are added to data. */
+/** Stack grouped for the About page — expand as tools change. */
 export const technologies = [
-  { name: "React", group: "Frameworks" as const },
-  { name: "Next.js", group: "Frameworks" as const },
-  { name: "TypeScript", group: "Languages" as const },
-  { name: "Tailwind CSS", group: "Tools" as const },
-  { name: "Motion", group: "Tools" as const },
-  { name: "Vercel", group: "Infrastructure" as const },
+  { name: "Java", group: "Languages" as const },
+  { name: "Python", group: "Languages" as const },
+  { name: "HTML", group: "Languages" as const },
+  { name: "CSS", group: "Languages" as const },
+  { name: "C#", group: "Languages" as const },
+  { name: "SQL", group: "Languages" as const },
+
+  { name: "React.js", group: "Frameworks & APIs" as const },
+  { name: "Spring Boot", group: "Frameworks & APIs" as const },
+  { name: ".NET", group: "Frameworks & APIs" as const },
+  { name: "REST APIs", group: "Frameworks & APIs" as const },
+
+  { name: "Figma", group: "Design & Editors" as const },
+  { name: "Cursor", group: "Design & Editors" as const },
+  { name: "IntelliJ", group: "Design & Editors" as const },
+  { name: "VSCode", group: "Design & Editors" as const },
+  { name: "Android Studio", group: "Design & Editors" as const },
+  { name: "Xcode", group: "Design & Editors" as const },
+  { name: "Microsoft SSMS", group: "Design & Editors" as const },
+
+  { name: "Linux", group: "Platforms & Ops" as const },
+  { name: "Podman", group: "Platforms & Ops" as const },
+  { name: "Kubernetes", group: "Platforms & Ops" as const },
+  { name: "Jenkins", group: "Platforms & Ops" as const },
+
+  { name: "Github", group: "Collaboration" as const },
+  { name: "GitLab", group: "Collaboration" as const },
+  { name: "Jira", group: "Collaboration" as const },
+  { name: "Confluence", group: "Collaboration" as const },
 ] as const;

@@ -134,6 +134,8 @@ export type Role = {
   technologies: string[];
   responsibilities: string[];
   accomplishments: string[];
+  /** Optional side note / quirk (ambassador work, special events, etc.). */
+  note?: string;
   artifacts?: Media[];
 };
 
@@ -141,6 +143,18 @@ export type Experience = {
   id: string;
   company: string;
   companyUrl?: string;
+  /**
+   * Path under `/public`, e.g. `/logos/nokia.jpg`.
+   * Used in the detail modal header.
+   */
+  logo?: string;
+  /**
+   * Full-bleed cover for the experience grid card.
+   * Falls back to `logo` when omitted.
+   */
+  thumbnail?: string;
+  /** Short label on the grid pill, e.g. "Nokia". Defaults to company. */
+  shortName?: string;
   /** Short descriptor of the company/team, e.g. "Payments platform". */
   descriptor?: string;
   /**
