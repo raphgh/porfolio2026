@@ -147,7 +147,7 @@ export const projects: Project[] = [
     cover: {
       type: "image",
       src: "/logos/yard365.png",
-      alt: "YARD365 app mockups — home screen and service booking on two phones",
+      alt: "YARD365 — home and service booking screens on two phones",
     },
     caseStudy: { sections: productCaseStudy },
   },
@@ -182,7 +182,7 @@ export const projects: Project[] = [
     cover: {
       type: "image",
       src: "/logos/newomelet.png",
-      alt: "New Omelet app — egg logo and phone mockups on a blue background",
+      alt: "New Omelet — egg logo with Get Started and Login screens on two phones",
     },
     caseStudy: { sections: systemCaseStudy },
   },
