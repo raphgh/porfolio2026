@@ -2,22 +2,10 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { stackNav } from "@/data/site";
+import { stackNav, stackNavColors } from "@/data/site";
 
 /** Thin lip so the stack reads as one pile. */
 const STACK_OFFSET = 12;
-
-/**
- * Soft washes from the embroidery trail palette
- * (mustard, coral, peach, rose, terracotta).
- */
-const CARD_COLORS = [
-  { bg: "#f5e6b8", border: "#e6b422", number: "#a87b0a" }, // Home — mustard
-  { bg: "#fde0d2", border: "#f07a45", number: "#c45a28" }, // Projects — coral
-  { bg: "#fce8d8", border: "#f0a06a", number: "#c47a3a" }, // Experience — peach
-  { bg: "#f9d6e4", border: "#e85a8a", number: "#b03860" }, // Lab — rose
-  { bg: "#f5d0d4", border: "#d94f5c", number: "#a83842" }, // About — terracotta
-] as const;
 
 /** Front → back indices. Hovered card is pulled to the front; others keep relative order. */
 function orderFromFront(active: number | null) {
@@ -46,7 +34,7 @@ export function NavStack() {
         <ul className="mb-8 flex flex-wrap items-baseline justify-center gap-x-7 gap-y-2 md:mb-10 md:gap-x-9">
           {stackNav.map((item, i) => {
             const on = active === i;
-            const color = CARD_COLORS[i];
+            const color = stackNavColors[i];
             return (
               <li key={item.href}>
                 <Link
@@ -78,7 +66,7 @@ export function NavStack() {
               const slot = frontToBack.indexOf(i);
               const isFront = slot === 0;
               const pulled = active === i;
-              const color = CARD_COLORS[i];
+              const color = stackNavColors[i];
 
               return (
                 <li
@@ -123,7 +111,7 @@ export function NavStack() {
 
       <ul className="flex flex-col gap-3 md:hidden">
         {stackNav.map((item, i) => {
-          const color = CARD_COLORS[i];
+          const color = stackNavColors[i];
           return (
             <li key={item.href}>
               <Link

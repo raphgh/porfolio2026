@@ -45,6 +45,18 @@ export const stackNav = [
   { label: "About", href: "/about" },
 ] as const;
 
+/**
+ * Soft washes from the embroidery trail palette
+ * (mustard, coral, peach, rose, terracotta) — one per stackNav entry.
+ */
+export const stackNavColors = [
+  { bg: "#f5e6b8", border: "#e6b422", number: "#a87b0a" }, // Home — mustard
+  { bg: "#fde0d2", border: "#f07a45", number: "#c45a28" }, // Projects — coral
+  { bg: "#fce8d8", border: "#f0a06a", number: "#c47a3a" }, // Experience — peach
+  { bg: "#f9d6e4", border: "#e85a8a", number: "#b03860" }, // Lab — rose
+  { bg: "#f5d0d4", border: "#d94f5c", number: "#a83842" }, // About — terracotta
+] as const;
+
 /** Stack grouped for the About page — expand as tools change. */
 export const technologies = [
   { name: "Java", group: "Languages" as const },
