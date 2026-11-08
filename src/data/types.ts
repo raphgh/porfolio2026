@@ -210,3 +210,21 @@ export type ScrapbookItem = {
   /** Visual tilt in degrees for the scrapbook layout. */
   tilt?: number;
 };
+
+export type Book = {
+  title: string;
+  author: string;
+  /** Cover image under `/public`. Empty/omitted = placeholder spine. */
+  cover?: Media;
+  note?: string;
+};
+
+export type InspirationKind = "Creator" | "Product" | "Website";
+
+export type Inspiration = {
+  name: string;
+  kind: InspirationKind;
+  /** One short line on why it matters. */
+  note?: string;
+  href?: string;
+};

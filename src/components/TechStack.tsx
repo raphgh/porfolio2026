@@ -2,22 +2,32 @@ import { technologies } from "@/data/site";
 
 /**
  * Visual technology collection using Simple Icons CDN SVGs.
- * Soft Apple-like chips; category emoji reserved for a couple of groups.
  */
+/** Local SVGs for icons removed from Simple Icons (trademark). */
+const localIcon: Record<string, string> = {
+  "VS Code": "/icons/vscode.png",
+  "C#": "/icons/csharp.svg",
+  "REST APIs": "/icons/rest-api.png",
+  "Microsoft SSMS": "/icons/ssms.png",
+};
+
 const iconSlug: Record<string, string> = {
   Java: "openjdk",
   Python: "python",
+  JavaScript: "javascript",
+  TypeScript: "typescript",
   HTML: "html5",
   CSS: "css",
-  "C#": "csharp",
+  XML: "xml",
   SQL: "mysql",
   "React.js": "react",
+  "Next.js": "nextdotjs",
+  Motion: "framer",
   "Spring Boot": "springboot",
   ".NET": "dotnet",
   Figma: "figma",
   Cursor: "cursor",
   IntelliJ: "intellijidea",
-  VSCode: "visualstudiocode",
   "Android Studio": "androidstudio",
   Xcode: "xcode",
   "Microsoft SSMS": "microsoftsqlserver",
@@ -34,18 +44,23 @@ const iconSlug: Record<string, string> = {
 const brandColor: Record<string, string> = {
   Java: "437291",
   Python: "3776AB",
+  JavaScript: "F7DF1E",
+  TypeScript: "3178C6",
   HTML: "E34F26",
   CSS: "1572B6",
+  XML: "005FAD",
   "C#": "512BD4",
   SQL: "4479A1",
   "React.js": "61DAFB",
+  "Next.js": "000000",
+  Motion: "FF0055",
   "Spring Boot": "6DB33F",
   ".NET": "512BD4",
   "REST APIs": "1E3A6E",
   Figma: "F24E1E",
   Cursor: "000000",
   IntelliJ: "000000",
-  VSCode: "007ACC",
+  "VS Code": "007ACC",
   "Android Studio": "3DDC84",
   Xcode: "147EFB",
   "Microsoft SSMS": "CC2927",
@@ -60,7 +75,7 @@ const brandColor: Record<string, string> = {
 };
 
 const groupEmoji: Partial<Record<(typeof technologies)[number]["group"], string>> = {
-  "Design & Editors": "",
+  "Design & IDEs": "",
   Collaboration: "",
 };
 
@@ -81,33 +96,37 @@ export function TechStack() {
               )}
               {group}
             </h3>
-            <ul className="flex flex-wrap gap-2.5">
+            <ul className="flex flex-wrap items-center gap-x-4 gap-y-3">
               {technologies
                 .filter((t) => t.group === group)
                 .map((tech) => {
+                  const local = localIcon[tech.name];
                   const slug = iconSlug[tech.name];
                   const color = brandColor[tech.name] ?? "1E3A6E";
+                  const src = local ?? (slug ? `https://cdn.simpleicons.org/${slug}/${color}` : null);
                   return (
                     <li key={tech.name}>
-                      <span className="inline-flex items-center gap-2 rounded-[14px] border border-black/[0.04] bg-[#f5f5f7] px-3.5 py-2.5 shadow-[0_1px_0_rgba(255,255,255,0.8)_inset] transition-[background-color,transform] duration-200 hover:bg-[#ebebed] active:scale-[0.98]">
-                        {slug ? (
+                      <span className="inline-flex items-center gap-2">
+                        {src ? (
                           // eslint-disable-next-line @next/next/no-img-element
                           <img
-                            src={`https://cdn.simpleicons.org/${slug}/${color}`}
+                            src={src}
                             alt=""
-                            width={18}
+                            width={tech.name === "REST APIs" ? 44 : 18}
                             height={18}
-                            className="size-[18px] shrink-0"
+                            className={`h-[18px] shrink-0 object-contain ${
+                              tech.name === "REST APIs" ? "w-11" : "w-[18px]"
+                            }`}
                           />
                         ) : (
                           <span
                             aria-hidden
-                            className="grid size-[18px] place-items-center rounded-[5px] bg-navy/10 text-[0.55rem] font-semibold text-navy"
+                            className="grid size-[18px] place-items-center text-[0.55rem] font-semibold text-navy"
                           >
                             {tech.name.slice(0, 2)}
                           </span>
                         )}
-                        <span className="text-[0.875rem] font-medium tracking-[-0.015em] text-charcoal">
+                        <span className="text-[0.875rem] tracking-[-0.015em] text-charcoal">
                           {tech.name}
                         </span>
                       </span>
