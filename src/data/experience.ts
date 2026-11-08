@@ -1,4 +1,4 @@
-import type { Experience } from "./types";
+import type { Experience, Media } from "./types";
 
 /**
  * Professional experience, most recent first.
@@ -9,7 +9,18 @@ import type { Experience } from "./types";
  *
  * Logos live in `/public/logos/`. Point each entry's `logo` at the file path
  * (e.g. `/logos/nokia.jpg`). Omit `logo` to fall back to initials.
+ *
+ * Photo-strip placeholders: empty `src` renders a squircle slot until you
+ * drop a real file in and point `src` at it (e.g. `/photos/nokia-1.jpg`).
  */
+function photoSlots(label: string, count = 3): Media[] {
+  return Array.from({ length: count }, (_, i) => ({
+    type: "image" as const,
+    src: "",
+    alt: `${label} — photo ${i + 1}`,
+  }));
+}
+
 export const experience: Experience[] = [
   {
     id: "experience-one",
@@ -29,6 +40,7 @@ export const experience: Experience[] = [
         technologies: ["Java", "Spring Boot", "Cursor", "Kubernetes K9s", "Jira", "Git/GitLab", "IntelliJ", "Linux", "Podman", "Gradle", "Jenkins"],
         responsibilities: [""],
         accomplishments: ["Accomplishment 1", "Accomplishment 2", "Accomplishment 3"],
+        artifacts: photoSlots("Nokia"),
       },
     ], 
   },
@@ -51,6 +63,7 @@ export const experience: Experience[] = [
         responsibilities: ["Bridging Nokia’s NFM-P and NSP (Network Services Platform) by implementing a new dashlet within the NSP System Health Admin Dashboard, to display statuses and NFM-P data.", "Developing the backend for the microservice and implementing components using Java, Spring, REST APIs, Gradle, and Jenkins, and using tools such as IntelliJ, Linux, Podman, and Git/CVS throughout my term.", "Driving the project’s progression by working alongside cross-functional teams in NSP and UX, and refining Jira subtasks and workflows."],
         accomplishments: ["Accomplishment 1", "Accomplishment 2", "Accomplishment 3"],
         note: "Also served as a Student Ambassador with NextGEN, supporting internal events and the student community at Nokia.",
+        artifacts: photoSlots("Nokia"),
       },
     ],
   },
@@ -115,6 +128,7 @@ export const experience: Experience[] = [
         responsibilities: ["Attended weekly team meetings, attended student events, edited and produced videos, and uploaded videos to YouTube, Instagram, and TikTok.",],
         accomplishments: ["Produced 30+ videos", "Increased viewership by 20%", "Increased engagement by 30%"],
         note: "Covered major campus events including the Panda Game, Capital Hoops, and Colonel By at Ottawa TD Place.",
+        artifacts: photoSlots("La Rotonde"),
       },
     ],
   },
@@ -136,6 +150,7 @@ export const experience: Experience[] = [
         technologies: [""],
         responsibilities: [", , .",],
         accomplishments: [" %"],
+        artifacts: photoSlots("Carleton University"),
       },
     ],
   },

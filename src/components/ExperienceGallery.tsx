@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { entryDates, ExperienceDetail } from "@/components/ExperienceCard";
+import { ExperienceDetail } from "@/components/ExperienceCard";
 import type { Experience } from "@/data/types";
 
 /** Soft washes from the embroidery trail palette */
@@ -97,24 +97,26 @@ export function ExperienceGallery({ entries }: { entries: Experience[] }) {
               role="dialog"
               aria-modal="true"
               aria-labelledby={titleId}
-              className="relative flex max-h-[min(90dvh,56rem)] w-full max-w-4xl animate-dialog-in flex-col overflow-hidden rounded-[1.75rem] border border-navy/20 bg-white shadow-[0_24px_80px_-32px_rgb(26_26_26/0.55)]"
+              className="relative flex max-h-[min(92dvh,58rem)] w-full max-w-3xl animate-dialog-in flex-col overflow-hidden rounded-[1.75rem] bg-white shadow-[0_24px_80px_-32px_rgb(26_26_26/0.45)]"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex shrink-0 items-center justify-between gap-4 border-b border-silver-soft px-5 py-4 md:px-8">
+              <div className="absolute top-4 left-4 z-10 md:top-5 md:left-5">
                 <button
                   ref={closeRef}
                   type="button"
                   onClick={() => setActiveId(null)}
                   aria-label="Close experience details"
-                  className="grid size-9 place-items-center rounded-full border border-navy/25 text-navy transition-colors hover:bg-navy-tint"
+                  className="grid size-9 place-items-center rounded-full text-charcoal-muted transition-colors hover:bg-black/[0.05] hover:text-charcoal"
                 >
                   <ShrinkIcon />
                 </button>
-                <p className="label text-charcoal-muted">{entryDates(active)}</p>
               </div>
 
-              <div className="overflow-y-auto px-5 py-6 md:px-10 md:py-8">
-                <ExperienceDetail entry={active} titleId={titleId} centered />
+              <div
+                data-experience-scroll
+                className="overflow-y-auto px-6 pt-14 pb-10 md:px-12 md:pt-16 md:pb-14"
+              >
+                <ExperienceDetail entry={active} titleId={titleId} />
               </div>
             </div>
           </div>,

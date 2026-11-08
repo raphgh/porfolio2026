@@ -1,12 +1,20 @@
 import { formatDates } from "@/data/experience";
-import type { Experience, Role } from "@/data/types";
-import { MediaFrame } from "./MediaFrame";
-import { TagList } from "./Tag";
+import type { Experience, Media, Role } from "@/data/types";
+import { ScrollFade } from "./ScrollFade";
 
 export function entryDates(entry: Experience) {
   const latest = entry.roles[0];
   const earliest = entry.roles[entry.roles.length - 1];
   return formatDates(earliest.start, latest.end);
+}
+
+function yearLabel(entry: Experience) {
+  const start = entry.roles[entry.roles.length - 1]?.start ?? "";
+  const end = entry.roles[0]?.end ?? entry.roles[0]?.start ?? "";
+  const startYear = start.match(/\d{4}/)?.[0];
+  const endYear = end.match(/\d{4}/)?.[0];
+  if (startYear && endYear && startYear !== endYear) return `${startYear}–${endYear}`;
+  return endYear ?? startYear ?? entryDates(entry);
 }
 
 function companyInitials(name: string) {
@@ -20,19 +28,22 @@ function companyInitials(name: string) {
 }
 
 function CompanyLogo({ entry }: { entry: Experience }) {
-  if (entry.logo) {
+  if (entry.logo && entry.logo !== "/logos/") {
     return (
       // eslint-disable-next-line @next/next/no-img-element -- local logo assets from /public/logos
       <img
         src={entry.logo}
-        alt={`${entry.company} logo`}
-        className="h-16 w-auto max-w-[11rem] object-contain md:h-20 md:max-w-[13rem]"
+        alt=""
+        className="h-14 w-auto max-w-[10rem] object-contain md:h-16 md:max-w-[12rem]"
       />
     );
   }
 
   return (
-    <span aria-hidden className="font-mono text-[0.7rem] tracking-[0.08em] text-navy">
+    <span
+      aria-hidden
+      className="grid size-14 place-items-center rounded-2xl bg-[#f5f5f7] text-sm font-semibold tracking-[0.06em] text-charcoal"
+    >
       {companyInitials(entry.company)}
     </span>
   );
@@ -42,27 +53,31 @@ function CompanyLogo({ entry }: { entry: Experience }) {
 export function ExperienceDetail({
   entry,
   titleId,
-  centered = false,
 }: {
   entry: Experience;
   titleId?: string;
+  /** Kept for callers; layout is left-aligned Apple-style. */
   centered?: boolean;
 }) {
-  const grouped = entry.roles.length > 1;
   const role = entry.roles[0];
+  const preview = entry.thumbnail && entry.thumbnail !== "/logos/" ? entry.thumbnail : null;
+  const techs = Array.from(new Set(entry.roles.flatMap((r) => r.technologies).filter((t) => t.trim())));
 
   return (
-    <div className={`mx-auto flex w-full max-w-2xl flex-col gap-8 ${centered ? "items-center text-center" : ""}`}>
-      <header className={`flex flex-col gap-4 ${centered ? "items-center" : "items-start"}`}>
+    <div className="mx-auto flex w-full max-w-3xl flex-col">
+      <header className="flex flex-col items-center gap-5 pb-10 text-center md:pb-12">
         <CompanyLogo entry={entry} />
-        <div>
-          <h2 id={titleId} className="display text-title text-navy">
+        <div className="flex flex-col gap-2">
+          <h2
+            id={titleId}
+            className="text-[1.65rem] font-semibold tracking-[-0.02em] text-charcoal md:text-[1.85rem]"
+          >
             {entry.companyUrl ? (
               <a
                 href={entry.companyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-mustard-deep"
+                className="hover:opacity-70"
               >
                 {entry.company}
               </a>
@@ -70,155 +85,181 @@ export function ExperienceDetail({
               entry.company
             )}
           </h2>
-          {entry.descriptor && <p className="mt-2 text-charcoal-soft">{entry.descriptor}</p>}
+          {entry.descriptor && (
+            <p className="text-[0.95rem] text-charcoal-muted">{entry.descriptor}</p>
+          )}
         </div>
       </header>
 
-      <dl
-        className={`grid w-full grid-cols-2 gap-x-6 gap-y-4 border-y border-silver-soft py-5 sm:grid-cols-4 ${
-          centered ? "text-center" : ""
-        }`}
-      >
-        <div>
-          <dt className="label text-charcoal-muted">Year</dt>
-          <dd className="mt-1 text-navy">{entryDates(entry)}</dd>
-        </div>
-        <div>
-          <dt className="label text-charcoal-muted">Role</dt>
-          <dd className="mt-1 text-navy">{role?.title}</dd>
-        </div>
-        <div>
-          <dt className="label text-charcoal-muted">Type</dt>
-          <dd className="mt-1 text-navy">{role?.employmentType}</dd>
-        </div>
-        <div>
-          <dt className="label text-charcoal-muted">Location</dt>
-          <dd className="mt-1 text-navy">{role?.location}</dd>
-        </div>
+      <dl className="grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-4">
+        <MetaCell label="Year" value={yearLabel(entry)} />
+        <MetaCell label="Role" value={role?.title ?? "—"} />
+        <MetaCell label="Type" value={role?.employmentType ?? "—"} />
+        <MetaCell label="Location" value={role?.location ?? "—"} />
       </dl>
 
-      <ol className={`w-full ${grouped ? "flex flex-col gap-12" : "flex flex-col"}`}>
-        {entry.roles.map((r, i) => (
-          <li key={i}>
-            <RoleDetail role={r} showMeta={grouped} centered={centered} />
-          </li>
-        ))}
-      </ol>
+      <div className="mt-10 border-t border-black/[0.08] pt-10 md:mt-12 md:pt-12">
+        {preview && (
+          <ScrollFade className="mb-10 md:mb-12">
+            <div className="overflow-hidden rounded-[1.25rem] bg-[#f5f5f7]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={preview}
+                alt=""
+                className="aspect-[16/10] w-full object-cover"
+              />
+            </div>
+          </ScrollFade>
+        )}
+
+        <ol className="flex flex-col gap-14">
+          {entry.roles.map((r, i) => (
+            <li key={i}>
+              <RoleDetail role={r} showMeta={entry.roles.length > 1} />
+            </li>
+          ))}
+        </ol>
+
+        {techs.length > 0 && (
+          <ScrollFade className="mt-12 border-t border-black/[0.08] pt-8">
+            <p className="mb-3 text-[0.7rem] font-medium tracking-[0.08em] text-charcoal-muted uppercase">
+              Technologies
+            </p>
+            <p className="text-[0.95rem] leading-relaxed text-charcoal-soft">{techs.join(" · ")}</p>
+          </ScrollFade>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function MetaCell({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="min-w-0">
+      <dt className="text-[0.7rem] font-medium tracking-[0.04em] text-charcoal-muted">{label}</dt>
+      <dd className="mt-1.5 text-[0.95rem] leading-snug text-charcoal [overflow-wrap:anywhere]">
+        {value}
+      </dd>
     </div>
   );
 }
 
 /** Legacy full-page card layout (kept for any remaining callers). */
-export function ExperienceCard({ entry, index = 0 }: { entry: Experience; index?: number }) {
-  const locations = Array.from(new Set(entry.roles.map((r) => r.location)));
-  const types = Array.from(new Set(entry.roles.map((r) => r.employmentType)));
-
+export function ExperienceCard({ entry }: { entry: Experience; index?: number }) {
   return (
     <article
       id={entry.id}
       aria-labelledby={`${entry.id}-company`}
-      className="relative overflow-hidden rounded-[1.5rem] border border-navy/35 bg-white"
+      className="relative overflow-hidden rounded-[1.75rem] border border-black/[0.06] bg-white"
     >
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-navy/20 bg-navy px-4 py-3 text-white md:px-8">
-        <p className="label">{entryDates(entry)}</p>
-        <p className="label opacity-80">{locations.join(" / ")}</p>
-        <span className="label rounded-full border border-white/30 bg-white/10 px-2.5 py-0.5">
-          {types.join(" · ")}
-        </span>
-      </div>
-
-      <div className="p-5 pt-6 md:p-8">
-        <div className="mb-4 flex items-center gap-3">
-          <span aria-hidden className="label text-mustard-deep">
-            {String(index + 1).padStart(2, "0")}
-          </span>
-        </div>
+      <div className="p-6 md:p-10" data-experience-scroll>
         <ExperienceDetail entry={entry} titleId={`${entry.id}-company`} />
       </div>
     </article>
   );
 }
 
-function RoleDetail({
-  role,
-  showMeta,
-  centered = false,
-}: {
-  role: Role;
-  showMeta: boolean;
-  centered?: boolean;
-}) {
+function RoleDetail({ role, showMeta }: { role: Role; showMeta: boolean }) {
+  const responsibilities = role.responsibilities.filter((item) => item.trim().length > 0);
+  const accomplishments = role.accomplishments.filter((item) => item.trim().length > 0);
+  const body = [...responsibilities, ...accomplishments];
+
   return (
-    <div className={`flex flex-col gap-6 ${centered ? "items-center" : ""}`}>
-      <div className={`flex flex-col gap-1 ${centered ? "items-center" : ""}`}>
-        <h3 className="display text-heading text-navy">
-          {role.title} <span className="text-charcoal-soft">— {role.employmentType}</span>
-        </h3>
-        {showMeta && (
-          <p className="label text-charcoal-soft">
-            {formatDates(role.start, role.end)} · {role.location}
+    <div className="flex flex-col gap-8">
+      {showMeta && (
+        <ScrollFade>
+          <div>
+            <h3 className="text-[1.15rem] font-semibold tracking-[-0.015em] text-charcoal">
+              {role.title}
+            </h3>
+            <p className="mt-1 text-sm text-charcoal-muted">
+              {formatDates(role.start, role.end)} · {role.location} · {role.employmentType}
+            </p>
+          </div>
+        </ScrollFade>
+      )}
+
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-10">
+        <ScrollFade className="md:col-span-4">
+          <p className="mb-3 text-[0.7rem] font-medium tracking-[0.08em] text-charcoal-muted uppercase">
+            The mission
           </p>
-        )}
-      </div>
+          {role.overview.trim() ? (
+            <p className="text-[1.05rem] leading-snug font-medium tracking-[-0.01em] text-charcoal">
+              {role.overview}
+            </p>
+          ) : (
+            <p className="text-charcoal-muted">—</p>
+          )}
+        </ScrollFade>
 
-      <p className={`max-w-[40rem] text-lede text-pretty ${centered ? "mx-auto" : ""}`}>{role.overview}</p>
+        <div className="flex flex-col gap-5 md:col-span-8">
+          {body.length > 0 ? (
+            body.map((paragraph, i) => (
+              <ScrollFade key={i} delay={i * 60}>
+                <p className="text-[0.98rem] leading-[1.65] text-charcoal-soft">{paragraph}</p>
+              </ScrollFade>
+            ))
+          ) : (
+            <ScrollFade>
+              <p className="text-charcoal-muted">Details coming soon.</p>
+            </ScrollFade>
+          )}
 
-      {role.note && (
-        <aside
-          className={`max-w-[40rem] rounded-2xl border border-dashed border-mustard/50 bg-mustard-soft/40 px-4 py-3 text-sm text-charcoal-soft ${
-            centered ? "mx-auto text-center" : ""
-          }`}
-        >
-          <p className="label mb-1 text-mustard-deep">Also</p>
-          <p>{role.note}</p>
-        </aside>
-      )}
-
-      {role.technologies.length > 0 && (
-        <div className={`flex flex-col gap-2 ${centered ? "items-center" : ""}`}>
-          <h4 className="label text-charcoal-muted">Technologies</h4>
-          <TagList items={role.technologies} className={`text-navy ${centered ? "justify-center" : ""}`} />
+          {role.note && (
+            <ScrollFade delay={body.length * 60}>
+              <p className="border-l-2 border-black/[0.08] pl-4 text-[0.95rem] leading-relaxed text-charcoal-soft">
+                {role.note}
+              </p>
+            </ScrollFade>
+          )}
         </div>
-      )}
-
-      <div className={`grid w-full gap-6 sm:grid-cols-2 ${centered ? "text-left" : ""}`}>
-        <DetailList title="What I worked on" items={role.responsibilities} />
-        <DetailList title="Selected impact" items={role.accomplishments} accent />
       </div>
 
       {role.artifacts && role.artifacts.length > 0 && (
-        <ul className="grid grid-cols-2 gap-4 md:grid-cols-3">
-          {role.artifacts.map((media, i) => (
-            <li key={i}>
-              <MediaFrame media={media} aspect="aspect-[4/3]" sizes="(min-width: 768px) 25vw, 50vw" />
-            </li>
-          ))}
-        </ul>
+        <ScrollFade delay={80}>
+          <PhotoStrip items={role.artifacts} />
+        </ScrollFade>
       )}
     </div>
   );
 }
 
-function DetailList({ title, items, accent }: { title: string; items: string[]; accent?: boolean }) {
-  const filled = items.filter((item) => item.trim().length > 0);
-  if (!filled.length) return null;
+/** Apple-style vertical squircles in a horizontal row. */
+function PhotoStrip({ items, caption = "Photos" }: { items: Media[]; caption?: string }) {
   return (
-    <div
-      className={`flex flex-col gap-1 rounded-2xl border p-4 ${
-        accent ? "border-mustard/40 bg-mustard-soft/50" : "border-navy/20 bg-navy-tint"
-      }`}
-    >
-      <h4 className="label mb-2 text-charcoal-muted">{title}</h4>
-      <ul className="flex flex-col gap-2">
-        {filled.map((item, i) => (
-          <li key={i} className="flex gap-3">
-            <span aria-hidden className={accent ? "text-mustard-deep" : "text-navy"}>
-              {accent ? "★" : "›"}
-            </span>
-            <span>{item}</span>
-          </li>
-        ))}
+    <figure className="flex flex-col items-center gap-4 pt-2">
+      <ul className="flex w-full gap-2.5 md:gap-3">
+        {items.map((media, i) => {
+          const hasImage = media.type === "image" && Boolean(media.src);
+          return (
+            <li
+              key={i}
+              className="relative aspect-[3/4] min-w-0 flex-1 overflow-hidden rounded-[1.75rem] bg-[#f2f2f7] md:rounded-[2rem]"
+            >
+              {hasImage ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={media.src}
+                  alt={media.alt}
+                  className="absolute inset-0 size-full object-cover"
+                />
+              ) : (
+                <div className="hatch absolute inset-0 flex items-end p-3">
+                  <span className="text-[0.65rem] font-medium tracking-[0.06em] text-navy/45 uppercase">
+                    Photo {i + 1}
+                  </span>
+                </div>
+              )}
+            </li>
+          );
+        })}
       </ul>
-    </div>
+      {caption && (
+        <figcaption className="text-[0.8rem] tracking-[-0.01em] text-charcoal-muted">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
   );
 }

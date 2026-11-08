@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Geist_Mono, Instrument_Sans, Instrument_Serif } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { SectionPager } from "@/components/SectionPager";
@@ -7,6 +7,12 @@ import { ThreadTrail } from "@/components/ThreadTrail";
 import { MotionProvider } from "@/components/MotionProvider";
 import { site } from "@/data/site";
 import "./globals.css";
+
+const sans = Instrument_Sans({
+  variable: "--font-instrument-sans",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 const display = Instrument_Serif({
   variable: "--font-instrument",
@@ -45,7 +51,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${display.variable} ${mono.variable} antialiased`}
+      className={`${sans.variable} ${display.variable} ${mono.variable} antialiased`}
     >
       <body className="flex min-h-dvh flex-col bg-white text-charcoal">
         <noscript>

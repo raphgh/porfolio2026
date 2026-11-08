@@ -24,13 +24,13 @@ export default function LabPage() {
         title="Lab"
         intro="Smaller, lower-stakes things: prototypes, tools, and experiments."
       >
-        <ul aria-label="Status legend" className="flex flex-wrap gap-2">
+       {/* <ul aria-label="Status legend" className="flex flex-wrap gap-2">
           {legend.map((l) => (
             <li key={l.label} className={`label rounded-full border px-2.5 py-1 ${statusStyle[l.status]}`}>
               {l.label}
             </li>
           ))}
-        </ul>
+        </ul>*/}
       </PageHeader>
       <LabSheet>
         <LabHeader />

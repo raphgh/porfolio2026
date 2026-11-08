@@ -16,8 +16,8 @@ function orderFromFront(active: number | null) {
 
 /**
  * Centered section links + physical card stack.
- * Hovering a menu item pulls that card to the front of the pile.
- * Cards are also links to their pages.
+ * Hovering a menu item pulls that card forward and highlights its label.
+ * Cards stay put on hover — they only navigate on click.
  */
 export function NavStack() {
   const [active, setActive] = useState<number | null>(null);
@@ -29,6 +29,15 @@ export function NavStack() {
       <h2 id="stack-nav-title" className="sr-only">
         Navigate
       </h2>
+
+      <p className="mx-auto mb-8 max-w-xl text-center text-charcoal-soft md:mb-10">
+        hi, i&apos;m raphaelle, a software engineering student at uOttawa. on this site
+        you&apos;ll find an overview of my projects, experience, ideas, and cool things
+        i&apos;m into. feel free to look around :)
+      </p>
+      <p className="mx-auto mb-8 max-w-xl text-center text-charcoal-soft md:mb-10">
+        hover (or tap if you&apos;re on mobile) over a section to see what i&apos;ve been up to!
+      </p>
 
       <div className="mx-auto max-w-3xl" onMouseLeave={() => setActive(null)}>
         <ul className="mb-8 flex flex-wrap items-baseline justify-center gap-x-7 gap-y-2 md:mb-10 md:gap-x-9">
@@ -43,8 +52,8 @@ export function NavStack() {
                   onMouseEnter={() => setActive(i)}
                   onFocus={() => setActive(i)}
                   onBlur={() => setActive((cur) => (cur === i ? null : cur))}
-                  className={`label transition-colors duration-200 ${
-                    on ? "text-navy" : "text-charcoal-muted"
+                  className={`label underline-offset-4 transition-colors duration-200 hover:underline ${
+                    on ? "text-navy underline" : "text-charcoal-muted hover:text-navy"
                   }`}
                 >
                   <span className="mr-1.5 font-mono text-[0.65rem]" style={{ color: color.number }}>
@@ -90,9 +99,10 @@ export function NavStack() {
                     style={{
                       backgroundColor: color.bg,
                       borderColor: color.border,
-                      boxShadow: isFront
-                        ? "0 12px 28px -18px rgb(26 26 26 / 0.35)"
-                        : "0 6px 16px -14px rgb(26 26 26 / 0.2)",
+                      boxShadow:
+                        isFront || pulled
+                          ? "0 12px 28px -18px rgb(26 26 26 / 0.35)"
+                          : "0 6px 16px -14px rgb(26 26 26 / 0.2)",
                     }}
                   >
                     <span className="display text-[clamp(2rem,1.4rem+1.8vw,3.25rem)] leading-none text-navy lowercase">
