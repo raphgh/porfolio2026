@@ -74,7 +74,7 @@ export function Footer() {
           </nav>
 
           <div className="col-span-6 md:col-span-3">
-            <h2 className="label mb-3 text-charcoal-muted">Let&apos;s chat!</h2>
+            <h2 className="label mb-3 text-charcoal-muted">reach out!</h2>
             <div className="flex flex-col gap-3">
               {site.contact.email && (
                 <a href={`mailto:${site.contact.email}`} className="text-navy hover:text-mustard-deep">

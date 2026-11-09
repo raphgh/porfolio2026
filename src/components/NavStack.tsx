@@ -42,10 +42,10 @@ export function NavStack() {
           ottawa-based software engineer and creative
         </span>
         . on this site you&apos;ll find an overview of my projects, experience, and cool things
-        i&apos;m into. feel free to look around :)
+        i&apos;m into :)
       </p>
       <p className="mx-auto mb-8 max-w-xl text-center text-charcoal-soft md:mb-10">
-        hover (or tap if you&apos;re on mobile) over a section to start!
+        hover (or tap if you&apos;re on mobile) over a section to look around!
       </p>
 
       <div className="mx-auto max-w-3xl" onMouseLeave={() => setActive(null)}>

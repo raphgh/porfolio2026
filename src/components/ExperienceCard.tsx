@@ -34,7 +34,7 @@ function CompanyLogo({ entry }: { entry: Experience }) {
       <img
         src={entry.logo}
         alt=""
-        className="h-14 w-auto max-w-[10rem] object-contain md:h-16 md:max-w-[12rem]"
+        className="h-9 w-auto max-w-[7.5rem] object-contain object-left md:h-10 md:max-w-[8.5rem]"
       />
     );
   }
@@ -42,7 +42,7 @@ function CompanyLogo({ entry }: { entry: Experience }) {
   return (
     <span
       aria-hidden
-      className="grid size-14 place-items-center rounded-2xl bg-[#f5f5f7] text-sm font-semibold tracking-[0.06em] text-charcoal"
+      className="grid size-10 place-items-center rounded-xl bg-[#f5f5f7] text-xs font-semibold tracking-[0.06em] text-charcoal"
     >
       {companyInitials(entry.company)}
     </span>
@@ -65,9 +65,9 @@ export function ExperienceDetail({
 
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col">
-      <header className="flex flex-col items-center gap-5 pb-10 text-center md:pb-12">
-        <CompanyLogo entry={entry} />
-        <div className="flex flex-col gap-2">
+      <header className="flex flex-col items-start gap-4 pb-10 text-left md:pb-12">
+        <div className="flex flex-col items-start gap-3">
+          <CompanyLogo entry={entry} />
           <h2
             id={titleId}
             className="text-[1.65rem] font-semibold tracking-[-0.02em] text-charcoal md:text-[1.85rem]"
@@ -91,7 +91,7 @@ export function ExperienceDetail({
         </div>
       </header>
 
-      <dl className="grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-4">
+      <dl className="grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-4">
         <MetaCell label="Year" value={yearLabel(entry)} />
         <MetaCell label="Role" value={role?.title ?? "—"} />
         <MetaCell label="Type" value={role?.employmentType ?? "—"} />
@@ -206,19 +206,43 @@ function RoleDetail({ role, showMeta }: { role: Role; showMeta: boolean }) {
             </ScrollFade>
           )}
 
-          {role.note && (
-            <ScrollFade delay={body.length * 60}>
+          {role.notes?.map((note, i) => (
+            <ScrollFade key={note} delay={(body.length + i) * 60}>
               <p className="border-l-2 border-black/[0.08] pl-4 text-[0.95rem] leading-relaxed text-charcoal-soft">
-                {role.note}
+                {note}
               </p>
             </ScrollFade>
-          )}
+          ))}
         </div>
       </div>
 
       {role.artifacts && role.artifacts.length > 0 && (
         <ScrollFade delay={80}>
           <PhotoStrip items={role.artifacts} />
+        </ScrollFade>
+      )}
+
+      {role.embeds && role.embeds.length > 0 && (
+        <ScrollFade delay={120}>
+          <ul className="flex flex-col items-center gap-6 pt-2">
+            {role.embeds.map((embed) => (
+              <li key={embed.src} className="flex w-full max-w-[504px] flex-col gap-3">
+                {embed.note && (
+                  <p className="border-l-2 border-black/[0.08] pl-4 text-[0.95rem] leading-relaxed text-charcoal-soft">
+                    {embed.note}
+                  </p>
+                )}
+                <iframe
+                  src={embed.src}
+                  title={embed.title ?? "Embedded post"}
+                  height={embed.height ?? 628}
+                  width={embed.width ?? 504}
+                  className="mx-auto max-w-full rounded-2xl border-0"
+                  allowFullScreen
+                />
+              </li>
+            ))}
+          </ul>
         </ScrollFade>
       )}
     </div>

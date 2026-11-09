@@ -123,6 +123,15 @@ export type EmploymentType =
   | "Freelance"
   | "Other";
 
+export type Embed = {
+  src: string;
+  title?: string;
+  height?: number;
+  width?: number;
+  /** Caption / context shown above the embed. */
+  note?: string;
+};
+
 export type Role = {
   title: string;
   employmentType: EmploymentType;
@@ -134,9 +143,11 @@ export type Role = {
   technologies: string[];
   responsibilities: string[];
   accomplishments: string[];
-  /** Optional side note / quirk (ambassador work, special events, etc.). */
-  note?: string;
+  /** Optional side notes / asides (ambassador work, special events, etc.). */
+  notes?: string[];
   artifacts?: Media[];
+  /** Embedded posts (e.g. LinkedIn) shown below the photo strip. */
+  embeds?: Embed[];
 };
 
 export type Experience = {

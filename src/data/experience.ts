@@ -40,7 +40,36 @@ export const experience: Experience[] = [
         technologies: ["Java", "Spring Boot", "Cursor", "Kubernetes K9s", "Jira", "Git/GitLab", "IntelliJ", "Linux", "Podman", "Gradle", "Jenkins"],
         responsibilities: [""],
         accomplishments: ["Accomplishment 1", "Accomplishment 2", "Accomplishment 3"],
-        artifacts: photoSlots("Nokia"),
+        notes: [
+          "Selected to join a Women in Engineering meeting at Nokia, representing co-ops and newer generations alongside other women in the field.",
+          "Also rejoined the Student Ambassadors team with NextGEN, supporting internal events and the student community.",
+        ],
+        artifacts: [
+          {
+            type: "image",
+            src: "/photos/nokia-2026-1.jpg",
+            alt: "Co-op session in a Nokia conference room",
+          },
+          {
+            type: "image",
+            src: "/photos/nokia-2026-2.jpg",
+            alt: "Lounge seating area in the Nokia office",
+          },
+          {
+            type: "image",
+            src: "/photos/nokia-2026-3.jpg",
+            alt: "Cafe common area at Nokia during the workday",
+          },
+        ],
+        embeds: [
+          {
+            src: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7493387156565045248?collapsed=1",
+            title: "LinkedIn post",
+            height: 628,
+            width: 504,
+            note: "[Note about this post]",
+          },
+        ],
       },
     ], 
   },
@@ -62,7 +91,9 @@ export const experience: Experience[] = [
         technologies: ["Java", "Spring Boot", "Docker", "Kubernetes"],
         responsibilities: ["Bridging Nokia’s NFM-P and NSP (Network Services Platform) by implementing a new dashlet within the NSP System Health Admin Dashboard, to display statuses and NFM-P data.", "Developing the backend for the microservice and implementing components using Java, Spring, REST APIs, Gradle, and Jenkins, and using tools such as IntelliJ, Linux, Podman, and Git/CVS throughout my term.", "Driving the project’s progression by working alongside cross-functional teams in NSP and UX, and refining Jira subtasks and workflows."],
         accomplishments: ["Accomplishment 1", "Accomplishment 2", "Accomplishment 3"],
-        note: "Also served as a Student Ambassador with NextGEN, supporting internal events and the student community at Nokia.",
+        notes: [
+          "Also served as a Student Ambassador with NextGEN, supporting internal events and the student community at Nokia.",
+        ],
         artifacts: [
           {
             type: "image",
@@ -83,6 +114,15 @@ export const experience: Experience[] = [
             type: "image",
             src: "/photos/nokia-4.jpg",
             alt: "Holiday gathering in the Nokia atrium",
+          },
+        ],
+        embeds: [
+          {
+            src: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7399600010578993152?collapsed=1",
+            title: "LinkedIn post",
+            height: 628,
+            width: 504,
+            note: "[Note about this post]",
           },
         ],
       },
@@ -148,7 +188,9 @@ export const experience: Experience[] = [
         technologies: ["Capcut", "Canva", "Slack"],
         responsibilities: ["Attended weekly team meetings, attended student events, edited and produced videos, and uploaded videos to YouTube, Instagram, and TikTok.",],
         accomplishments: ["Produced 30+ videos", "Increased viewership by 20%", "Increased engagement by 30%"],
-        note: "Covered major campus events including the Panda Game, Capital Hoops, and Colonel By at Ottawa TD Place.",
+        notes: [
+          "Covered major campus events including the Panda Game, Capital Hoops, and Colonel By at Ottawa TD Place.",
+        ],
         artifacts: [
           {
             type: "image",

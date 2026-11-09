@@ -10,7 +10,7 @@ import { about, books, inspirations, scrapbook } from "@/data/about";
 export default function AboutPage() {
   return (
     <div className="shell pb-24 md:pb-32">
-      <PageHeader kicker="(04) — Person" title="About" intro={about.intro} />
+      <PageHeader title="About" intro={about.intro} />
 
       <section aria-label="Biography" className="grid grid-cols-12 gap-x-4 gap-y-12 md:gap-x-8">
         <div className="col-span-12 sm:col-span-7 md:col-span-4">

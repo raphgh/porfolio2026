@@ -97,7 +97,7 @@ export function ExperienceGallery({ entries }: { entries: Experience[] }) {
               role="dialog"
               aria-modal="true"
               aria-labelledby={titleId}
-              className="relative flex max-h-[min(92dvh,58rem)] w-full max-w-3xl animate-dialog-in flex-col overflow-hidden rounded-[1.75rem] bg-white shadow-[0_24px_80px_-32px_rgb(26_26_26/0.45)]"
+              className="relative flex max-h-[min(92dvh,58rem)] w-full max-w-5xl animate-dialog-in flex-col overflow-hidden rounded-[1.75rem] bg-white shadow-[0_24px_80px_-32px_rgb(26_26_26/0.45)]"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="absolute top-4 left-4 z-10 md:top-5 md:left-5">
@@ -114,7 +114,7 @@ export function ExperienceGallery({ entries }: { entries: Experience[] }) {
 
               <div
                 data-experience-scroll
-                className="overflow-y-auto px-6 pt-14 pb-10 md:px-12 md:pt-16 md:pb-14"
+                className="overflow-y-auto px-8 pt-14 pb-10 md:px-20 md:pt-16 md:pb-14 lg:px-24"
               >
                 <ExperienceDetail entry={active} titleId={titleId} />
               </div>

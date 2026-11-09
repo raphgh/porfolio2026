@@ -13,7 +13,6 @@ export default function ExtracurricularsPage() {
   return (
     <div className="shell pb-24 md:pb-32">
       <PageHeader
-        kicker="(03) — Beyond the job"
         title="Extracurriculars"
         intro="Hackathons, community initiatives, and the things I organise or show up for."
       />

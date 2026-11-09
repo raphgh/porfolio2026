@@ -11,11 +11,7 @@ export const metadata: Metadata = {
 export default function ExperiencePage() {
   return (
     <div className="shell pb-24 md:pb-32">
-      <PageHeader
-        kicker="(02) — Professional"
-        title="Experience"
-        intro=" "
-      />
+      <PageHeader title="Experience" />
       <ExperienceGallery entries={experienceEntries()} />
     </div>
   );

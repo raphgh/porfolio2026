@@ -12,9 +12,8 @@ export default function WorkPage() {
   return (
     <div className="shell pb-24 md:pb-32">
       <PageHeader
-        kicker="(01) — Projects"
         title="Projects"
-        intro="In depth case studies for each project to be added soon."
+        intro="case studies for each project to be added soon!"
       />
       <WorkIndex projects={projects} />
     </div>
