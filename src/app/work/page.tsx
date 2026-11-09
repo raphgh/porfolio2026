@@ -14,7 +14,7 @@ export default function WorkPage() {
       <PageHeader
         kicker="(01) — Projects"
         title="Projects"
-        intro="Things I’ve worked on outside of professional roles. Case studies for each project to be added soon."
+        intro="In depth case studies for each project to be added soon."
       />
       <WorkIndex projects={projects} />
     </div>

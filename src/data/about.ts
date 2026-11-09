@@ -7,8 +7,9 @@ import type { Book, Inspiration, ScrapbookItem } from "./types";
 export const about = {
   intro: "",
   paragraphs: [
-    "i'm currently a student at uOttawa in software engineering.",
-    "i'm a big enjoyer of art, music, and culture. i’m very drawn to community and to technology that creates social good. those things are where a lot of my project ideas come from.",
+    "i'm currently at uOttawa for my bachelor's in software engineering.",
+    "i'm a big enjoyer of art, music, and culture. i’m very drawn to community and to technology that creates social good. these are where a lot of my project ideas come from.",
+    "feel free to scroll down, through photos, current reads and likings, and my tech stack.",
   ],
 };
 

@@ -59,15 +59,15 @@ export const stackNavColors = [
 
 /** Stack grouped for the About page — expand as tools change. */
 export const technologies = [
-  { name: "Java", group: "Languages" as const },
-  { name: "Python", group: "Languages" as const },
-  { name: "JavaScript", group: "Languages" as const },
-  { name: "TypeScript", group: "Languages" as const },
-  { name: "HTML", group: "Languages" as const },
-  { name: "CSS", group: "Languages" as const },
-  { name: "XML", group: "Languages" as const },
-  { name: "C#", group: "Languages" as const },
-  { name: "SQL", group: "Languages" as const },
+  { name: "Java", group: "Languages (other than English, French, and Arabic)" as const },
+  { name: "Python", group: "Languages (other than English, French, and Arabic)" as const },
+  { name: "JavaScript", group: "Languages (other than English, French, and Arabic)" as const },
+  { name: "TypeScript", group: "Languages (other than English, French, and Arabic)" as const },
+  { name: "HTML", group: "Languages (other than English, French, and Arabic)" as const },
+  { name: "CSS", group: "Languages (other than English, French, and Arabic)" as const },
+  { name: "XML", group: "Languages (other than English, French, and Arabic)" as const },
+  { name: "C#", group: "Languages (other than English, French, and Arabic)" as const },
+  { name: "SQL", group: "Languages (other than English, French, and Arabic)" as const },
 
   { name: "React.js", group: "Frameworks & APIs" as const },
   { name: "Next.js", group: "Frameworks & APIs" as const },
