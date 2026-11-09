@@ -209,6 +209,8 @@ export type ScrapbookItem = {
   media?: Media;
   /** Visual tilt in degrees for the scrapbook layout. */
   tilt?: number;
+  /** Frame shape — defaults to portrait. */
+  aspect?: "portrait" | "landscape";
 };
 
 export type Book = {
