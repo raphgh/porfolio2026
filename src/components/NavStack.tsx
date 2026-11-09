@@ -31,12 +31,12 @@ export function NavStack() {
       </h2>
 
       <p className="mx-auto mb-8 max-w-xl text-center text-charcoal-soft md:mb-10">
-        hi, i&apos;m raphaelle, a software engineering student at uOttawa. on this site
-        you&apos;ll find an overview of my projects, experience, ideas, and cool things
+        hey, i&apos;m raphaelle, an ottawa based software engineer and creative. on this site
+        you&apos;ll find an overview of my projects, experience, and cool things
         i&apos;m into. feel free to look around :)
       </p>
       <p className="mx-auto mb-8 max-w-xl text-center text-charcoal-soft md:mb-10">
-        hover (or tap if you&apos;re on mobile) over a section to see what i&apos;ve been up to!
+        hover (or tap if you&apos;re on mobile) over a section to start!
       </p>
 
       <div className="mx-auto max-w-3xl" onMouseLeave={() => setActive(null)}>

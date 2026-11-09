@@ -58,16 +58,6 @@ export const lab: LabExperiment[] = [
     },
   },
   {
-    id: "hack-the-hill",
-    title: "Hack the Hill",
-    date: "Sep 2024",
-    technology: ["[Tech]"],
-    result: "Group hackathon project",
-    description: "Team build at Hack the Hill.",
-    status: "ABANDONED",
-    link: { label: "View project", href: "#" },
-  },
-  {
     id: "uottahack",
     title: "Hackbibis — uOttahack",
     date: "Jan 2025",
@@ -81,6 +71,16 @@ export const lab: LabExperiment[] = [
       src: "/lab/hackbibis.png",
       alt: "Hackbibis welcome screen with neon pink and blue neo-brutalist UI",
     },
+  },
+  {
+    id: "hack-the-hill",
+    title: "Hack the Hill",
+    date: "Sep 2024",
+    technology: ["[Tech]"],
+    result: "Group hackathon project",
+    description: "Team build at Hack the Hill.",
+    status: "ABANDONED",
+    link: { label: "View project", href: "#" },
   },
   {
     id: "personal-site-test",

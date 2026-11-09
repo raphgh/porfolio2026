@@ -7,8 +7,8 @@ import type { Book, Inspiration, ScrapbookItem } from "./types";
 export const about = {
   intro: "",
   paragraphs: [
-    "",
-    "outside of software i enjoy music, guitar, and making content. i’m drawn to community work and to technology that does social good, and makes people's lives better. those things aren’t separate from engineering for me; they’re where a lot of my ideas come from. they're drawn from the things i'm passionate about.",
+    "i'm currently a student at uOttawa in software engineering.",
+    "i'm a big enjoyer of art, music, and culture. i’m very drawn to community and to technology that creates social good. those things are where a lot of my project ideas come from.",
   ],
 };
 

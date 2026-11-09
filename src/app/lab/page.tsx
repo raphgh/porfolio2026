@@ -22,7 +22,7 @@ export default function LabPage() {
       <PageHeader
         kicker="(03) — Experiments"
         title="Lab"
-        intro="Smaller, lower-stakes things: prototypes, tools, and experiments."
+        intro="prototypes, hackathon projects, and other experiments."
       >
        {/* <ul aria-label="Status legend" className="flex flex-wrap gap-2">
           {legend.map((l) => (
