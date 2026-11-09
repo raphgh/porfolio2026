@@ -63,7 +63,28 @@ export const experience: Experience[] = [
         responsibilities: ["Bridging Nokia’s NFM-P and NSP (Network Services Platform) by implementing a new dashlet within the NSP System Health Admin Dashboard, to display statuses and NFM-P data.", "Developing the backend for the microservice and implementing components using Java, Spring, REST APIs, Gradle, and Jenkins, and using tools such as IntelliJ, Linux, Podman, and Git/CVS throughout my term.", "Driving the project’s progression by working alongside cross-functional teams in NSP and UX, and refining Jira subtasks and workflows."],
         accomplishments: ["Accomplishment 1", "Accomplishment 2", "Accomplishment 3"],
         note: "Also served as a Student Ambassador with NextGEN, supporting internal events and the student community at Nokia.",
-        artifacts: photoSlots("Nokia"),
+        artifacts: [
+          {
+            type: "image",
+            src: "/photos/nokia-1.jpg",
+            alt: "Nokia desk setup with logo on the monitor",
+          },
+          {
+            type: "image",
+            src: "/photos/nokia-2.jpg",
+            alt: "Pickleball court in the Nokia lobby",
+          },
+          {
+            type: "image",
+            src: "/photos/nokia-3.jpg",
+            alt: "Nokia student community event at Tailgators",
+          },
+          {
+            type: "image",
+            src: "/photos/nokia-4.jpg",
+            alt: "Holiday gathering in the Nokia atrium",
+          },
+        ],
       },
     ],
   },
@@ -128,7 +149,23 @@ export const experience: Experience[] = [
         responsibilities: ["Attended weekly team meetings, attended student events, edited and produced videos, and uploaded videos to YouTube, Instagram, and TikTok.",],
         accomplishments: ["Produced 30+ videos", "Increased viewership by 20%", "Increased engagement by 30%"],
         note: "Covered major campus events including the Panda Game, Capital Hoops, and Colonel By at Ottawa TD Place.",
-        artifacts: photoSlots("La Rotonde"),
+        artifacts: [
+          {
+            type: "image",
+            src: "/photos/la-rotonde-1.jpg",
+            alt: "Filming a basketball game for La Rotonde",
+          },
+          {
+            type: "image",
+            src: "/photos/la-rotonde-2.jpg",
+            alt: "Camera playback on court with a La Rotonde media pass",
+          },
+          {
+            type: "image",
+            src: "/photos/la-rotonde-3.jpg",
+            alt: "Basketball huddle on court during coverage",
+          },
+        ],
       },
     ],
   },
