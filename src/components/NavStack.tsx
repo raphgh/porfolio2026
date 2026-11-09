@@ -31,7 +31,7 @@ export function NavStack() {
       </h2>
 
       <p className="mx-auto mb-8 max-w-xl text-center text-charcoal-soft md:mb-10">
-        hey, i&apos;m raphaelle, an ottawa based software engineer and creative. on this site
+        hey, i&apos;m raphaelle, an ottawa-based software engineer and creative. on this site
         you&apos;ll find an overview of my projects, experience, and cool things
         i&apos;m into. feel free to look around :)
       </p>
