@@ -5,6 +5,10 @@ export function InspirationList({ items }: { items: Inspiration[] }) {
   return (
     <ul className="flex flex-col gap-3">
       {items.map((item, i) => {
+        if (item.spacer) {
+          return <li key={`spacer-${i}`} aria-hidden className="h-3 list-none" />;
+        }
+
         const live = Boolean(item.href && item.href !== "#");
         const label = item.note ? (
           <>

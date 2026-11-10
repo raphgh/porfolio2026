@@ -43,6 +43,60 @@ export const scrapbook: ScrapbookItem[] = [
   },
 ];
 
+
+/** Simple bullets — add `href` when you want them to link out. */
+export const inspirations: Inspiration[] = [
+  {
+    name: "Nabihah Ahmad",
+    kind: "Creator",
+    note: "building fashion-tech with values",
+    href: "https://www.instagram.com/nabihah.ahmad/",
+  },
+  {
+    name: "julip.mp3",
+    kind: "Creator",
+    note: "musician & creative technologist — making music with hand-tracking code",
+    href: "https://www.instagram.com/julip.mp3/",
+  },
+  {
+    name: "Gazi Jarin",
+    kind: "Creator",
+    note: "tech and lifestyle creator - previous work at Pinterest, Google, and Amazon",
+    href: "https://www.instagram.com/gazisj/",
+  },
+  {
+    name: "Myriam Boulos",
+    kind: "Creator",
+    note: "lebanese documentary photographer",
+    href: "https://www.instagram.com/myriamboulos/",
+  },
+  {
+    name: "Greta Thunberg",
+    kind: "Creator",
+    note: "climate activist",
+    href: "https://www.instagram.com/gretathunberg/",
+  },
+  { name: "", kind: "Product", spacer: true },
+  {
+    name: "SSQRD",
+    kind: "Product",
+    note: "discovering sustainable, ethical brands worldwide",
+    href: "https://ssqrd.co/",
+  },
+  {
+    name: "Sonic Liberation Devices",
+    kind: "Product",
+    note: "collective of artists, musicians, technologists, designers, organizers, and researchers.",
+    href: "https://sonicliberationdevices.com/#top",
+  },
+  {
+    name: "2048 Foundation",
+    kind: "Creator",
+    note: "funding palestinian creative projects and bringing ideas to life",
+    href: "https://www.instagram.com/2048foundation/",
+  },
+];
+
 /** Current reads — covers live under `/public/books/`. */
 export const books: Book[] = [
   {
@@ -71,39 +125,5 @@ export const books: Book[] = [
       src: "/books/secret-lives-of-planets.png",
       alt: "Cover of The Secret Lives of Planets by Paul Murdin",
     },
-  },
-];
-
-/** Simple bullets — add `href` when you want them to link out. */
-export const inspirations: Inspiration[] = [
-  {
-    name: "SSQRD",
-    kind: "Product",
-    note: "discovering sustainable, ethical brands worldwide",
-    href: "https://ssqrd.co/",
-  },
-  {
-    name: "Sonic Liberation Devices",
-    kind: "Product",
-    note: "collective of artists, musicians, technologists, designers, organizers, and researchers.",
-    href: "https://sonicliberationdevices.com/#top",
-  },
-  {
-    name: "Nabihah Ahmad",
-    kind: "Creator",
-    note: "building fashion-tech with values",
-    href: "https://www.instagram.com/nabihah.ahmad/",
-  },
-  {
-    name: "gazisj",
-    kind: "Creator",
-    note: "tech and lifestyle creator - previous work in Pinterest, Google, and Amazon",
-    href: "https://www.instagram.com/gazisj/",
-  },
-  {
-    name: "2048 Foundation",
-    kind: "Creator",
-    note: "instagram",
-    href: "https://www.instagram.com/2048foundation/",
   },
 ];

@@ -53,7 +53,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-scroll-behavior="smooth"
       className={`${sans.variable} ${display.variable} ${mono.variable} antialiased`}
     >
-      <body className="flex min-h-dvh flex-col bg-white text-charcoal">
+      <body
+        className="flex min-h-dvh flex-col bg-white text-charcoal"
+        suppressHydrationWarning
+      >
         <noscript>
           <style>{`[style*="opacity:0"]{opacity:1!important;transform:none!important}`}</style>
         </noscript>

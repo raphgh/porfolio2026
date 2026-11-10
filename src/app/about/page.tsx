@@ -21,7 +21,7 @@ export default function AboutPage() {
               sizes="(min-width: 768px) 33vw, 100vw"
               className="rounded-none border-0"
             />
-            <figcaption className="px-4 py-3 text-sm text-charcoal-soft">that’s me</figcaption>
+            <figcaption className="px-4 py-3 text-sm text-charcoal-muted">that’s me</figcaption>
           </figure>
         </div>
         <div className="col-span-12 flex flex-col gap-8 md:col-span-7 md:col-start-6">
@@ -31,7 +31,7 @@ export default function AboutPage() {
               className={
                 i === 0
                   ? "display text-heading text-pretty text-navy"
-                  : "text-lede text-pretty text-charcoal-soft"
+                  : "text-lede text-pretty text-charcoal-muted"
               }
             >
               {p}
@@ -46,13 +46,31 @@ export default function AboutPage() {
         </Reveal>
       </section>
 
+      <section aria-labelledby="inspo-title" className="mt-28 md:mt-36">
+        <Reveal>
+          <div className="grid grid-cols-12 items-start gap-x-4 gap-y-6 md:gap-x-8">
+            <div className="col-span-12 md:col-span-3 md:pt-1">
+              <h2
+                id="inspo-title"
+                className="text-[0.72rem] font-medium tracking-[0.08em] text-charcoal-soft uppercase"
+              >
+                some creators/things I appreciate
+              </h2>
+            </div>
+            <div className="col-span-12 md:col-span-9">
+              <InspirationList items={inspirations} />
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
       <section aria-labelledby="reads-title" className="mt-28 md:mt-36">
         <Reveal>
           <div className="grid grid-cols-12 items-start gap-x-4 gap-y-6 md:gap-x-8">
             <div className="col-span-12 md:col-span-3 md:pt-1">
               <h2
                 id="reads-title"
-                className="text-[0.72rem] font-medium tracking-[0.08em] text-charcoal-muted uppercase"
+                className="text-[0.72rem] font-medium tracking-[0.08em] text-charcoal-soft uppercase"
               >
                 cool reads :)
               </h2>
@@ -64,31 +82,13 @@ export default function AboutPage() {
         </Reveal>
       </section>
 
-      <section aria-labelledby="inspo-title" className="mt-28 md:mt-36">
-        <Reveal>
-          <div className="grid grid-cols-12 items-start gap-x-4 gap-y-6 md:gap-x-8">
-            <div className="col-span-12 md:col-span-3 md:pt-1">
-              <h2
-                id="inspo-title"
-                className="text-[0.72rem] font-medium tracking-[0.08em] text-charcoal-muted uppercase"
-              >
-                creators/things I appreciate
-              </h2>
-            </div>
-            <div className="col-span-12 md:col-span-9">
-              <InspirationList items={inspirations} />
-            </div>
-          </div>
-        </Reveal>
-      </section>
-
       <section aria-labelledby="tech-title" className="mt-28 font-sans md:mt-36">
         <Reveal>
           <div className="grid grid-cols-12 items-start gap-x-4 gap-y-6 md:gap-x-8">
             <div className="col-span-12 md:col-span-3 md:pt-1">
               <h2
                 id="tech-title"
-                className="text-[0.72rem] font-medium tracking-[0.08em] text-charcoal-muted uppercase"
+                className="text-[0.72rem] font-medium tracking-[0.08em] text-charcoal-soft uppercase"
               >
                 Technologies I&apos;ve used
               </h2>

@@ -240,4 +240,6 @@ export type Inspiration = {
   /** One short line on why it matters. */
   note?: string;
   href?: string;
+  /** Renders as a blank gap in the list. */
+  spacer?: boolean;
 };
