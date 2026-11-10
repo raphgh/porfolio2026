@@ -5,9 +5,9 @@
 export const site = {
   name: "Raphaelle Ghanem",
   shortName: "rg",
-  title: "Software Engineer",
+  title: "SWE & Creative",
   description:
-    "Software engineering student building products end-to-end — from backend systems and APIs to interfaces and experiences.",
+    "Software engineering student and creative based in Ottawa.",
   /** Used for canonical URLs, sitemap and Open Graph. Set NEXT_PUBLIC_SITE_URL in Vercel. */
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   /** Drop the real file at /public/resume.pdf. */
