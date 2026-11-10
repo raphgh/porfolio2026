@@ -19,7 +19,15 @@ export function Footer() {
       <div className="shell flex flex-col gap-8 pt-10 pb-8 md:gap-10 md:pt-12">
         <div className="grid grid-cols-12 gap-x-4 gap-y-8 md:gap-x-8">
           <div className="col-span-12 flex flex-col gap-1.5 md:col-span-5">
-            <p className="display text-2xl text-navy lowercase">{site.name.toLowerCase()}</p>
+            <p
+              className="display bg-clip-text text-2xl text-transparent lowercase"
+              style={{
+                backgroundImage:
+                  "linear-gradient(90deg, #e6b422, #f07a45, #e85a8a, #d94f5c, #f0a06a)",
+              }}
+            >
+              {site.name.toLowerCase()}
+            </p>
             <LocalTime className="text-sm text-charcoal-muted tabular-nums" />
           </div>
 

@@ -31,18 +31,8 @@ export function NavStack() {
       </h2>
 
       <p className="mx-auto mb-8 max-w-xl text-center text-charcoal-soft md:mb-10">
-        hey, i&apos;m raphaelle, an{" "}
-        <span
-          className="bg-clip-text font-medium text-transparent"
-          style={{
-            backgroundImage:
-              "linear-gradient(90deg, #e6b422, #f07a45, #e85a8a, #d94f5c, #f0a06a)",
-          }}
-        >
-          ottawa-based software engineer and creative
-        </span>
-        . on this site you&apos;ll find an overview of my projects, experience, and cool things
-        i&apos;m into :)
+        hey, i&apos;m raphaelle, an ottawa-based software engineer and creative. on this site
+        you&apos;ll find an overview of my projects, experience, and cool things i&apos;m into :)
       </p>
       <p className="mx-auto mb-8 max-w-xl text-center text-charcoal-soft md:mb-10">
         hover (or tap if you&apos;re on mobile) over a section to look around!
