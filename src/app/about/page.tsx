@@ -16,12 +16,17 @@ export default function AboutPage() {
         <div className="col-span-12 sm:col-span-7 md:col-span-4">
           <figure className="overflow-hidden rounded-[1.5rem] border border-navy/35 bg-white">
             <MediaFrame
+              media={{
+                type: "image",
+                src: "/scrapbook/fundraiser.jpg",
+                alt: "Hosting a music fundraiser for the Lebanese Red Cross",
+              }}
               aspect="aspect-[4/5]"
-              placeholder="Portrait"
               sizes="(min-width: 768px) 33vw, 100vw"
               className="rounded-none border-0"
+              priority
             />
-            <figcaption className="px-4 py-3 text-sm text-charcoal-muted">that’s me</figcaption>
+            <figcaption className="px-4 py-3 text-sm text-charcoal-muted">📍 fundraiser @ the Bike Café</figcaption>
           </figure>
         </div>
         <div className="col-span-12 flex flex-col gap-8 md:col-span-7 md:col-start-6">

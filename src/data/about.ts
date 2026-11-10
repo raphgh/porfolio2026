@@ -16,15 +16,6 @@ export const about = {
 /** A few strong images — not a creative portfolio. */
 export const scrapbook: ScrapbookItem[] = [
   {
-    caption:
-      "me hosting a music fundraiser for the lebanese red cross, with community members and artists, raising $1200+ !",
-    media: {
-      type: "image",
-      src: "/scrapbook/fundraiser.jpg",
-      alt: "Hosting a music fundraiser for the Lebanese Red Cross",
-    },
-  },
-  {
     caption: "back home in lebanon.",
     media: {
       type: "image",
@@ -39,6 +30,22 @@ export const scrapbook: ScrapbookItem[] = [
       type: "image",
       src: "/scrapbook/travelling.jpg",
       alt: "Travelling — overlooking the Eiffel Tower in Paris",
+    },
+  },
+  {
+    caption: "running enthusiast.",
+    media: {
+      type: "image",
+      src: "/scrapbook/running.jpg",
+      alt: "Post-run with a pain au chocolat",
+    },
+  },
+  {
+    caption: "guitar!",
+    media: {
+      type: "image",
+      src: "/scrapbook/guitar.jpg",
+      alt: "Red electric guitar with amp and pedals",
     },
   },
 ];
