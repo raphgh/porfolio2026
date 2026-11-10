@@ -41,15 +41,6 @@ export const scrapbook: ScrapbookItem[] = [
       alt: "Travelling — overlooking the Eiffel Tower in Paris",
     },
   },
-  {
-    caption: "some more travelling.",
-    aspect: "landscape",
-    media: {
-      type: "image",
-      src: "/scrapbook/travelling.jpg",
-      alt: "Travelling — overlooking the Eiffel Tower in Paris",
-    },
-  },
 ];
 
 /** Current reads — covers live under `/public/books/`. */
@@ -85,9 +76,34 @@ export const books: Book[] = [
 
 /** Simple bullets — add `href` when you want them to link out. */
 export const inspirations: Inspiration[] = [
-  { name: "[Name]", kind: "Creator", note: "[quick idea]" },
-  { name: "[Name]", kind: "Product", note: "[quick idea]" },
-  { name: "[Name]", kind: "Website", note: "[quick idea]" },
-  { name: "[Name]", kind: "Creator", note: "[quick idea]" },
-  { name: "[Name]", kind: "Product", note: "[quick idea]" },
+  {
+    name: "SSQRD",
+    kind: "Product",
+    note: "discovering sustainable, ethical brands worldwide",
+    href: "https://ssqrd.co/",
+  },
+  {
+    name: "Sonic Liberation Devices",
+    kind: "Product",
+    note: "collective of artists, musicians, technologists, designers, organizers, and researchers.",
+    href: "https://sonicliberationdevices.com/#top",
+  },
+  {
+    name: "Nabihah Ahmad",
+    kind: "Creator",
+    note: "building fashion-tech with values",
+    href: "https://www.instagram.com/nabihah.ahmad/",
+  },
+  {
+    name: "gazisj",
+    kind: "Creator",
+    note: "tech and lifestyle creator - previous work in Pinterest, Google, and Amazon",
+    href: "https://www.instagram.com/gazisj/",
+  },
+  {
+    name: "2048 Foundation",
+    kind: "Creator",
+    note: "instagram",
+    href: "https://www.instagram.com/2048foundation/",
+  },
 ];
