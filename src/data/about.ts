@@ -8,8 +8,8 @@ export const about = {
   intro: "",
   paragraphs: [
     "i'm currently at uOttawa for my bachelor's in software engineering.",
-    "i'm a big enjoyer of art, music, and culture. i’m very drawn to community and to technology that creates social good. these are where a lot of my project ideas come from.",
-    "feel free to scroll down, through photos, current reads and likings, and my tech stack.",
+    "i'm a big enjoyer of art, music, and culture. i’m very drawn to community and to technology that creates social good. it's where a lot of my project ideas come from.",
+    "scroll down for more!",
   ],
 };
 
@@ -25,11 +25,20 @@ export const scrapbook: ScrapbookItem[] = [
     },
   },
   {
-    caption: "travelling back home in lebanon, one of my favourite places.",
+    caption: "back home in lebanon.",
     media: {
       type: "image",
       src: "/scrapbook/lebanon.jpg",
       alt: "Looking out over mountains in Lebanon",
+    },
+  },
+  {
+    caption: "some more travelling.",
+    aspect: "landscape",
+    media: {
+      type: "image",
+      src: "/scrapbook/travelling.jpg",
+      alt: "Travelling — overlooking the Eiffel Tower in Paris",
     },
   },
   {
@@ -61,6 +70,15 @@ export const books: Book[] = [
       type: "image",
       src: "/books/show-your-work.png",
       alt: "Cover of Show Your Work! by Austin Kleon",
+    },
+  },
+  {
+    title: "The Secret Lives of Planets",
+    author: "Paul Murdin",
+    cover: {
+      type: "image",
+      src: "/books/secret-lives-of-planets.png",
+      alt: "Cover of The Secret Lives of Planets by Paul Murdin",
     },
   },
 ];
