@@ -25,7 +25,7 @@ export function NavStack() {
   const frontToBack = orderFromFront(active);
 
   return (
-    <section aria-labelledby="stack-nav-title" className="shell pb-20 md:pb-28">
+    <section aria-labelledby="stack-nav-title" className="shell pt-16 pb-20 md:pt-24 md:pb-28">
       <h2 id="stack-nav-title" className="sr-only">
         Navigate
       </h2>
