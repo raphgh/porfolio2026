@@ -39,7 +39,7 @@ export const experience: Experience[] = [
         overview: "Continued work on the NSP System Health Admin Dashboard, and the NFM-P microservice.",
         technologies: ["Java", "Spring Boot", "Cursor", "Kubernetes K9s", "Jira", "Git/GitLab", "IntelliJ", "Linux", "Podman", "Gradle", "Jenkins"],
         responsibilities: [""],
-        accomplishments: ["Accomplishment 1", "Accomplishment 2", "Accomplishment 3"],
+        accomplishments: [""],
         notes: [
           "Selected to join a Women in Engineering meeting at Nokia, representing co-ops and newer generations alongside other women in the field.",
           "Also rejoined the Student Ambassadors team with NextGEN, supporting internal events and the student community.",
