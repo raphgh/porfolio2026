@@ -10,7 +10,7 @@ export function ResumeLink({ compact = false, inverted = false, plain = false }:
         target="_blank"
         rel="noopener"
         aria-label="Resume (PDF, opens in a new tab)"
-        className="group inline-flex items-center gap-1.5 rounded-full border border-transparent px-2 py-1 text-[0.95rem] text-navy transition-colors hover:border-navy/30 hover:bg-navy-tint"
+        className="group inline-flex items-center gap-1.5 px-1 py-1 text-[0.95rem] text-navy transition-colors hover:text-[#d4a017]"
       >
         resume
         <svg

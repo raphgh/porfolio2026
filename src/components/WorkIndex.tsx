@@ -51,7 +51,7 @@ export function WorkIndex({ projects }: { projects: Project[] }) {
         );
 
         return (
-          <li key={project.slug}>
+          <li key={project.slug} id={project.slug} className="scroll-mt-24">
             {href ? (
               external ? (
                 <a

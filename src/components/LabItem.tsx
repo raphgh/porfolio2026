@@ -38,7 +38,7 @@ export function LabItem({ item, showDescription = false }: { item: LabExperiment
   );
 
   return (
-    <article className="flex flex-col gap-2.5">
+    <article id={item.id} className="flex flex-col gap-2.5 scroll-mt-24">
       <h3 className="flex flex-wrap items-center gap-2.5 text-[1.15rem] leading-tight font-medium text-charcoal">
         {item.media?.type === "image" && (
           <span

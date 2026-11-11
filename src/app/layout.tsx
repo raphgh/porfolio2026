@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Geist_Mono, Instrument_Sans, Instrument_Serif } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { SectionPager } from "@/components/SectionPager";
 import { ThreadTrail } from "@/components/ThreadTrail";
 import { MotionProvider } from "@/components/MotionProvider";
 import { site } from "@/data/site";
@@ -71,7 +70,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Navbar />
           <main id="main" className="relative z-10 flex-1">
             {children}
-            <SectionPager />
           </main>
           <Footer />
         </MotionProvider>

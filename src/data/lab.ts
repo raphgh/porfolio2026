@@ -64,7 +64,7 @@ export const lab: LabExperiment[] = [
   },
   {
     id: "uottahack",
-    title: "Hackbibis — uOttahack",
+    title: "uOttahack Hackathon",
     date: "Jan 2025",
     technology: ["Gadget"],
     result: "Group hackathon project for uOttahack",
@@ -79,7 +79,7 @@ export const lab: LabExperiment[] = [
   },
   {
     id: "hack-the-hill",
-    title: "Hack the Hill",
+    title: "Hack the Hill Hackathon",
     date: "Sep 2024",
     technology: ["Figma, HTML, CSS, JavaScript"],
     result: "Group hackathon project",

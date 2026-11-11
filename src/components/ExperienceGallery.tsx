@@ -40,6 +40,16 @@ export function ExperienceGallery({ entries }: { entries: Experience[] }) {
   }, []);
 
   useEffect(() => {
+    const openFromHash = () => {
+      const id = window.location.hash.replace(/^#/, "");
+      if (id && entries.some((entry) => entry.id === id)) setActiveId(id);
+    };
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+    return () => window.removeEventListener("hashchange", openFromHash);
+  }, [entries]);
+
+  useEffect(() => {
     if (!active) return;
 
     const scrollY = window.scrollY;
@@ -73,6 +83,9 @@ export function ExperienceGallery({ entries }: { entries: Experience[] }) {
       body.style.width = prev.bodyWidth;
       window.scrollTo(0, scrollY);
       window.removeEventListener("keydown", onKey);
+      if (window.location.hash.replace(/^#/, "") === active.id) {
+        history.replaceState(null, "", window.location.pathname + window.location.search);
+      }
     };
   }, [active]);
 
@@ -122,6 +135,7 @@ export function ExperienceGallery({ entries }: { entries: Experience[] }) {
           const cover = coverSrc(entry);
           const year = yearLabel(entry);
           const label = shortLabel(entry);
+          const title = entry.roles[0]?.title;
 
           return (
             <li key={entry.id}>
@@ -143,9 +157,12 @@ export function ExperienceGallery({ entries }: { entries: Experience[] }) {
 
                 <span className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/35 to-transparent" />
 
-                <span className="absolute bottom-3 left-3 inline-flex items-center rounded-full bg-white/95 px-3 py-1.5 text-[0.72rem] font-medium tracking-[0.04em] text-navy shadow-sm backdrop-blur-sm md:bottom-4 md:left-4">
-                  {label}
-                  {year ? <span className="text-charcoal-muted"> · {year}</span> : null}
+                <span className="absolute bottom-3 left-3 inline-flex max-w-[calc(100%-1.5rem)] items-center rounded-full bg-white/95 px-3 py-1.5 text-[0.72rem] font-medium tracking-[0.04em] text-navy shadow-sm backdrop-blur-sm md:bottom-4 md:left-4 md:max-w-[calc(100%-2rem)]">
+                  <span className="truncate">
+                    {label}
+                    {title ? <span className="text-charcoal-muted"> · {title}</span> : null}
+                    {year ? <span className="text-charcoal-muted"> · {year}</span> : null}
+                  </span>
                 </span>
               </button>
             </li>

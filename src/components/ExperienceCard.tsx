@@ -165,7 +165,7 @@ function RoleDetail({ role, showMeta }: { role: Role; showMeta: boolean }) {
       <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-10">
         <ScrollFade className="md:col-span-4">
           <p className="mb-3 text-[0.7rem] font-medium tracking-[0.08em] text-charcoal-muted uppercase">
-            The mission
+            Overview
           </p>
           {role.overview.trim() ? (
             <p className="text-[1.05rem] leading-snug font-medium tracking-[-0.01em] text-charcoal">

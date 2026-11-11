@@ -61,7 +61,7 @@ export const stickers: StickerDef[] = [
   {
     id: "heart",
     name: "Berry heart",
-    page: "/about",
+    page: "/me",
     color: "#b23a6f",
     shape: <path d="M32 54C15 43 8 33 8 24a12 12 0 0 1 24-4 12 12 0 0 1 24 4c0 9-7 19-24 30Z" strokeLinejoin="round" />,
   },

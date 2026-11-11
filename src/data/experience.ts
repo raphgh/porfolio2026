@@ -226,7 +226,8 @@ export const experience: Experience[] = [
         start: "March 2022",
         end: "June 2022",
         location: "Ottawa, ON",
-        overview: "",
+        overview:
+          "Supported lab research at Carleton University as a high school student, running tasks alongside university peers and contributing to the research progression.",
         technologies: [],
         responsibilities: [],
         accomplishments: [
