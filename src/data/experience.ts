@@ -122,7 +122,7 @@ export const experience: Experience[] = [
             title: "LinkedIn post",
             height: 628,
             width: 504,
-            note: "Conference about Nokia's new campus",
+            note: "Ceremony for Nokia's upcoming campus, alongside Jeffrey Maddox, President of Nokia Canada, and David Heard, Head of Network Infrastructure.",
           },
         ],
       },
