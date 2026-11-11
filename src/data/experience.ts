@@ -87,10 +87,10 @@ export const experience: Experience[] = [
         start: "Sep 2025",
         end: "Dec 2025",
         location: "Ottawa, ON",
-        overview: "Designed and implemented software solutions for a variety of clients using a variety of technologies.",
+        overview: "Start working on implementing the NFM-P microservice to the broader NSP System Health Admin Dashboard, by collaborating with cross-functional teams in NSP and UX.",
         technologies: ["Java", "Spring Boot", "Docker", "Kubernetes"],
-        responsibilities: ["Bridging Nokia’s NFM-P and NSP (Network Services Platform) by implementing a new dashlet within the NSP System Health Admin Dashboard, to display statuses and NFM-P data.", "Developing the backend for the microservice and implementing components using Java, Spring, REST APIs, Gradle, and Jenkins, and using tools such as IntelliJ, Linux, Podman, and Git/CVS throughout my term.", "Driving the project’s progression by working alongside cross-functional teams in NSP and UX, and refining Jira subtasks and workflows."],
-        accomplishments: ["Accomplishment 1", "Accomplishment 2", "Accomplishment 3"],
+        responsibilities: ["Bridged Nokia’s NFM-P and NSP (Network Services Platform) by implementing a new dashlet within the NSP System Health Admin Dashboard, to display statuses and NFM-P data.", "Developed the backend for the microservice and implementing components using Java, Spring, REST APIs, Gradle, and Jenkins, and using tools such as IntelliJ, Linux, Podman, and Git/CVS throughout my term.", "Drove the project’s progression by working alongside others and refining Jira subtasks and workflows."],
+        accomplishments: [""],
         notes: [
           "Also served as a Student Ambassador with NextGEN, supporting internal events and the student community at Nokia.",
         ],
