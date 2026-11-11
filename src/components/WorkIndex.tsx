@@ -35,7 +35,7 @@ export function WorkIndex({ projects }: { projects: Project[] }) {
                 <img
                   src={cover.src}
                   alt={cover.alt}
-                  className="absolute inset-0 size-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                  className="absolute inset-0 size-full object-cover"
                 />
               ) : (
                 <span className="absolute inset-0" style={{ backgroundColor: tone.bg }} />
@@ -58,14 +58,14 @@ export function WorkIndex({ projects }: { projects: Project[] }) {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative block overflow-hidden rounded-[1.75rem] border border-navy/10 bg-white text-left transition-transform duration-300 ease-(--ease-card) hover:scale-[1.015] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-navy"
+                  className="group relative block overflow-hidden rounded-[1.75rem] border border-navy/10 bg-white text-left transition-transform duration-300 ease-(--ease-card) hover:scale-[0.985] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-navy"
                 >
                   {body}
                 </a>
               ) : (
                 <Link
                   href={href}
-                  className="group relative block overflow-hidden rounded-[1.75rem] border border-navy/10 bg-white text-left transition-transform duration-300 ease-(--ease-card) hover:scale-[1.015] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-navy"
+                  className="group relative block overflow-hidden rounded-[1.75rem] border border-navy/10 bg-white text-left transition-transform duration-300 ease-(--ease-card) hover:scale-[0.985] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-navy"
                 >
                   {body}
                 </Link>

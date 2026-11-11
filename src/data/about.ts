@@ -16,7 +16,7 @@ export const about = {
 /** A few strong images — not a creative portfolio. */
 export const scrapbook: ScrapbookItem[] = [
   {
-    caption: "back home in lebanon.",
+    caption: "back home in lebanon :)",
     media: {
       type: "image",
       src: "/scrapbook/lebanon.jpg",
@@ -33,11 +33,11 @@ export const scrapbook: ScrapbookItem[] = [
     },
   },
   {
-    caption: "running enthusiast.",
+    caption: "running enthusiast 🚴",
     media: {
       type: "image",
       src: "/scrapbook/running.jpg",
-      alt: "Post-run with a pain au chocolat",
+      alt: "run with a croissant",
     },
   },
   {
@@ -45,7 +45,7 @@ export const scrapbook: ScrapbookItem[] = [
     media: {
       type: "image",
       src: "/scrapbook/guitar.jpg",
-      alt: "Red electric guitar with amp and pedals",
+      alt: "electric guitar with amp and pedals",
     },
   },
 ];

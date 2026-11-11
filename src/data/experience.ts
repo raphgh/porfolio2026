@@ -67,7 +67,7 @@ export const experience: Experience[] = [
             title: "LinkedIn post",
             height: 628,
             width: 504,
-            note: "[Note about this post]",
+            note: "Student Ambassador gang!",
           },
         ],
       },
@@ -122,7 +122,7 @@ export const experience: Experience[] = [
             title: "LinkedIn post",
             height: 628,
             width: 504,
-            note: "[Note about this post]",
+            note: "Conference about Nokia's new campus",
           },
         ],
       },
@@ -133,7 +133,7 @@ export const experience: Experience[] = [
     company: "Canadian Intergovernmental Conference Secretariat (CICS)",
     shortName: "CICS",
     logo: "/logos/cics_50th_logo.webp",
-    thumbnail: "/logos/cics_50th_logo.webp",
+    thumbnail: "/logos/cics.jpg",
     display: "grouped",
     roles: [
       {
@@ -153,8 +153,8 @@ export const experience: Experience[] = [
     id: "experience-four",
     company: "Canadian Cancer Survivor Network (CCSN)",
     shortName: "CCSN",
-    logo: "/logos/CCSN_Logo_EN_SQUARE.png",
-    thumbnail: "/logos/CCSN_Logo_EN_SQUARE.png",
+    logo: "/logos/ccsn.png",
+    thumbnail: "/logos/ccsn.png",
     display: "grouped",
     roles: [
       {
@@ -214,9 +214,10 @@ export const experience: Experience[] = [
   {
     id: "experience-six",
     company: "Carleton University",
-    shortName: "Carleton University",
-    logo: "/logos/",
-    thumbnail: "/logos/",
+    shortName: "Carleton",
+    logo: "/logos/carleton-logo.png",
+    thumbnail: "/logos/carleton-sign.png",
+    preview: "/logos/carleton-lab.jpg",
     display: "grouped",
     roles: [
       {
@@ -225,11 +226,27 @@ export const experience: Experience[] = [
         start: "March 2022",
         end: "June 2022",
         location: "Ottawa, ON",
-        overview:"",
-        technologies: [""],
-        responsibilities: [", , .",],
-        accomplishments: [" %"],
-        artifacts: photoSlots("Carleton University"),
+        overview: "",
+        technologies: [],
+        responsibilities: [],
+        accomplishments: [
+          "Reduced project timeline through effective multitasking and lab procedures, increasing project efficiency.",
+          "Successfully collaborated with university peers, demonstrating advanced lab skills as a high school student.",
+        ],
+        embeds: [
+          {
+            src: "https://onlinelibrary.wiley.com/doi/10.1111/fwb.70066",
+            title: "Freshwater Biology article — title page",
+            image: "/photos/carleton-paper-1.png",
+            note: "Acknowledged for technical assistance in Freshwater Biology (Wiley).",
+          },
+          {
+            src: "https://onlinelibrary.wiley.com/doi/10.1111/fwb.70066",
+            title: "Freshwater Biology article — acknowledgements",
+            image: "/photos/carleton-paper-2.png",
+            linkLabel: "Full article here",
+          },
+        ],
       },
     ],
   },

@@ -130,6 +130,13 @@ export type Embed = {
   width?: number;
   /** Caption / context shown above the embed. */
   note?: string;
+  /**
+   * Preview image under `/public`. When set, renders a linked card
+   * instead of an iframe (for pages that block embedding).
+   */
+  image?: string;
+  /** Optional text link shown under the embed (e.g. "Full article here"). */
+  linkLabel?: string;
 };
 
 export type Role = {
@@ -164,6 +171,11 @@ export type Experience = {
    * Falls back to `logo` when omitted.
    */
   thumbnail?: string;
+  /**
+   * Hero image inside the detail modal.
+   * Falls back to `thumbnail` when omitted.
+   */
+  preview?: string;
   /** Short label on the grid pill, e.g. "Nokia". Defaults to company. */
   shortName?: string;
   /** Short descriptor of the company/team, e.g. "Payments platform". */

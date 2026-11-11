@@ -8,15 +8,6 @@ export function entryDates(entry: Experience) {
   return formatDates(earliest.start, latest.end);
 }
 
-function yearLabel(entry: Experience) {
-  const start = entry.roles[entry.roles.length - 1]?.start ?? "";
-  const end = entry.roles[0]?.end ?? entry.roles[0]?.start ?? "";
-  const startYear = start.match(/\d{4}/)?.[0];
-  const endYear = end.match(/\d{4}/)?.[0];
-  if (startYear && endYear && startYear !== endYear) return `${startYear}–${endYear}`;
-  return endYear ?? startYear ?? entryDates(entry);
-}
-
 function companyInitials(name: string) {
   const parts = name.replace(/[()]/g, "").split(/\s+/).filter(Boolean);
   if (parts.length === 1) return parts[0].slice(0, 3).toUpperCase();
@@ -60,8 +51,8 @@ export function ExperienceDetail({
   centered?: boolean;
 }) {
   const role = entry.roles[0];
-  const preview = entry.thumbnail && entry.thumbnail !== "/logos/" ? entry.thumbnail : null;
-  const techs = Array.from(new Set(entry.roles.flatMap((r) => r.technologies).filter((t) => t.trim())));
+  const previewSrc = entry.preview ?? entry.thumbnail;
+  const preview = previewSrc && previewSrc !== "/logos/" ? previewSrc : null;
 
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col">
@@ -92,7 +83,7 @@ export function ExperienceDetail({
       </header>
 
       <dl className="grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-4">
-        <MetaCell label="Year" value={yearLabel(entry)} />
+        <MetaCell label="Dates" value={entryDates(entry)} />
         <MetaCell label="Role" value={role?.title ?? "—"} />
         <MetaCell label="Type" value={role?.employmentType ?? "—"} />
         <MetaCell label="Location" value={role?.location ?? "—"} />
@@ -119,15 +110,6 @@ export function ExperienceDetail({
             </li>
           ))}
         </ol>
-
-        {techs.length > 0 && (
-          <ScrollFade className="mt-12 border-t border-black/[0.08] pt-8">
-            <p className="mb-3 text-[0.7rem] font-medium tracking-[0.08em] text-charcoal-muted uppercase">
-              Technologies
-            </p>
-            <p className="text-[0.95rem] leading-relaxed text-charcoal-soft">{techs.join(" · ")}</p>
-          </ScrollFade>
-        )}
       </div>
     </div>
   );
@@ -163,6 +145,7 @@ function RoleDetail({ role, showMeta }: { role: Role; showMeta: boolean }) {
   const responsibilities = role.responsibilities.filter((item) => item.trim().length > 0);
   const accomplishments = role.accomplishments.filter((item) => item.trim().length > 0);
   const body = [...responsibilities, ...accomplishments];
+  const techs = role.technologies.filter((t) => t.trim().length > 0);
 
   return (
     <div className="flex flex-col gap-8">
@@ -216,6 +199,22 @@ function RoleDetail({ role, showMeta }: { role: Role; showMeta: boolean }) {
         </div>
       </div>
 
+      {techs.length > 0 && (
+        <ScrollFade>
+          <p className="mb-3 text-[0.7rem] font-medium tracking-[0.08em] text-charcoal-muted uppercase">
+            Technologies
+          </p>
+          <ul className="flex flex-wrap items-baseline gap-y-1 text-[0.9rem] tracking-[-0.01em] text-charcoal-soft">
+            {techs.map((tech, i) => (
+              <li key={tech} className="inline">
+                {i > 0 && <span className="mx-2 text-charcoal-muted/45">·</span>}
+                {tech}
+              </li>
+            ))}
+          </ul>
+        </ScrollFade>
+      )}
+
       {role.artifacts && role.artifacts.length > 0 && (
         <ScrollFade delay={80}>
           <PhotoStrip items={role.artifacts} />
@@ -226,20 +225,49 @@ function RoleDetail({ role, showMeta }: { role: Role; showMeta: boolean }) {
         <ScrollFade delay={120}>
           <ul className="flex flex-col items-center gap-6 pt-2">
             {role.embeds.map((embed) => (
-              <li key={embed.src} className="flex w-full max-w-[504px] flex-col gap-3">
+              <li
+                key={`${embed.src}-${embed.image ?? "iframe"}`}
+                className="flex w-full max-w-[504px] flex-col gap-3"
+              >
                 {embed.note && (
                   <p className="border-l-2 border-black/[0.08] pl-4 text-[0.95rem] leading-relaxed text-charcoal-soft">
                     {embed.note}
                   </p>
                 )}
-                <iframe
-                  src={embed.src}
-                  title={embed.title ?? "Embedded post"}
-                  height={embed.height ?? 628}
-                  width={embed.width ?? 504}
-                  className="mx-auto max-w-full rounded-2xl border-0"
-                  allowFullScreen
-                />
+                {embed.image ? (
+                  <a
+                    href={embed.src}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block overflow-hidden rounded-2xl border border-black/[0.06] bg-white transition-opacity hover:opacity-90"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={embed.image}
+                      alt={embed.title ?? "Article preview"}
+                      className="block w-full"
+                    />
+                  </a>
+                ) : (
+                  <iframe
+                    src={embed.src}
+                    title={embed.title ?? "Embedded post"}
+                    height={embed.height ?? 628}
+                    width={embed.width ?? 504}
+                    className="mx-auto max-w-full rounded-2xl border-0"
+                    allowFullScreen
+                  />
+                )}
+                {embed.linkLabel && (
+                  <a
+                    href={embed.src}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[0.95rem] text-charcoal-soft underline decoration-black/20 underline-offset-4 transition-colors hover:text-charcoal hover:decoration-black/40"
+                  >
+                    {embed.linkLabel}
+                  </a>
+                )}
               </li>
             ))}
           </ul>

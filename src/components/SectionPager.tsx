@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { stackNav, stackNavColors } from "@/data/site";
+import { stackNav } from "@/data/site";
 
 function sectionIndex(pathname: string) {
   // Match deepest section first (e.g. /work/slug → Projects)
@@ -17,7 +17,6 @@ function sectionIndex(pathname: string) {
 /**
  * Bottom-of-page previous / next links between main sections
  * (Home → Projects → Experience → Lab → About).
- * Each button uses the same wash as that section’s home stack card.
  */
 export function SectionPager() {
   const pathname = usePathname();
@@ -25,10 +24,8 @@ export function SectionPager() {
 
   if (index < 0 || pathname === "/") return null;
 
-  const prevIndex = index > 0 ? index - 1 : null;
-  const nextIndex = index < stackNav.length - 1 ? index + 1 : null;
-  const prev = prevIndex !== null ? stackNav[prevIndex] : null;
-  const next = nextIndex !== null ? stackNav[nextIndex] : null;
+  const prev = index > 0 ? stackNav[index - 1] : null;
+  const next = index < stackNav.length - 1 ? stackNav[index + 1] : null;
 
   if (!prev && !next) return null;
 
@@ -37,25 +34,17 @@ export function SectionPager() {
       aria-label="Section"
       className="shell mt-16 border-t border-silver-soft pt-8 pb-4 md:mt-24 md:pt-10"
     >
-      <div className="flex flex-wrap items-stretch justify-between gap-4">
-        {prev && prevIndex !== null ? (
+      <div className="flex items-start justify-between gap-8">
+        {prev ? (
           <Link
             href={prev.href}
-            className="group flex min-w-[12rem] flex-1 flex-col gap-1 rounded-[1.25rem] border-[1.5px] px-5 py-4 transition-opacity hover:opacity-90 sm:max-w-xs"
-            style={{
-              backgroundColor: stackNavColors[prevIndex].bg,
-              borderColor: stackNavColors[prevIndex].border,
-            }}
+            className="group flex max-w-[14rem] flex-col gap-1 text-left transition-colors"
           >
-            <span className="label" style={{ color: stackNavColors[prevIndex].number }}>
+            <span className="text-[0.7rem] font-medium tracking-[0.06em] text-charcoal-muted uppercase">
               Previous
             </span>
-            <span className="display text-heading text-navy lowercase">
-              <span
-                aria-hidden
-                className="mr-2 transition-transform group-hover:-translate-x-0.5"
-                style={{ color: stackNavColors[prevIndex].number }}
-              >
+            <span className="text-[1.05rem] tracking-[-0.02em] text-navy lowercase group-hover:text-mustard-deep">
+              <span aria-hidden className="mr-1.5 text-charcoal-muted transition-transform group-hover:-translate-x-0.5">
                 ←
               </span>
               {prev.label}
@@ -65,25 +54,17 @@ export function SectionPager() {
           <span />
         )}
 
-        {next && nextIndex !== null ? (
+        {next ? (
           <Link
             href={next.href}
-            className="group flex min-w-[12rem] flex-1 flex-col gap-1 rounded-[1.25rem] border-[1.5px] px-5 py-4 text-right transition-opacity hover:opacity-90 sm:ml-auto sm:max-w-xs"
-            style={{
-              backgroundColor: stackNavColors[nextIndex].bg,
-              borderColor: stackNavColors[nextIndex].border,
-            }}
+            className="group ml-auto flex max-w-[14rem] flex-col gap-1 text-right transition-colors"
           >
-            <span className="label" style={{ color: stackNavColors[nextIndex].number }}>
+            <span className="text-[0.7rem] font-medium tracking-[0.06em] text-charcoal-muted uppercase">
               Next
             </span>
-            <span className="display text-heading text-navy lowercase">
+            <span className="text-[1.05rem] tracking-[-0.02em] text-navy lowercase group-hover:text-mustard-deep">
               {next.label}
-              <span
-                aria-hidden
-                className="ml-2 transition-transform group-hover:translate-x-0.5"
-                style={{ color: stackNavColors[nextIndex].number }}
-              >
+              <span aria-hidden className="ml-1.5 text-charcoal-muted transition-transform group-hover:translate-x-0.5">
                 →
               </span>
             </span>

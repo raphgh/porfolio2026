@@ -5,15 +5,6 @@ import { createPortal } from "react-dom";
 import { ExperienceDetail } from "@/components/ExperienceCard";
 import type { Experience } from "@/data/types";
 
-/** Soft washes from the embroidery trail palette */
-const CARD_TONES = [
-  { bg: "#f5e6b8", accent: "#e6b422" }, // mustard
-  { bg: "#fde0d2", accent: "#f07a45" }, // coral
-  { bg: "#fce8d8", accent: "#f0a06a" }, // peach
-  { bg: "#f9d6e4", accent: "#e85a8a" }, // rose
-  { bg: "#f5d0d4", accent: "#d94f5c" }, // terracotta
-] as const;
-
 function yearLabel(entry: Experience) {
   const start = entry.roles[entry.roles.length - 1]?.start ?? "";
   const end = entry.roles[0]?.end ?? entry.roles[0]?.start ?? "";
@@ -127,8 +118,7 @@ export function ExperienceGallery({ entries }: { entries: Experience[] }) {
   return (
     <>
       <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6">
-        {entries.map((entry, i) => {
-          const tone = CARD_TONES[i % CARD_TONES.length];
+        {entries.map((entry) => {
           const cover = coverSrc(entry);
           const year = yearLabel(entry);
           const label = shortLabel(entry);
@@ -140,19 +130,14 @@ export function ExperienceGallery({ entries }: { entries: Experience[] }) {
                 onClick={() => setActiveId(entry.id)}
                 aria-haspopup="dialog"
                 aria-expanded={activeId === entry.id}
-                className="group relative aspect-[2/1] w-full overflow-hidden rounded-[1.75rem] text-left transition-transform duration-300 ease-(--ease-card) hover:scale-[1.015] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-navy"
-                style={{ backgroundColor: tone.bg }}
+                className="group relative aspect-[2/1] w-full overflow-hidden rounded-[1.75rem] text-left transition-transform duration-300 ease-(--ease-card) hover:scale-[0.985] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-navy"
               >
                 {cover ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={cover}
                     alt=""
-                    className={`absolute inset-0 size-full transition-transform duration-500 ease-out group-hover:scale-[1.03] ${
-                      entry.company === "Nokia" || entry.company === "La Rotonde"
-                        ? "object-cover"
-                        : "object-contain p-8 md:p-10"
-                    }`}
+                    className="absolute inset-0 size-full object-cover"
                   />
                 ) : null}
 
