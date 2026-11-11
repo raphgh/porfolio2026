@@ -9,17 +9,19 @@ import { site } from "@/data/site";
 import { ResumeLink } from "./ResumeLink";
 
 /**
- * Sticky header with mega menu that expands down from the bar itself
- * (not a floating panel).
+ * Auto-hiding header: slides away on scroll down, returns on scroll up.
+ * Mega menu expands down from the bar itself (not a floating panel).
  */
 export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [active, setActive] = useState<MegaMenuItem | null>(null);
   const [hash, setHash] = useState("");
   const toggleRef = useRef<HTMLButtonElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
+  const lastScrollY = useRef(0);
   const menuId = useId();
   const columns = megaMenuColumns();
 
@@ -33,7 +35,36 @@ export function Navbar() {
 
   useEffect(() => {
     setOpen(false);
+    setHidden(false);
   }, [pathname]);
+
+  useEffect(() => {
+    lastScrollY.current = window.scrollY;
+
+    const onScroll = () => {
+      if (open) {
+        setHidden(false);
+        lastScrollY.current = window.scrollY;
+        return;
+      }
+
+      const y = window.scrollY;
+      const delta = y - lastScrollY.current;
+
+      if (y < 12) {
+        setHidden(false);
+      } else if (delta > 4) {
+        setHidden(true);
+      } else if (delta < -4) {
+        setHidden(false);
+      }
+
+      lastScrollY.current = y;
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [open]);
 
   useEffect(() => {
     if (!open) {
@@ -41,21 +72,18 @@ export function Navbar() {
       return;
     }
 
-    const scrollY = window.scrollY;
+    setHidden(false);
+
     const { body, documentElement } = document;
     const prev = {
       bodyOverflow: body.style.overflow,
       htmlOverflow: documentElement.style.overflow,
-      bodyPosition: body.style.position,
-      bodyTop: body.style.top,
-      bodyWidth: body.style.width,
     };
 
+    // overflow-only lock — avoid body position:fixed, which yanks the header
+    // off-screen when the page isn't scrolled to the top.
     body.style.overflow = "hidden";
     documentElement.style.overflow = "hidden";
-    body.style.position = "fixed";
-    body.style.top = `-${scrollY}px`;
-    body.style.width = "100%";
 
     firstLinkRef.current?.focus();
     const toggle = toggleRef.current;
@@ -67,10 +95,6 @@ export function Navbar() {
     return () => {
       body.style.overflow = prev.bodyOverflow;
       documentElement.style.overflow = prev.htmlOverflow;
-      body.style.position = prev.bodyPosition;
-      body.style.top = prev.bodyTop;
-      body.style.width = prev.bodyWidth;
-      window.scrollTo(0, scrollY);
       window.removeEventListener("keydown", onKey);
       toggle?.focus({ preventScroll: true });
     };
@@ -85,7 +109,7 @@ export function Navbar() {
           <button
             type="button"
             aria-label="Close menu"
-            className="fixed inset-x-0 bottom-0 z-[35] top-14 bg-charcoal/15 animate-overlay-in md:top-16"
+            className="fixed inset-0 z-[35] bg-charcoal/15 animate-overlay-in"
             onClick={() => setOpen(false)}
           />,
           document.body,
@@ -93,7 +117,12 @@ export function Navbar() {
       : null;
 
   return (
-    <header className="sticky top-0 z-40">
+    <>
+    <header
+      className={`fixed inset-x-0 top-0 z-40 transition-transform duration-300 ease-(--ease-out-soft) ${
+        hidden && !open ? "-translate-y-full" : "translate-y-0"
+      }`}
+    >
       <div
         className={`bg-white/95 supports-[backdrop-filter]:bg-white/90 supports-[backdrop-filter]:backdrop-blur-md ${
           open
@@ -126,7 +155,10 @@ export function Navbar() {
               type="button"
               aria-expanded={open}
               aria-controls={open ? menuId : undefined}
-              onClick={() => setOpen((v) => !v)}
+              onClick={() => {
+                setHidden(false);
+                setOpen((v) => !v);
+              }}
               className="flex h-9 items-center gap-2 rounded-full border border-navy/40 bg-white px-3.5 text-sm text-navy transition-colors hover:border-[#d4a017] hover:text-[#d4a017]"
             >
               <span className="max-sm:sr-only">Menu</span>
@@ -233,5 +265,8 @@ export function Navbar() {
       </div>
       {backdrop}
     </header>
+    {/* Reserve the fixed header’s space in document flow */}
+    <div aria-hidden className="h-14 md:h-16" />
+    </>
   );
 }
