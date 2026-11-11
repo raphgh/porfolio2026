@@ -89,7 +89,7 @@ export const experience: Experience[] = [
         location: "Ottawa, ON",
         overview: "Bridging Nokia’s NFM-P and NSP (Network Services Platform, by implementing a new dashlet within the NSP System Health Admin Dashboard, to display statuses and NFM-P data.",
         technologies: ["Java", "Spring Boot", "IntelliJ", "Linux", "Podman", "Jenkins", "Jira", "Confluence"],
-        responsibilities: ["Developed the backend for the microservice and implementing components.", "Drive the project’s progression by working alongside engineers and UX designers, and refining subtasks and workflows."],
+        responsibilities: ["Developed the backend for the microservice and implementing components.", "Drove the project’s progression by working alongside engineers and UX designers, and refining subtasks and workflows."],
         accomplishments: [""],
         notes: [
           "Also served as a Student Ambassador with NextGEN, supporting internal events and the student community at Nokia.",
