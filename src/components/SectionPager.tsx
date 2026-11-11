@@ -32,7 +32,7 @@ export function SectionPager() {
   return (
     <nav
       aria-label="Section"
-      className="shell mt-16 border-t border-silver-soft pt-8 pb-4 md:mt-24 md:pt-10"
+      className="shell mt-16 pt-8 pb-4 md:mt-24 md:pt-10"
     >
       <div className="flex items-start justify-between gap-8">
         {prev ? (
