@@ -42,7 +42,6 @@ export function NavStack() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  aria-current={item.href === "/" ? "page" : undefined}
                   onMouseEnter={() => setActive(i)}
                   onFocus={() => setActive(i)}
                   onBlur={() => setActive((cur) => (cur === i ? null : cur))}
@@ -87,7 +86,6 @@ export function NavStack() {
                 >
                   <Link
                     href={item.href}
-                    aria-current={item.href === "/" ? "page" : undefined}
                     aria-label={`Go to ${item.label}`}
                     className="flex h-56 items-start justify-between rounded-[1.5rem] border-[1.5px] px-8 pt-6 pb-7 transition-shadow duration-500 lg:px-10"
                     style={{
@@ -120,7 +118,6 @@ export function NavStack() {
             <li key={item.href}>
               <Link
                 href={item.href}
-                aria-current={item.href === "/" ? "page" : undefined}
                 className="flex min-h-16 items-center justify-between rounded-2xl border-[1.5px] px-5 py-4 transition-opacity hover:opacity-90"
                 style={{ backgroundColor: color.bg, borderColor: color.border }}
               >

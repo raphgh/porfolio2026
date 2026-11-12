@@ -36,9 +36,8 @@ export const nav = [
   { label: "Lab", href: "/lab" },
 ] as const;
 
-/** Stacked landing-page cards — includes Home as the first card. */
+/** Stacked landing-page cards — same destinations as `nav`. */
 export const stackNav = [
-  { label: "Home", href: "/" },
   { label: "Me", href: "/me" },
   { label: "Experience", href: "/experience" },
   { label: "Projects", href: "/work" },
@@ -47,10 +46,9 @@ export const stackNav = [
 
 /**
  * Soft washes from the embroidery trail palette
- * (mustard, coral, peach, rose, terracotta) — one per stackNav entry.
+ * (terracotta, peach, coral, rose) — one per stackNav entry.
  */
 export const stackNavColors = [
-  { bg: "#f5e6b8", border: "#e6b422", number: "#a87b0a" }, // Home — mustard
   { bg: "#f5d0d4", border: "#d94f5c", number: "#a83842" }, // Me — terracotta
   { bg: "#fce8d8", border: "#f0a06a", number: "#c47a3a" }, // Experience — peach
   { bg: "#fde0d2", border: "#f07a45", number: "#c45a28" }, // Projects — coral
