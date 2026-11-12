@@ -29,7 +29,7 @@ export function AboutGallery({ items, compact = false }: { items: ScrapbookItem[
               ) : (
                 <div className="aspect-[5/6] bg-paper-deep" />
               )}
-              <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/60 to-transparent px-4 pt-10 pb-4 text-sm font-medium tracking-[-0.01em] text-white opacity-100 transition-opacity duration-300 ease-out sm:opacity-0 sm:group-hover:opacity-100">
+              <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/60 to-transparent px-4 pt-10 pb-4 text-sm font-medium tracking-[-0.01em] text-snow opacity-100 transition-opacity duration-300 ease-out sm:opacity-0 sm:group-hover:opacity-100">
                 {item.caption}
               </figcaption>
             </figure>

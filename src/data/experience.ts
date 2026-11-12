@@ -221,7 +221,7 @@ export const experience: Experience[] = [
     display: "grouped",
     roles: [
       {
-        title: "Lab Assistant",
+        title: "Lab Research Assistant",
         employmentType: "Part-time",
         start: "March 2022",
         end: "June 2022",

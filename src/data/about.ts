@@ -8,8 +8,8 @@ export const about = {
   intro: "",
   paragraphs: [
     "i'm currently at uOttawa finishing up my bachelor's in software engineering, with a microprogram in AI, giving me early access to master-level courses in AI and machine learning.",
-    "i'm a big enjoyer of art, music, and culture. i’m very drawn to community and to technology that creates social good. it's where a lot of my ideas come from.",
-    "i'm certainly just motivated by what can be done with it, and how a good piece of software can so quickly and so easily help and impact the world.",
+    "i'm extremely passionate about art, music, and culture. i’m very drawn to community and to technology that creates social good. it's where a lot of my ideas come from.",
+    "i'm certainly just motivated by what can be done with it, and how a good piece of software can so quickly and so easily make a change.",
     "scroll down for more!",
   ],
 };
@@ -57,7 +57,7 @@ export const inspirations: Inspiration[] = [
   {
     name: "Nabihah Ahmad",
     kind: "Creator",
-    note: "changing the fashion industry through technology and awareness",
+    note: "building fashion-tech with values",
     href: "https://www.instagram.com/nabihah.ahmad/",
   },
   {

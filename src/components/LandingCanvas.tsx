@@ -50,19 +50,24 @@ export function LandingCanvas() {
         */}
 
         <div className="absolute inset-0 z-10 grid place-items-center px-6 text-center">
-          <h1
-            id="landing-name"
-            className="display max-w-[16ch] text-[clamp(2.4rem,1.2rem+5vw,5.75rem)] leading-[0.95] text-navy"
-          >
-            <span aria-hidden className="text-navy/35">
-              [{" "}
-            </span>
-            {name}
-            <span aria-hidden className="text-navy/35">
-              {" "}
-              ]
-            </span>
-          </h1>
+          <div className="flex flex-col items-center gap-3 md:gap-4">
+            <h1
+              id="landing-name"
+              className="display max-w-[16ch] text-[clamp(2.4rem,1.2rem+5vw,5.75rem)] leading-[0.95] text-navy"
+            >
+              <span aria-hidden className="text-navy/35">
+                [{" "}
+              </span>
+              {name}
+              <span aria-hidden className="text-navy/35">
+                {" "}
+                ]
+              </span>
+            </h1>
+            <p className="text-[0.95rem] tracking-[-0.01em] text-charcoal-muted md:text-[1.05rem]">
+              ottawa-based software engineer & creative
+            </p>
+          </div>
         </div>
       </div>
     </section>

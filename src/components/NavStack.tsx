@@ -31,8 +31,6 @@ export function NavStack() {
       </h2>
 
       <p className="mx-auto mb-8 max-w-xl text-center text-charcoal-soft md:mb-10">
-        hey! i'm an ottawa-based software engineer and creative. 
-      on this site you&apos;ll find an overview of my projects, experience, and cool things i&apos;m into :)
       </p>
 
       <div className="mx-auto max-w-3xl" onMouseLeave={() => setActive(null)}>
@@ -101,7 +99,7 @@ export function NavStack() {
                           : "0 6px 16px -14px rgb(26 26 26 / 0.2)",
                     }}
                   >
-                    <span className="display text-[clamp(2rem,1.4rem+1.8vw,3.25rem)] leading-none text-navy lowercase">
+                    <span className="display text-[clamp(2rem,1.4rem+1.8vw,3.25rem)] leading-none text-navy-ink lowercase">
                       {item.label}
                     </span>
                     <span className="label" style={{ color: color.number }}>
@@ -126,7 +124,7 @@ export function NavStack() {
                 className="flex min-h-16 items-center justify-between rounded-2xl border-[1.5px] px-5 py-4 transition-opacity hover:opacity-90"
                 style={{ backgroundColor: color.bg, borderColor: color.border }}
               >
-                <span className="display text-2xl leading-none text-navy lowercase">{item.label}</span>
+                <span className="display text-2xl leading-none text-navy-ink lowercase">{item.label}</span>
                 <span className="label" style={{ color: color.number }}>
                   {String(i + 1).padStart(2, "0")}
                 </span>

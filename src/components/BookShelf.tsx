@@ -30,7 +30,7 @@ export function BookShelf({ books }: { books: Book[] }) {
                   </div>
                 )}
                 {hasCover && (
-                  <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 z-10 px-2 py-2 text-[0.65rem] font-medium text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 z-10 px-2 py-2 text-[0.65rem] font-medium text-snow opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     {book.title}
                   </figcaption>
                 )}

@@ -26,7 +26,7 @@ export default function MePage() {
               className="rounded-none border-0"
               priority
             />
-            <figcaption className="px-4 py-3 text-sm text-charcoal-muted">📍 fundraiser @ the Bike Café, raising $1,200+ for the Lebanese Red Cross</figcaption>
+            <figcaption className="px-4 py-3 text-sm text-charcoal-muted dark:text-snow">📍 fundraiser @ the Bike Café, raising $1,200+ for the Lebanese Red Cross</figcaption>
           </figure>
         </div>
         <div className="col-span-12 flex flex-col gap-8 md:col-span-7 md:col-start-6">
