@@ -57,7 +57,7 @@ export const inspirations: Inspiration[] = [
   {
     name: "Nabihah Ahmad",
     kind: "Creator",
-    note: "building fashion-tech with values",
+    note: "changing the fashion industry through technology and awareness",
     href: "https://www.instagram.com/nabihah.ahmad/",
   },
   {
