@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Geist_Mono, Instrument_Sans, Instrument_Serif } from "next/font/google";
+import Script from "next/script";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ThreadTrail } from "@/components/ThreadTrail";
 import { MotionProvider } from "@/components/MotionProvider";
+import { themeBootScript } from "@/lib/theme";
 import { site } from "@/data/site";
 import "./globals.css";
 
@@ -51,11 +53,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       data-scroll-behavior="smooth"
       className={`${sans.variable} ${display.variable} ${mono.variable} antialiased`}
+      suppressHydrationWarning
     >
       <body
         className="flex min-h-dvh flex-col bg-white text-charcoal"
         suppressHydrationWarning
       >
+        <Script id="theme-boot" strategy="beforeInteractive">
+          {themeBootScript}
+        </Script>
         <noscript>
           <style>{`[style*="opacity:0"]{opacity:1!important;transform:none!important}`}</style>
         </noscript>

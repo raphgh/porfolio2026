@@ -94,7 +94,7 @@ export function ExperienceGallery({ entries }: { entries: Experience[] }) {
       ? createPortal(
           <div
             role="presentation"
-            className="fixed inset-0 z-[100] flex animate-overlay-in items-center justify-center bg-charcoal/45 p-3 backdrop-blur-[2px] md:p-6"
+            className="fixed inset-0 z-[100] flex animate-overlay-in items-center justify-center bg-overlay p-3 backdrop-blur-[2px] md:p-6"
             onClick={() => setActiveId(null)}
           >
             <div
@@ -110,7 +110,7 @@ export function ExperienceGallery({ entries }: { entries: Experience[] }) {
                   type="button"
                   onClick={() => setActiveId(null)}
                   aria-label="Close experience details"
-                  className="grid size-9 place-items-center rounded-full text-charcoal-muted transition-colors hover:bg-black/[0.05] hover:text-charcoal"
+                  className="grid size-9 place-items-center rounded-full text-charcoal-muted transition-colors hover:bg-navy-tint hover:text-charcoal"
                 >
                   <ShrinkIcon />
                 </button>

@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-white: #ffffff;
   --color-paper: #ffffff;
@@ -28,6 +30,9 @@
 
   --color-rule: rgb(26 26 26 / 0.12);
   --color-rule-strong: rgb(30 58 110 / 0.28);
+  --color-overlay: rgb(26 26 26 / 0.45);
+  --color-dot: rgb(184 190 200 / 0.55);
+  --color-hatch-dot: rgb(30 58 110 / 0.16);
 
   /* Backward-compatible aliases for remaining components during redesign */
   --color-powder: var(--color-navy-soft);
@@ -130,13 +135,13 @@
 }
 
 @utility tech-dots {
-  background-image: radial-gradient(circle at 1px 1px, rgb(184 190 200 / 0.55) 1px, transparent 0);
+  background-image: radial-gradient(circle at 1px 1px, var(--color-dot) 1px, transparent 0);
   background-size: 18px 18px;
 }
 
 @utility hatch {
   background-color: var(--color-navy-tint);
-  background-image: radial-gradient(circle at 1px 1px, rgb(30 58 110 / 0.16) 1px, transparent 0);
+  background-image: radial-gradient(circle at 1px 1px, var(--color-hatch-dot) 1px, transparent 0);
   background-size: 14px 14px;
 }
 
@@ -148,6 +153,50 @@
     overflow-x: clip;
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
+  }
+
+  html.dark {
+    --color-white: #0e1014;
+    --color-paper: #0e1014;
+    --color-paper-deep: #161a22;
+    --color-card: #161a22;
+
+    --color-charcoal: #eef0f4;
+    --color-charcoal-soft: #c5cad3;
+    --color-charcoal-muted: #8b93a3;
+    --color-ink: #eef0f4;
+    --color-ink-soft: #c5cad3;
+    --color-ink-muted: #8b93a3;
+
+    --color-navy: #b8c9e8;
+    --color-navy-deep: #d6e0f0;
+    --color-navy-soft: #1a2438;
+    --color-navy-tint: #151c2b;
+
+    --color-mustard: #e6b422;
+    --color-mustard-soft: #3d3420;
+    --color-mustard-deep: #f0c65a;
+
+    --color-silver: #3a4150;
+    --color-silver-soft: #252a35;
+    --color-silver-line: rgb(255 255 255 / 0.08);
+
+    --color-rule: rgb(255 255 255 / 0.12);
+    --color-rule-strong: rgb(184 201 232 / 0.35);
+    --color-overlay: rgb(0 0 0 / 0.65);
+    --color-dot: rgb(255 255 255 / 0.14);
+    --color-hatch-dot: rgb(184 201 232 / 0.18);
+
+    --color-powder: var(--color-navy-soft);
+    --color-powder-soft: var(--color-navy-tint);
+    --color-berry: var(--color-navy);
+    --color-berry-deep: var(--color-navy-deep);
+    --color-berry-soft: var(--color-navy-soft);
+    --color-berry-tint: var(--color-navy-tint);
+    --color-accent: var(--color-navy);
+    --color-accent-ink: var(--color-navy-deep);
+    --color-night: var(--color-charcoal);
+    --color-night-soft: #9aa3b2;
   }
 
   body {

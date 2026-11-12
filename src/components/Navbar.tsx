@@ -7,6 +7,7 @@ import { createPortal } from "react-dom";
 import { megaMenuColumns, type MegaMenuItem } from "@/data/megaMenu";
 import { site } from "@/data/site";
 import { ResumeLink } from "./ResumeLink";
+import { ThemeToggle } from "./ThemeToggle";
 
 /**
  * Auto-hiding header: slides away on scroll down, returns on scroll up.
@@ -109,7 +110,7 @@ export function Navbar() {
           <button
             type="button"
             aria-label="Close menu"
-            className="fixed inset-0 z-[35] bg-charcoal/15 animate-overlay-in"
+            className="fixed inset-0 z-[35] bg-overlay/40 animate-overlay-in"
             onClick={() => setOpen(false)}
           />,
           document.body,
@@ -148,7 +149,8 @@ export function Navbar() {
             </span>
           </Link>
 
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <ThemeToggle />
             <ResumeLink plain />
             <button
               ref={toggleRef}
@@ -159,7 +161,7 @@ export function Navbar() {
                 setHidden(false);
                 setOpen((v) => !v);
               }}
-              className="flex h-9 items-center gap-2 rounded-full border border-navy/40 bg-white px-3.5 text-sm text-navy transition-colors hover:border-[#d4a017] hover:text-[#d4a017]"
+              className="flex h-9 items-center gap-2 rounded-full border border-navy/40 bg-white px-3.5 text-sm text-navy transition-colors hover:border-mustard hover:text-mustard"
             >
               <span className="max-sm:sr-only">Menu</span>
               <span aria-hidden className="relative block h-2.5 w-4">
@@ -222,8 +224,8 @@ export function Navbar() {
                         const on = active?.href === item.href || current === item.href;
                         const className = `rounded-lg px-2.5 py-2 text-left text-[0.92rem] leading-snug transition-colors ${
                           on
-                            ? "bg-[#f5e6b8] text-[#a87b0a]"
-                            : "text-charcoal-soft hover:bg-[#f5e6b8] hover:text-[#d4a017]"
+                            ? "bg-mustard-soft text-mustard-deep"
+                            : "text-charcoal-soft hover:bg-mustard-soft hover:text-mustard"
                         }`;
 
                         return (

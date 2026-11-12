@@ -89,7 +89,7 @@ export function ExperienceDetail({
         <MetaCell label="Location" value={role?.location ?? "—"} />
       </dl>
 
-      <div className="mt-10 border-t border-black/[0.08] pt-10 md:mt-12 md:pt-12">
+      <div className="mt-10 border-t border-rule pt-10 md:mt-12 md:pt-12">
         {preview && (
           <ScrollFade className="mb-10 md:mb-12">
             <div className="overflow-hidden rounded-[1.25rem] bg-[#f5f5f7]">
@@ -132,7 +132,7 @@ export function ExperienceCard({ entry }: { entry: Experience; index?: number })
     <article
       id={entry.id}
       aria-labelledby={`${entry.id}-company`}
-      className="relative overflow-hidden rounded-[1.75rem] border border-black/[0.06] bg-white"
+      className="relative overflow-hidden rounded-[1.75rem] border border-rule bg-white"
     >
       <div className="p-6 md:p-10" data-experience-scroll>
         <ExperienceDetail entry={entry} titleId={`${entry.id}-company`} />
@@ -191,7 +191,7 @@ function RoleDetail({ role, showMeta }: { role: Role; showMeta: boolean }) {
 
           {role.notes?.map((note, i) => (
             <ScrollFade key={note} delay={(body.length + i) * 60}>
-              <p className="border-l-2 border-black/[0.08] pl-4 text-[0.95rem] leading-relaxed text-charcoal-soft">
+              <p className="border-l-2 border-rule pl-4 text-[0.95rem] leading-relaxed text-charcoal-soft">
                 {note}
               </p>
             </ScrollFade>
@@ -230,7 +230,7 @@ function RoleDetail({ role, showMeta }: { role: Role; showMeta: boolean }) {
                 className="flex w-full max-w-[504px] flex-col gap-3"
               >
                 {embed.note && (
-                  <p className="border-l-2 border-black/[0.08] pl-4 text-[0.95rem] leading-relaxed text-charcoal-soft">
+                  <p className="border-l-2 border-rule pl-4 text-[0.95rem] leading-relaxed text-charcoal-soft">
                     {embed.note}
                   </p>
                 )}
@@ -239,7 +239,7 @@ function RoleDetail({ role, showMeta }: { role: Role; showMeta: boolean }) {
                     href={embed.src}
                     target="_blank"
                     rel="noreferrer"
-                    className="block overflow-hidden rounded-2xl border border-black/[0.06] bg-white transition-opacity hover:opacity-90"
+                    className="block overflow-hidden rounded-2xl border border-rule bg-white transition-opacity hover:opacity-90"
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
