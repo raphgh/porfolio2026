@@ -26,7 +26,7 @@ export const scrapbook: ScrapbookItem[] = [
     },
   },
   {
-    caption: "some more travelling.",
+    caption: "solo travel.",
     aspect: "landscape",
     media: {
       type: "image",
@@ -43,7 +43,7 @@ export const scrapbook: ScrapbookItem[] = [
     },
   },
   {
-    caption: "guitar!",
+    caption: "guitar",
     media: {
       type: "image",
       src: "/scrapbook/guitar.jpg",
