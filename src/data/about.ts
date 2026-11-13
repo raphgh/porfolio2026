@@ -62,22 +62,22 @@ export const inspirations: Inspiration[] = [
     href: "https://www.instagram.com/nabihah.ahmad/",
   },
   {
-    name: "julip.mp3",
-    kind: "Creator",
-    note: "musician & creative technologist — making music with hand-tracking code",
-    href: "https://www.instagram.com/julip.mp3/",
-  },
-  {
     name: "Gazi Jarin",
     kind: "Creator",
     note: "tech and lifestyle creator - previous work at Pinterest, Google, and Amazon",
     href: "https://www.instagram.com/gazisj/",
   },
   {
-    name: "Myriam Boulos",
+    name: "Imogen Heap",
     kind: "Creator",
-    note: "lebanese documentary photographer",
-    href: "https://www.instagram.com/myriamboulos/",
+    note: "musician, technologist, creator of Mi.Mu Gloves, mogen.ai, etc.",
+    href: "https://www.imogenheap.com/",
+  },
+   {
+    name: "julip.mp3",
+    kind: "Creator",
+    note: "musician & creative engineer — making music with hand-tracking code",
+    href: "https://www.instagram.com/julip.mp3/",
   },
   {
     name: "Greta Thunberg",
@@ -91,6 +91,12 @@ export const inspirations: Inspiration[] = [
     kind: "Product",
     note: "discovering sustainable, ethical brands worldwide",
     href: "https://ssqrd.co/",
+  },
+  {
+    name: "All Things Go",
+    kind: "Product",
+    note: "festival website - i like how it looks :)",
+    href: "https://www.allthingsgofestival.com/",
   },
   {
     name: "Sonic Liberation Devices",
