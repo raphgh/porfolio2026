@@ -55,12 +55,12 @@ export function megaMenuColumns(): MegaMenuColumn[] {
       description: about.paragraphs[0] || "A bit about me.",
     },
     {
-      label: "Scrapbook",
-      href: "/me#scrapbook",
+      label: "Gallery",
+      href: "/me#gallery",
       description: "Photos and moments from along the way.",
     },
     {
-      label: "Inspirations",
+      label: "Appreciations",
       href: "/me#inspo",
       description: "Creators and products I appreciate.",
     },
