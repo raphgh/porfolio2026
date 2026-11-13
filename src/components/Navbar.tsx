@@ -144,8 +144,8 @@ export function Navbar() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/logos/me.jpg" alt="" className="size-full object-cover" />
             </span>
-            <span className="display text-[1.15rem] leading-none text-navy max-[380px]:sr-only">
-              {site.name.toLowerCase()}
+            <span className="display text-[1.15rem] leading-none text-navy">
+              {site.shortName}
             </span>
           </Link>
 

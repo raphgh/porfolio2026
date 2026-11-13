@@ -7,10 +7,10 @@ import type { Book, Inspiration, ScrapbookItem } from "./types";
 export const about = {
   intro: "",
   paragraphs: [
-    "i'm currently at uOttawa finishing up my bachelor's in software engineering, with a microprogram in AI- giving me early access to masters-level courses in AI/ML.",
+    "i'm currently at uOttawa finishing up my bachelor's in software engineering (with a microprogram in AI- giving me early access to masters-level courses in AI/ML).",
     "i'm extremely passionate about art, music, and culture. i’m very drawn to community and to technology that creates social good. it's where a lot of my ideas come from.",
     "i'm certainly just motivated by what can be done with it and how quickly and so easily it can make an impact.",
-    "i'm also great at and love working with others, leading things, and bringing cool ideas to life :)",
+    "i also love- and am great at- working with others and leading things :)",
     "scroll down for more!",
   ],
 };
@@ -95,7 +95,7 @@ export const inspirations: Inspiration[] = [
   {
     name: "All Things Go",
     kind: "Product",
-    note: "festival website - i like how it looks :)",
+    note: "cool looking festival website",
     href: "https://www.allthingsgofestival.com/",
   },
   {

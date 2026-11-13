@@ -125,6 +125,26 @@ export function Footer() {
           <p>
             © {year} {site.name}
           </p>
+          <p className="normal-case tracking-normal">
+            made with{" "}
+            <a
+              href="https://nextjs.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-navy hover:text-mustard-deep"
+            >
+              Next.js
+            </a>
+            {" "}&{" "}
+            <a
+              href="https://cursor.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-navy hover:text-mustard-deep"
+            >
+              Cursor
+            </a>
+          </p>
           <a href="#main" className="hover:text-navy">
             Back to top ↑
           </a>

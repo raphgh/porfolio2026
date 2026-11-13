@@ -30,9 +30,6 @@ export function NavStack() {
         Navigate
       </h2>
 
-      <p className="mx-auto mb-8 max-w-xl text-center text-charcoal-soft md:mb-10">
-      </p>
-
       <div className="mx-auto max-w-3xl" onMouseLeave={() => setActive(null)}>
         <ul className="mb-8 flex flex-wrap items-baseline justify-center gap-x-7 gap-y-2 md:mb-10 md:gap-x-9">
           {stackNav.map((item, i) => {

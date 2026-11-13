@@ -60,8 +60,8 @@ export function megaMenuColumns(): MegaMenuColumn[] {
       description: "Photos and moments from along the way.",
     },
     {
-      label: "Appreciations",
-      href: "/me#inspo",
+      label: "Likings",
+      href: "/me#likings",
       description: "Creators and products I appreciate.",
     },
     {

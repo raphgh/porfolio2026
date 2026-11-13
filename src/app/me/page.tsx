@@ -59,7 +59,7 @@ export default function MePage() {
                 id="inspo-title"
                 className="text-[0.72rem] font-medium tracking-[0.08em] text-charcoal-soft uppercase"
               >
-                creators/things I appreciate
+                likings/things I appreciate
               </h2>
             </div>
             <div className="col-span-12 md:col-span-9">
