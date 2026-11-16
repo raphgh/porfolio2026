@@ -26,6 +26,11 @@ export function SiteChrome({ children }: { children: ReactNode }) {
     );
   }
 
+  /* Dev review routes — no chrome so thumbs can be inspected cleanly. */
+  if (pathname.startsWith("/dev")) {
+    return <>{children}</>;
+  }
+
   if (mode === "wii") {
     if (isHome) return <WiiHome />;
     return (

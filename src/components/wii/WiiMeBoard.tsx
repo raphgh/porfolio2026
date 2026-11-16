@@ -89,6 +89,13 @@ export function WiiMeBoard() {
       </div>
 
       <WiiPanel className="wii-me-section-panel">
+        <section id="scrapbook" aria-label="Scrapbook" className="wii-me-section">
+          <h2 className="wii-me-section__title">scrapbook</h2>
+          <AboutGallery items={scrapbook} />
+        </section>
+      </WiiPanel>
+
+      <WiiPanel className="wii-me-section-panel">
         <section id="inspo" aria-labelledby="inspo-title" className="wii-me-section">
           <h2 id="inspo-title" className="wii-me-section__title">
             likings/things I appreciate

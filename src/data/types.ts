@@ -194,9 +194,14 @@ export type ExperienceBoardEntry = {
   id: string;
   company: string;
   role: string;
+  /** Primary year for timeline grouping. */
   year: number;
+  /** Optional display override for the tile pill (e.g. "2023–2024"). */
+  yearLabel?: string;
   image: string;
   fit: "cover" | "contain";
+  /** Links to the full `experience` entry (photos, LinkedIn embeds, etc.). */
+  sourceId: string;
   /** Fill in later — detail panel uses placeholders when empty. */
   details?: {
     summary?: string;

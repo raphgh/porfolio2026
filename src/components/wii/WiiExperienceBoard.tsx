@@ -1,31 +1,20 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, m, useReducedMotion } from "motion/react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { AnimatePresence, m, useAnimationControls, useReducedMotion } from "motion/react";
+import { ExperienceDetail } from "@/components/ExperienceCard";
 import { ExperienceGallery } from "@/components/ExperienceGallery";
 import { useInterfaceMode } from "@/components/InterfaceModeProvider";
-import { experienceBoard, experienceEntries } from "@/data/experience";
+import { WiiPanel } from "@/components/wii/WiiPanel";
+import { experience, experienceBoard, experienceEntries } from "@/data/experience";
 import type { ExperienceBoardEntry } from "@/data/types";
 import { wiiSound } from "@/lib/wiiSound";
 
-const PLACEHOLDER = "[Add details here]";
+const NEWS_LINE = "currently looking for a summer 2027 internship..";
+const NEWS_LOOP = `${NEWS_LINE}  ·  ${NEWS_LINE}  ·  ${NEWS_LINE}  ·  `;
 
-function detailSummary(entry: ExperienceBoardEntry) {
-  return entry.details?.summary?.trim() || PLACEHOLDER;
-}
-
-function detailDates(entry: ExperienceBoardEntry) {
-  return entry.details?.dates?.trim() || PLACEHOLDER;
-}
-
-function detailStack(entry: ExperienceBoardEntry) {
-  const stack = entry.details?.stack?.filter(Boolean) ?? [];
-  return stack.length ? stack : [PLACEHOLDER];
-}
-
-function detailHighlights(entry: ExperienceBoardEntry) {
-  const items = entry.details?.highlights?.filter(Boolean) ?? [];
-  return items.length ? items : [PLACEHOLDER];
+function sourceEntry(board: ExperienceBoardEntry) {
+  return experience.find((e) => e.id === board.sourceId) ?? null;
 }
 
 /**
@@ -35,9 +24,12 @@ function detailHighlights(entry: ExperienceBoardEntry) {
 export function WiiExperienceBoard() {
   const { mode } = useInterfaceMode();
   const reduce = useReducedMotion();
+  const detailTitleId = useId();
   const [activeId, setActiveId] = useState<string | null>(null);
   const [activeYear, setActiveYear] = useState(experienceBoard[0]?.year ?? 2026);
+  const [tickerPaused, setTickerPaused] = useState(false);
   const yearRefs = useRef(new Map<number, HTMLElement>());
+  const tickerControls = useAnimationControls();
 
   const years = useMemo(() => {
     const set = new Set(experienceBoard.map((e) => e.year));
@@ -54,7 +46,20 @@ export function WiiExperienceBoard() {
     return map;
   }, []);
 
-  const active = experienceBoard.find((e) => e.id === activeId) ?? null;
+  const activeBoard = experienceBoard.find((e) => e.id === activeId) ?? null;
+  const active = activeBoard ? sourceEntry(activeBoard) : null;
+
+  useEffect(() => {
+    if (mode !== "wii" || reduce) return;
+    if (tickerPaused) {
+      tickerControls.stop();
+      return;
+    }
+    void tickerControls.start({
+      x: ["0%", "-33.333%"],
+      transition: { duration: 28, ease: "linear", repeat: Infinity },
+    });
+  }, [mode, reduce, tickerPaused, tickerControls]);
 
   useEffect(() => {
     if (mode !== "wii") return;
@@ -98,6 +103,26 @@ export function WiiExperienceBoard() {
 
   return (
     <div className="wii-exp">
+      <WiiPanel className="wii-exp-ticker-panel">
+        <div
+          className="wii-exp-ticker"
+          aria-label="Experience news ticker"
+          onMouseEnter={() => setTickerPaused(true)}
+          onMouseLeave={() => setTickerPaused(false)}
+        >
+          <span className="wii-exp-ticker__badge">NEWS</span>
+          <div className="wii-exp-ticker__viewport">
+            {reduce ? (
+              <p className="wii-exp-ticker__track is-static">{NEWS_LINE}</p>
+            ) : (
+              <m.p className="wii-exp-ticker__track" animate={tickerControls}>
+                {NEWS_LOOP}
+              </m.p>
+            )}
+          </div>
+        </div>
+      </WiiPanel>
+
       <div className="wii-exp-layout">
         <aside className="wii-exp-rail" aria-label="Years">
           <div className="wii-exp-rail__line" aria-hidden />
@@ -169,7 +194,7 @@ export function WiiExperienceBoard() {
                         <span className="wii-exp-tile__pill">
                           <strong>{entry.company}</strong>
                           <span>
-                            · {entry.role} · {entry.year}
+                            · {entry.role} · {entry.yearLabel ?? entry.year}
                           </span>
                         </span>
                       </span>
@@ -183,7 +208,7 @@ export function WiiExperienceBoard() {
       </div>
 
       <AnimatePresence>
-        {active ? (
+        {active && activeBoard ? (
           <div className="wii-exp-detail-root" role="presentation">
             <m.button
               type="button"
@@ -198,53 +223,14 @@ export function WiiExperienceBoard() {
               }}
             />
             <m.article
-              layoutId={`wii-exp-${active.id}`}
+              layoutId={`wii-exp-${activeBoard.id}`}
               className="wii-exp-detail"
               role="dialog"
               aria-modal="true"
-              aria-label={`${active.company} ${active.role}`}
+              aria-labelledby={detailTitleId}
               transition={{ type: "spring", stiffness: 220, damping: 26 }}
             >
-              <div
-                className={`wii-exp-detail__media${active.fit === "contain" ? " is-contain" : ""}`}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={active.image}
-                  alt=""
-                  className={`wii-exp-tile__img wii-exp-tile__img--${active.fit}`}
-                />
-                <span className="wii-exp-tile__gloss" aria-hidden />
-                <span className="wii-exp-tile__scan" aria-hidden />
-              </div>
-              <div className="wii-exp-detail__body">
-                <header className="wii-exp-detail__head">
-                  <h2 className="wii-exp-detail__title">
-                    {active.company}
-                    <span>
-                      {" "}
-                      · {active.role}
-                    </span>
-                  </h2>
-                  <p className="wii-exp-detail__dates">{detailDates(active)}</p>
-                </header>
-                <p className="wii-exp-detail__summary">{detailSummary(active)}</p>
-                <div className="wii-exp-detail__block">
-                  <h3>Stack</h3>
-                  <ul className="wii-exp-detail__stack">
-                    {detailStack(active).map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="wii-exp-detail__block">
-                  <h3>Highlights</h3>
-                  <ul className="wii-exp-detail__list">
-                    {detailHighlights(active).map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
+              <div className="wii-exp-detail__toolbar">
                 <button
                   type="button"
                   className="wii-pill wii-pill--primary"
@@ -255,6 +241,23 @@ export function WiiExperienceBoard() {
                 >
                   Close
                 </button>
+              </div>
+              <div className="wii-exp-detail__scroll">
+                <div
+                  className={`wii-exp-detail__media${activeBoard.fit === "contain" ? " is-contain" : ""}`}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={activeBoard.image}
+                    alt=""
+                    className={`wii-exp-tile__img wii-exp-tile__img--${activeBoard.fit}`}
+                  />
+                  <span className="wii-exp-tile__gloss" aria-hidden />
+                  <span className="wii-exp-tile__scan" aria-hidden />
+                </div>
+                <div className="wii-exp-detail__body">
+                  <ExperienceDetail entry={active} titleId={detailTitleId} />
+                </div>
               </div>
             </m.article>
           </div>

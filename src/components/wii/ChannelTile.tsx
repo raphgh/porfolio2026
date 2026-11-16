@@ -1,6 +1,7 @@
 "use client";
 
 import { m, useReducedMotion } from "motion/react";
+import { ChannelThumb } from "@/components/wii/ChannelThumb";
 import type { WiiChannel } from "@/data/wiiChannels";
 import { wiiSound } from "@/lib/wiiSound";
 
@@ -34,11 +35,12 @@ export function ChannelTile({
   const reduce = useReducedMotion();
   const empty = !channel;
   const globalIndex = pageIndex * 12 + index;
+  const hot = Boolean(hovered || focused);
 
   const className = [
     "wii-channel",
     empty ? "wii-channel--empty" : "",
-    hovered || focused ? "is-hover" : "",
+    hot ? "is-hover" : "",
     dimmed ? "is-dim" : "",
   ]
     .filter(Boolean)
@@ -47,29 +49,19 @@ export function ChannelTile({
   const body = empty ? (
     <>
       <span className="wii-channel__face">
-        <span className="wii-channel__scan" aria-hidden />
-        <span className="wii-channel__empty-mark">rg</span>
-        <span className="wii-channel__fade" aria-hidden />
+        <ChannelThumb variant="comingSoon" title="Coming soon" hovered={false} />
       </span>
     </>
   ) : (
     <>
       <span className="wii-channel__face">
-        {channel.preview ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={channel.preview} alt="" className="wii-channel__preview" />
-        ) : channel.id === "resume" ? (
-          <span className="wii-channel__doc" style={{ background: channel.accent }}>
-            <span className="wii-channel__doc-sheet" />
-            <span className="wii-channel__doc-label">PDF</span>
-          </span>
-        ) : (
-          <span className="wii-channel__wash" style={{ background: channel.accent }} />
-        )}
-        <span className="wii-channel__scan" aria-hidden />
-        <span className="wii-channel__fade" aria-hidden />
+        <ChannelThumb
+          variant={channel.thumb}
+          title={channel.label}
+          accent={channel.accent}
+          hovered={hot}
+        />
         <span className="wii-channel__shine" aria-hidden />
-        {channel.showLabel ? <span className="wii-channel__badge">{channel.label}</span> : null}
       </span>
       <span className="wii-channel__tip" aria-hidden>
         {channel.label}
@@ -84,9 +76,9 @@ export function ChannelTile({
       ? ({ opacity: 1, scale: 1 } as const)
       : {
           opacity: 1,
-          scale: hovered || focused ? 1.06 : 1,
+          scale: hot ? 1.06 : 1,
           rotate: wiggle ? [0, -1.5, 1.5, 0] : 0,
-          zIndex: hovered || focused ? 5 : 1,
+          zIndex: hot ? 5 : 1,
         },
     transition: reduce
       ? { duration: 0.2 }

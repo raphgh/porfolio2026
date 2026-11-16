@@ -276,6 +276,7 @@ export const experienceBoard: ExperienceBoardEntry[] = [
     year: 2026,
     image: "/logos/nokia.jpg",
     fit: "cover",
+    sourceId: "experience-one",
     details: {
       summary:
         "Continued work on the NSP System Health Admin Dashboard, and the NFM-P microservice.",
@@ -306,6 +307,7 @@ export const experienceBoard: ExperienceBoardEntry[] = [
     year: 2025,
     image: "/logos/nokia2.webp",
     fit: "cover",
+    sourceId: "experience-two",
     details: {
       summary:
         "Bridging Nokia’s NFM-P and NSP by implementing a new dashlet within the NSP System Health Admin Dashboard.",
@@ -330,6 +332,7 @@ export const experienceBoard: ExperienceBoardEntry[] = [
     year: 2025,
     image: "/logos/cics.jpg",
     fit: "cover",
+    sourceId: "experience-three",
     details: {
       summary:
         "Assisted with the development and maintenance of the internal CICS platform, as well as the public-facing website.",
@@ -350,6 +353,7 @@ export const experienceBoard: ExperienceBoardEntry[] = [
     // TODO: replace with a higher-res or SVG CCSN logo — current square PNG still soft when enlarged
     image: "/logos/CCSN_Logo_EN_SQUARE.png",
     fit: "contain",
+    sourceId: "experience-four",
     details: {
       summary:
         "Researched and updated content for the Canadian Cancer Survivor Network website.",
@@ -365,9 +369,11 @@ export const experienceBoard: ExperienceBoardEntry[] = [
     id: "la-rotonde-2024",
     company: "La Rotonde",
     role: "Videographer",
-    year: 2024,
+    year: 2023,
+    yearLabel: "2023–2024",
     image: "/logos/la-rotonde.png",
     fit: "cover",
+    sourceId: "experience-five",
     details: {
       summary:
         "Creating content about and for the uOttawa community, giving francophone students, athletes, and faculty members a voice.",
@@ -387,6 +393,7 @@ export const experienceBoard: ExperienceBoardEntry[] = [
     year: 2022,
     image: "/logos/carleton-sign.png",
     fit: "cover",
+    sourceId: "experience-six",
     details: {
       summary:
         "Supported lab research at Carleton University as a high school student, running tasks alongside university peers.",

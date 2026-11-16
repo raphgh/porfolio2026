@@ -1,5 +1,16 @@
 import { site } from "./site";
 
+export type ChannelThumbVariant =
+  | "projects"
+  | "lab"
+  | "experience"
+  | "me"
+  | "resume"
+  | "contact"
+  | "github"
+  | "linkedin"
+  | "comingSoon";
+
 export type WiiChannel = {
   id: string;
   label: string;
@@ -8,53 +19,76 @@ export type WiiChannel = {
   preview?: string;
   previewAlt?: string;
   accent?: string;
+  /** Designed thumbnail face for the home grid. */
+  thumb: ChannelThumbVariant;
   /** Show title badge on the tile face (top-left). Default false — hover tip handles naming. */
   showLabel?: boolean;
 };
 
 /**
  * Portfolio channels for the Wii Menu grid.
- * Empty slots pad each 12-slot page. Two pages enable peek + arrows.
+ * Empty slots (`null`) pad each 12-slot page with the disc-slot look.
  */
 export const wiiChannels: WiiChannel[] = [
   {
-    id: "projects",
-    label: "Projects",
-    href: "/work",
-    preview: "/logos/yard365.png",
-    previewAlt: "Projects preview",
-    accent: "#fde0d2",
+    id: "about",
+    label: "Me",
+    href: "/me",
+    thumb: "me",
+    accent: "#e88a6a",
   },
   {
     id: "experience",
     label: "Experience",
     href: "/experience",
-    preview: "/logos/nokia.jpg",
-    previewAlt: "Experience preview",
-    accent: "#fce8d8",
+    thumb: "experience",
+    accent: "#1a3a6e",
+  },
+  {
+    id: "projects",
+    label: "Projects",
+    href: "/work",
+    thumb: "projects",
+    accent: "#1f6b3a",
   },
   {
     id: "lab",
     label: "Lab",
     href: "/lab",
-    preview: "/lab/emoji-blast.png",
-    previewAlt: "Lab preview",
-    accent: "#f9d6e4",
-  },
-  {
-    id: "about",
-    label: "About",
-    href: "/me",
-    preview: "/scrapbook/fundraiser.jpg",
-    previewAlt: "About preview",
-    accent: "#f5d0d4",
+    thumb: "lab",
+    accent: "#f0a06a",
   },
   {
     id: "resume",
     label: "Resume",
     href: site.resume,
     external: true,
-    accent: "#f5e6b8",
+    thumb: "resume",
+    accent: "#9fd8e8",
+  },
+  {
+    id: "contact",
+    label: "Contact",
+    href: `mailto:${site.contact.email}`,
+    external: true,
+    thumb: "contact",
+    accent: "#3fa9e0",
+  },
+  {
+    id: "github",
+    label: "GitHub",
+    href: site.contact.github,
+    external: true,
+    thumb: "github",
+    accent: "#4a5560",
+  },
+  {
+    id: "linkedin",
+    label: "LinkedIn",
+    href: site.contact.linkedin,
+    external: true,
+    thumb: "linkedin",
+    accent: "#0a66c2",
   },
 ];
 
