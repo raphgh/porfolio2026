@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { PageHeader } from "@/components/PageHeader";
-import { WorkIndex } from "@/components/WorkIndex";
+import { WiiPage } from "@/components/wii/WiiPage";
+import { WiiPanel } from "@/components/wii/WiiPanel";
+import { WiiProjectGrid } from "@/components/wii/WiiProjectGrid";
 import { projects } from "@/data/projects";
 
 export const metadata: Metadata = {
@@ -10,12 +11,16 @@ export const metadata: Metadata = {
 
 export default function WorkPage() {
   return (
-    <div className="shell pb-24 md:pb-32">
-      <PageHeader
-        title="Projects"
-        intro="case studies for each project to be added soon!"
-      />
-      <WorkIndex projects={projects} />
-    </div>
+    <WiiPage
+      title="Projects"
+      subtitle="case studies for each project to be added soon!"
+      thumb="/logos/yard365.png"
+      accent="#fde0d2"
+      channelId="projects"
+    >
+      <WiiPanel>
+        <WiiProjectGrid projects={projects} />
+      </WiiPanel>
+    </WiiPage>
   );
 }

@@ -189,6 +189,23 @@ export type Experience = {
   roles: Role[];
 };
 
+/** Wii Experience channel-board tile (shared by grid, ticker, detail). */
+export type ExperienceBoardEntry = {
+  id: string;
+  company: string;
+  role: string;
+  year: number;
+  image: string;
+  fit: "cover" | "contain";
+  /** Fill in later — detail panel uses placeholders when empty. */
+  details?: {
+    summary?: string;
+    dates?: string;
+    stack?: string[];
+    highlights?: string[];
+  };
+};
+
 /* -------------------------------------------------------------------------- */
 /* Extracurriculars                                                           */
 /* -------------------------------------------------------------------------- */
@@ -211,6 +228,23 @@ export type Extracurricular = {
 
 export type LabStatus = "SHIPPED" | "ONGOING" | "PAUSED" | "ABANDONED";
 
+/** Canonical lab entry — calendar + message board share this shape. */
+export type LabEntry = {
+  id: string;
+  title: string;
+  icon?: string;
+  status: LabStatus;
+  /** ISO date (YYYY-MM-DD) used by the calendar. */
+  date: string;
+  description: string;
+  tech: string[];
+  result: string;
+  href?: string;
+  /** Accent for calendar dots. */
+  color?: string;
+};
+
+/** Legacy shape used by Modern-mode LabItem / mega menu. */
 export type LabExperiment = {
   id: string;
   title: string;

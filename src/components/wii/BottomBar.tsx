@@ -5,12 +5,18 @@ import { ModeToggle } from "@/components/ModeToggle";
 import { WiiClock } from "@/components/wii/WiiClock";
 import { site } from "@/data/site";
 
+/** Top-edge of the Wii dock — high shoulders, flat low center. */
+const DOCK_TOP =
+  "M0,0 H330 C520,0 620,110 800,110 H1120 C1300,110 1400,0 1590,0 H1920";
+const DOCK_SHAPE = `${DOCK_TOP} V295 H0 Z`;
+
 type Props = {
   unread: number;
   onOpenSettings: () => void;
   onOpenMail: () => void;
 };
 
+/** Home-menu dock only — channel pages use a standalone back orb. */
 export function BottomBar({ unread, onOpenSettings, onOpenMail }: Props) {
   const reduce = useReducedMotion();
 
@@ -21,21 +27,56 @@ export function BottomBar({ unread, onOpenSettings, onOpenMail }: Props) {
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: "spring", stiffness: 220, damping: 28, delay: 0.25 }}
     >
-      <div className="wii-menu__dock-curve" aria-hidden>
-        {/* Exaggerated Wii swoosh: high sides, deep center dip */}
-        <svg viewBox="0 0 1200 96" preserveAspectRatio="none">
+      <div className="wii-menu__dock-svg-wrap" aria-hidden>
+        <svg
+          className="wii-menu__dock-svg"
+          viewBox="0 0 1920 295"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="wii-dock-fill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#e6e8ec" />
+              <stop offset="100%" stopColor="#c3c8d0" />
+            </linearGradient>
+            <linearGradient id="wii-dock-bevel" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.55" />
+              <stop offset="12%" stopColor="#ffffff" stopOpacity="0" />
+            </linearGradient>
+            <pattern id="wii-dock-scan" patternUnits="userSpaceOnUse" width="4" height="3">
+              <rect width="4" height="1" fill="rgb(0 0 0 / 0.035)" />
+            </pattern>
+            <clipPath id="wii-dock-clip">
+              <path d={DOCK_SHAPE} />
+            </clipPath>
+            <filter id="wii-dock-blue-glow" x="-20%" y="-40%" width="140%" height="180%">
+              <feDropShadow dx="0" dy="-1" stdDeviation="2" floodColor="#3fa9e0" floodOpacity="0.45" />
+            </filter>
+          </defs>
+
+          <path d={DOCK_SHAPE} fill="url(#wii-dock-fill)" />
+          <path d={DOCK_SHAPE} fill="url(#wii-dock-scan)" />
           <path
-            className="wii-menu__dock-curve-fill"
-            d="M0 96V18C0 18 180 4 360 28C520 50 600 78 600 78C600 78 680 50 840 28C1020 4 1200 18 1200 18V96H0Z"
+            d={DOCK_SHAPE}
+            fill="url(#wii-dock-bevel)"
+            transform="translate(0 3)"
+            clipPath="url(#wii-dock-clip)"
           />
           <path
-            className="wii-menu__dock-curve-line"
-            d="M0 18C0 18 180 4 360 28C520 50 600 78 600 78C600 78 680 50 840 28C1020 4 1200 18 1200 18"
+            d={DOCK_TOP}
+            fill="none"
+            stroke="#3fa9e0"
+            strokeWidth="3"
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            vectorEffect="non-scaling-stroke"
+            filter="url(#wii-dock-blue-glow)"
           />
         </svg>
       </div>
 
       <m.div
+        className="wii-menu__dock-clock"
         initial={reduce ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.55, duration: 0.35 }}
@@ -47,21 +88,12 @@ export function BottomBar({ unread, onOpenSettings, onOpenMail }: Props) {
         <div className="wii-menu__dock-left">
           <button
             type="button"
-            className="wii-orb"
+            className="wii-orb wii-orb--info"
             aria-label="Open settings"
             onClick={onOpenSettings}
           >
-            <span className="wii-orb__label">rg</span>
+            <InfoIcon />
           </button>
-          <p className="wii-menu__identity wii-menu__identity--dock">
-            <span className="wii-menu__identity-name">{site.name}</span>
-          </p>
-        </div>
-
-        <div aria-hidden />
-
-        <div className="wii-menu__dock-right">
-          <ModeToggle variant="wii" />
           <div className="wii-mail-wrap">
             <button
               type="button"
@@ -74,8 +106,28 @@ export function BottomBar({ unread, onOpenSettings, onOpenMail }: Props) {
             </button>
           </div>
         </div>
+
+        <div className="wii-menu__dock-right">
+          <p className="wii-menu__identity wii-menu__identity--dock">
+            <span className="wii-menu__identity-name">{site.name}</span>
+          </p>
+          <ModeToggle variant="wii" />
+        </div>
       </div>
     </m.footer>
+  );
+}
+
+function InfoIcon() {
+  return (
+    <svg viewBox="0 0 48 48" className="wii-orb__info-svg" aria-hidden>
+      <circle cx="24" cy="24" r="15.5" fill="none" stroke="#4a5560" strokeWidth="3.2" />
+      <circle cx="24" cy="15.2" r="2.4" fill="#4a5560" />
+      <path
+        d="M21.2 21.5h5.2v12.8c0 1.1-.9 2-2 2h-1.2c-1.1 0-2-.9-2-2V21.5z"
+        fill="#4a5560"
+      />
+    </svg>
   );
 }
 

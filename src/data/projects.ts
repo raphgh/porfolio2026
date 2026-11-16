@@ -161,6 +161,8 @@ export const projects: Project[] = [
     featured: true,
     cover: {
       type: "image",
+      // TODO: swap for a production screenshot without the Next.js "N" badge
+      // (current crop hides the badge via `.wii-project-card__img--website`).
       src: "/logos/this-website.png",
       alt: "This website — landing page with scrapbook photo cards around the name",
     },

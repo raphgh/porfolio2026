@@ -1,0 +1,177 @@
+"use client";
+
+import { useCallback, useState, type ReactNode } from "react";
+import { useRouter } from "next/navigation";
+import { m, useReducedMotion } from "motion/react";
+import { ModeToggle } from "@/components/ModeToggle";
+import { PageHeader } from "@/components/PageHeader";
+import { useInterfaceMode } from "@/components/InterfaceModeProvider";
+import { WiiCursor } from "@/components/wii/WiiCursor";
+import { WiiPanelProvider } from "@/components/wii/WiiPanel";
+import { site } from "@/data/site";
+import { unlockWiiSound, wiiSound } from "@/lib/wiiSound";
+
+type Props = {
+  title: string;
+  subtitle?: string;
+  /** Show the case-studies loading-bar treatment under the title. */
+  loadingNote?: boolean;
+  thumb?: string;
+  accent?: string;
+  channelId: string;
+  children: ReactNode;
+};
+
+/**
+ * Shared Wii channel-page shell for portfolio routes.
+ * Modern mode keeps the existing PageHeader + shell layout.
+ */
+export function WiiPage({
+  title,
+  subtitle,
+  loadingNote = false,
+  thumb,
+  accent = "#eef2f6",
+  channelId,
+  children,
+}: Props) {
+  const { mode, ready } = useInterfaceMode();
+  const router = useRouter();
+  const reduce = useReducedMotion();
+  const [exiting, setExiting] = useState(false);
+
+  const goHome = useCallback(() => {
+    if (exiting) return;
+    wiiSound.back();
+    setExiting(true);
+    window.setTimeout(() => router.push("/"), reduce ? 120 : 420);
+  }, [exiting, reduce, router]);
+
+  if (!ready || mode === "modern") {
+    return (
+      <div className="shell pb-24 md:pb-32">
+        <PageHeader title={title} intro={subtitle} />
+        {children}
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className={`wii-channel-page wii-page${exiting ? " is-exiting" : ""}`}
+      onPointerDownCapture={() => {
+        void unlockWiiSound();
+      }}
+    >
+      <WiiCursor />
+
+      <header className="wii-page__top">
+        <span className="wii-page__top-spacer" aria-hidden />
+        <p className="wii-page__mark">{site.shortName}</p>
+        <div className="wii-page__top-end">
+          <ModeToggle variant="wii" />
+        </div>
+      </header>
+
+      <m.div
+        className="wii-page__scroll"
+        initial={false}
+        animate={
+          exiting
+            ? reduce
+              ? { opacity: 0 }
+              : { opacity: 0, scale: 0.86, y: 40 }
+            : { opacity: 1, scale: 1, y: 0 }
+        }
+        transition={
+          reduce ? { duration: 0.2 } : { type: "spring", stiffness: 200, damping: 26 }
+        }
+      >
+        <div className="wii-page__column">
+          <m.header
+            className="wii-page__title-block"
+            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={
+              reduce ? { duration: 0.25 } : { type: "spring", stiffness: 260, damping: 28 }
+            }
+          >
+            <m.div
+              className="wii-page__thumb"
+              layoutId={`wii-channel-${channelId}`}
+              transition={{ type: "spring", stiffness: 180, damping: 24 }}
+              style={{ background: accent }}
+            >
+              {thumb ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={thumb} alt="" />
+              ) : null}
+            </m.div>
+            <div className="wii-page__title-text">
+              <h1 className="wii-page__heading">
+                {title.toLowerCase()}
+                <span aria-hidden className="text-mustard">
+                  .
+                </span>
+              </h1>
+              <m.span
+                className="wii-page__rule"
+                aria-hidden
+                initial={reduce ? { scaleX: 1 } : { scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                style={{ originX: 0 }}
+                transition={
+                  reduce
+                    ? { duration: 0.2 }
+                    : { type: "spring", stiffness: 220, damping: 28, delay: 0.12 }
+                }
+              />
+              {loadingNote && subtitle ? (
+                <div className="wii-loading-note">
+                  <div className="wii-loading-bar" aria-hidden>
+                    <span className="wii-loading-bar__fill" />
+                  </div>
+                  <p className="wii-page__subtitle">{subtitle}</p>
+                </div>
+              ) : subtitle ? (
+                <p className="wii-page__subtitle">{subtitle}</p>
+              ) : null}
+            </div>
+          </m.header>
+
+          <div className="wii-page__body">
+            <WiiPanelProvider>{children}</WiiPanelProvider>
+          </div>
+        </div>
+      </m.div>
+
+      <m.button
+        type="button"
+        className="wii-orb wii-page__back"
+        aria-label="Back to channels"
+        initial={reduce ? false : { opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ type: "spring", stiffness: 260, damping: 24, delay: 0.2 }}
+        onClick={goHome}
+      >
+        <BackIcon />
+      </m.button>
+    </div>
+  );
+}
+
+function BackIcon() {
+  return (
+    <svg viewBox="0 0 48 48" className="wii-orb__info-svg" aria-hidden>
+      <path
+        d="M28.5 12.5 17 24l11.5 11.5"
+        fill="none"
+        stroke="#4a5560"
+        strokeWidth="3.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M18 24h14.5" fill="none" stroke="#4a5560" strokeWidth="3.4" strokeLinecap="round" />
+    </svg>
+  );
+}

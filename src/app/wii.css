@@ -59,12 +59,14 @@
 /* ----- Menu shell --------------------------------------------------------- */
 
 .wii-menu {
+  --wii-dock-h: clamp(100px, 10.2vw, 185px);
   position: relative;
   display: flex;
   height: 100dvh;
   max-height: 100dvh;
   flex-direction: column;
   overflow: hidden;
+  padding-bottom: var(--wii-dock-h);
   background: linear-gradient(180deg, var(--wii-bg-top) 0%, var(--wii-bg-bot) 100%);
 }
 
@@ -244,15 +246,133 @@
   }
 
   .wii-channel-grid__peek,
-  .wii-page-arrow {
+  .wii-channel-grid .wii-page-arrow {
     display: none;
   }
 }
 
 @media (width < 640px) {
+  .wii-menu__board-wrap {
+    align-items: flex-start;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.55rem 0 1.25rem;
+    overscroll-behavior: contain;
+  }
+
+  .wii-channel-grid {
+    height: auto;
+    max-height: none;
+    padding: 0 0.7rem;
+  }
+
+  .wii-channel-grid__track {
+    height: auto;
+  }
+
   .wii-channel-grid__page {
+    height: auto;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: repeat(6, auto);
+    gap: 0.55rem;
+    padding: 0;
+    align-content: start;
+  }
+
+  .wii-page-dots {
+    margin-top: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .wii-menu {
+    --wii-dock-h: clamp(92px, 20vw, 128px);
+  }
+
+  .wii-menu__dock-inner {
+    gap: 0.4rem;
+    padding: 0 0.65rem 1.05rem;
+  }
+
+  .wii-menu__dock-left,
+  .wii-menu__dock-right {
+    gap: 0.4rem;
+  }
+
+  .wii-orb {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .wii-orb__label {
+    font-size: 0.8rem;
+  }
+
+  .wii-orb--mail svg {
+    width: 1.35rem;
+  }
+
+  .wii-mail-count {
+    bottom: 0.35rem;
+    font-size: 0.62rem;
+  }
+
+  .wii-clock__time {
+    top: 0.25rem;
+    gap: 0.2rem;
+  }
+
+  .wii-clock__digits {
+    font-size: 1.1rem;
+  }
+
+  .wii-clock__ampm {
+    font-size: 0.55rem;
+  }
+
+  .wii-clock__date {
+    top: calc(37.3% + 0.2rem);
+    font-size: 0.68rem;
+  }
+
+  .wii-menu__dock-right [role="group"] {
+    transform: scale(0.88);
+    transform-origin: right bottom;
+  }
+
+  .wii-channel__tip {
+    min-width: min(9rem, 80%);
+    font-size: 0.75rem;
+    padding: 0.28rem 1.1rem;
+  }
+
+  .wii-dialog-root {
+    align-items: end;
+    padding: 0.65rem;
+    padding-bottom: max(0.65rem, env(safe-area-inset-bottom));
+  }
+
+  .wii-dialog-panel {
+    width: 100%;
+    max-height: min(88dvh, 36rem);
+    overflow: auto;
+    padding: 1.05rem 0.95rem 1rem;
+    border-radius: 1rem;
+  }
+
+  .wii-dialog-title {
+    margin-bottom: 0.85rem;
+    font-size: 1.05rem;
+  }
+
+  .wii-dialog-actions {
+    flex-wrap: wrap;
+  }
+
+  .wii-pill {
+    min-width: 6.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.88rem;
   }
 }
 
@@ -428,20 +548,22 @@
   left: 50%;
   z-index: 8;
   width: max-content;
-  max-width: min(14rem, 90vw);
-  translate: -50% 0;
+  min-width: min(11rem, 85%);
+  max-width: min(18rem, 92vw);
   border-radius: 999px;
   border: 1px solid #b7c2cc;
   background: linear-gradient(180deg, #ffffff 0%, #f3f6f8 100%);
-  padding: 0.28rem 0.95rem;
-  font-size: 0.8rem;
+  padding: 0.35rem 1.55rem;
+  font-size: 0.85rem;
   font-weight: 700;
   color: #3f4d59;
+  text-align: center;
   white-space: nowrap;
   box-shadow: 0 4px 12px rgb(40 55 70 / 0.18);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-4px);
+  /* Keep -50% X so hover transform doesn't un-center the tip */
+  transform: translate(-50%, -4px);
   transition: opacity 140ms ease, transform 140ms ease, visibility 140ms ease;
 }
 
@@ -449,7 +571,7 @@
 .wii-channel:focus-visible .wii-channel__tip {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translate(-50%, 0);
 }
 
 .wii-channel--empty {
@@ -490,51 +612,40 @@
 /* ----- Dock / bottom bar -------------------------------------------------- */
 
 .wii-menu__dock {
-  position: relative;
-  z-index: 4;
-  flex: 0 0 auto;
-  margin-top: auto;
-  min-height: clamp(5.2rem, 12vh, 7rem);
-  background: linear-gradient(180deg, var(--wii-dock-top) 0%, var(--wii-dock-bot) 100%);
-}
-
-.wii-menu__dock-curve {
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
-  bottom: 100%;
-  height: clamp(3.2rem, 7vh, 4.6rem);
-  line-height: 0;
-  overflow: visible;
+  bottom: 0;
+  z-index: 4;
+  height: var(--wii-dock-h);
+  pointer-events: none;
 }
 
-.wii-menu__dock-curve svg {
+.wii-menu__dock-svg-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 -4px 10px rgb(0 0 0 / 0.08));
+  line-height: 0;
+}
+
+.wii-menu__dock-svg {
   display: block;
   width: 100%;
   height: 100%;
-}
-
-.wii-menu__dock-curve-fill {
-  fill: var(--wii-dock-top);
-}
-
-.wii-menu__dock-curve-line {
-  fill: none;
-  stroke: var(--wii-accent);
-  stroke-width: 3.5;
-  stroke-linecap: round;
-  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.12));
+  overflow: visible;
 }
 
 .wii-menu__dock-inner {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 2;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: end;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
   gap: 0.75rem;
-  min-height: clamp(4.6rem, 10vh, 6rem);
-  padding: 0 clamp(1.1rem, 4vw, 2.75rem) 0.85rem;
+  padding: 0 clamp(1.1rem, 4vw, 2.75rem) clamp(1.45rem, 3.8vh, 2.05rem);
+  pointer-events: none;
 }
 
 .wii-menu__dock-left,
@@ -542,12 +653,21 @@
   display: flex;
   align-items: center;
   gap: 0.65rem;
-  padding-bottom: 0.15rem;
   min-width: 0;
+  pointer-events: auto;
 }
 
 .wii-menu__dock-right {
-  gap: 0.75rem;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 0.28rem;
+  text-align: right;
+}
+
+.wii-menu__identity--dock {
+  margin: 0;
+  line-height: 1.1;
 }
 
 @media (width < 640px) {
@@ -556,39 +676,42 @@
   }
 }
 
-.wii-menu__dock-left {
-  justify-self: start;
-}
-
-.wii-menu__dock-right {
-  justify-self: end;
-}
-
-/* Clock straddles the curve dip */
-.wii-clock {
+/* Time sits in the page background above the center dip; date below the blue line */
+.wii-menu__dock-clock {
   position: absolute;
   left: 50%;
-  bottom: 0.85rem;
-  z-index: 5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  top: 0;
+  z-index: 3;
+  width: min(100%, 20rem);
+  height: 100%;
   translate: -50% 0;
   pointer-events: none;
+}
+
+.wii-clock {
+  position: relative;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
   line-height: 1;
 }
 
 .wii-clock__time {
+  position: absolute;
+  /* Sit in the transparent notch above y=110/295 ≈ 37% */
+  top: clamp(0.35rem, 2.2vh, 0.85rem);
+  left: 50%;
   display: flex;
   align-items: flex-end;
   gap: 0.3rem;
-  margin-bottom: clamp(1.85rem, 4.2vh, 2.7rem);
+  translate: -50% 0;
   color: var(--wii-clock);
 }
 
 .wii-clock__digits {
   font-family: "DSEG7 Classic", "Courier New", monospace;
-  font-size: clamp(1.55rem, 3.8vh, 2.25rem);
+  font-size: clamp(1.45rem, 3.4vh, 2.2rem);
   letter-spacing: 0.06em;
   text-shadow: 0 1px 0 rgb(255 255 255 / 0.55), 0 -1px 0 rgb(0 0 0 / 0.08);
 }
@@ -612,6 +735,11 @@
 }
 
 .wii-clock__date {
+  position: absolute;
+  /* Just below the blue line (110/295 ≈ 37.3%) */
+  top: calc(37.3% + 0.35rem);
+  left: 50%;
+  translate: -50% 0;
   font-size: clamp(0.78rem, 1.6vh, 0.95rem);
   font-weight: 800;
   letter-spacing: 0.02em;
@@ -641,6 +769,12 @@
   font-size: clamp(0.95rem, 2.2vh, 1.15rem);
   font-weight: 800;
   letter-spacing: 0.04em;
+}
+
+.wii-orb__info-svg {
+  width: clamp(1.55rem, 3.6vh, 2rem);
+  height: auto;
+  display: block;
 }
 
 .wii-orb:hover,
@@ -889,18 +1023,37 @@
   top: 0;
   left: 0;
   z-index: 200;
+  /* Hotspot ≈ fingertip at top-left of the sprite */
   width: 56px;
   height: 60px;
-  margin-left: -10px;
-  margin-top: -6px;
+  margin-left: -2px;
+  margin-top: -2px;
   will-change: transform;
+  transform-origin: 0 0;
 }
 
 .wii-cursor--fist {
   width: 54px;
   height: 54px;
-  margin-left: -26px;
-  margin-top: -8px;
+  margin-left: -4px;
+  margin-top: -4px;
+}
+
+.wii-cursor--content {
+  width: 40px;
+  height: 42px;
+  margin-left: -1px;
+  margin-top: -1px;
+}
+
+.wii-cursor--content.wii-cursor--fist {
+  width: 38px;
+  height: 38px;
+}
+
+.wii-cursor--text {
+  width: 34px;
+  height: 36px;
 }
 
 .wii-cursor img {
@@ -915,8 +1068,20 @@
 /* ----- Channel pages (internal) ------------------------------------------- */
 
 .wii-channel-page {
+  --wii-page-back-h: 5.5rem;
+  position: relative;
   min-height: 100dvh;
   background: linear-gradient(180deg, var(--wii-bg-top) 0%, var(--wii-bg-bot) 100%);
+  padding-bottom: var(--wii-page-back-h);
+}
+
+.wii-channel-page::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: var(--wii-scanline);
 }
 
 .wii-channel-page__bar {
@@ -973,23 +1138,1604 @@
   background: #fff;
 }
 
+/* ----- WiiPage shell ------------------------------------------------------ */
+
+.wii-page {
+  position: relative;
+  z-index: 1;
+}
+
+.wii-page__top {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem clamp(0.85rem, 3vw, 1.5rem);
+  pointer-events: none;
+}
+
+.wii-page__top-spacer {
+  justify-self: start;
+}
+
+.wii-page__mark {
+  margin: 0;
+  justify-self: center;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #4a5866;
+  text-shadow: 0 1px 0 rgb(255 255 255 / 0.55);
+}
+
+.wii-page__top-end {
+  justify-self: end;
+  pointer-events: auto;
+}
+
+.wii-page__scroll {
+  position: relative;
+  z-index: 1;
+  max-height: calc(100dvh - var(--wii-page-back-h) - 3.25rem);
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 0.35rem 0 1.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--wii-accent) #e4e8ee;
+}
+
+.wii-page__back {
+  position: fixed;
+  left: clamp(1rem, 4vw, 2rem);
+  bottom: clamp(0.85rem, 2.5vh, 1.35rem);
+  z-index: 30;
+  pointer-events: auto;
+}
+
+.wii-page__scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.wii-page__scroll::-webkit-scrollbar-track {
+  background: #e4e8ee;
+  border-radius: 999px;
+}
+
+.wii-page__scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #5bb8e8 0%, var(--wii-accent) 100%);
+  border-radius: 999px;
+  box-shadow: 0 1px 4px rgb(63 169 224 / 0.45);
+}
+
+.wii-page__column {
+  width: min(100% - 1.5rem, 1100px);
+  margin: 0 auto;
+}
+
+.wii-page__title-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.wii-page__thumb {
+  flex: 0 0 56px;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  border: 2px solid var(--wii-tile-border);
+  overflow: hidden;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.9) inset,
+    var(--wii-shadow);
+}
+
+.wii-page__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.wii-page__title-text {
+  min-width: 0;
+  flex: 1;
+}
+
+.wii-page__heading {
+  margin: 0;
+  font-family: var(--font-wii-sans), var(--font-instrument-sans), Arial, Helvetica, sans-serif;
+  font-size: clamp(1.85rem, 1.25rem + 2vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #2f3a44;
+  text-transform: lowercase;
+}
+
+.wii-page__rule {
+  display: block;
+  width: 120px;
+  height: 3px;
+  margin-top: 0.55rem;
+  border-radius: 999px;
+  background: var(--wii-accent);
+  transform-origin: left center;
+}
+
+.wii-page__subtitle {
+  margin: 0.55rem 0 0;
+  max-width: 36rem;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: #6a7580;
+}
+
+.wii-loading-note {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-top: 0.7rem;
+}
+
+.wii-loading-bar {
+  position: relative;
+  width: min(100%, 14rem);
+  height: 0.55rem;
+  border-radius: 999px;
+  background: #d8dde4;
+  border: 1px solid #c9ced6;
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.08);
+}
+
+.wii-loading-bar__fill {
+  display: block;
+  height: 100%;
+  width: 70%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #7ec8ee, var(--wii-accent));
+  box-shadow: 0 0 8px rgb(63 169 224 / 0.45);
+  transform-origin: left center;
+  animation: wii-load-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes wii-load-pulse {
+  0%,
+  100% {
+    transform: scaleX(0.08);
+  }
+  55% {
+    transform: scaleX(1);
+  }
+}
+
+.wii-panel {
+  position: relative;
+  border-radius: 16px;
+  border: 2px solid var(--wii-tile-border);
+  background: linear-gradient(180deg, #ffffff 0%, #f4f6f8 100%);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.95) inset,
+    var(--wii-shadow);
+  padding: clamp(0.85rem, 2vw, 1.35rem);
+  overflow: hidden;
+}
+
+.wii-panel::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: var(--wii-scanline);
+  opacity: 0.55;
+}
+
+.wii-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ----- Project channel cards ---------------------------------------------- */
+
+.wii-project-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (width < 800px) {
+  .wii-project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wii-project-grid__item {
+  min-width: 0;
+}
+
+.wii-project-card {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  border: 2px solid var(--wii-tile-border);
+  border-radius: 16px;
+  background: #fff;
+  padding: 0;
+  text-align: left;
+  color: inherit;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.9) inset,
+    0 3px 8px rgb(0 0 0 / 0.12);
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    filter 160ms ease;
+}
+
+.wii-project-card.is-hot,
+.wii-project-card:focus-visible {
+  outline: none;
+  border-color: var(--wii-accent);
+  border-width: 3px;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.9) inset,
+    var(--wii-glow),
+    0 8px 20px rgb(0 0 0 / 0.16);
+}
+
+.wii-project-card.is-dim {
+  filter: brightness(0.96);
+}
+
+.wii-project-card__media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #dfe3e8;
+}
+
+.wii-project-card__img,
+.wii-project-card__wash {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Crop out the Next.js "N" badge (bottom-left). Replace src with a production shot when ready. */
+.wii-project-card__img--website {
+  object-fit: cover;
+  object-position: 52% 38%;
+  transform: scale(1.14);
+  transform-origin: center 35%;
+}
+
+.wii-project-card__gloss {
+  position: absolute;
+  inset: 0 0 55% 0;
+  background: linear-gradient(
+    180deg,
+    rgb(255 255 255 / 0.42) 0%,
+    rgb(255 255 255 / 0.08) 55%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.wii-project-card__scan {
+  position: absolute;
+  inset: 0;
+  background: var(--wii-scanline);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.wii-project-card__title {
+  position: absolute;
+  top: 0.65rem;
+  left: 0.75rem;
+  z-index: 2;
+  max-width: calc(100% - 1.5rem);
+  font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  color: #fff;
+  text-shadow: 0 1px 3px rgb(0 0 0 / 0.5);
+}
+
+.wii-project-card__role {
+  position: absolute;
+  right: 0.55rem;
+  bottom: 0.55rem;
+  z-index: 2;
+  border-radius: 999px;
+  border: 1px solid rgb(255 255 255 / 0.55);
+  background: rgb(255 255 255 / 0.88);
+  padding: 0.18rem 0.55rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #3f4d59;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.18);
+}
+
+.wii-project-card__bubble {
+  position: absolute;
+  left: 0.65rem;
+  right: 0.65rem;
+  bottom: 0.55rem;
+  z-index: 3;
+  border-radius: 12px;
+  background: #fff;
+  padding: 0.65rem 0.75rem 0.75rem;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.18);
+  opacity: 0;
+  translate: 0 12px;
+  pointer-events: none;
+  transition:
+    opacity 180ms ease,
+    translate 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.wii-project-card__bubble::after {
+  content: "";
+  position: absolute;
+  left: 1.1rem;
+  bottom: -7px;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  transform: rotate(45deg);
+  box-shadow: 2px 2px 4px rgb(0 0 0 / 0.06);
+}
+
+.wii-project-card__bubble-text {
+  position: relative;
+  z-index: 1;
+  display: block;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: #3f4d59;
+}
+
+.wii-project-card.is-hot .wii-project-card__bubble,
+.wii-project-card:focus-visible .wii-project-card__bubble {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.wii-project-card.is-hot .wii-project-card__role,
+.wii-project-card:focus-visible .wii-project-card__role {
+  opacity: 0;
+}
+
+.wii-project-card__body {
+  background: #fff;
+  padding: 0.75rem 0.85rem 0.9rem;
+}
+
+.wii-project-card__lede {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  overflow: hidden;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: #667280;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .wii-project-card__bubble {
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  .wii-project-card__role {
+    opacity: 0;
+  }
+}
+
+.wii-coming-soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+.wii-coming-soon__ghost {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #9aa3ac;
+  text-transform: uppercase;
+}
+
+.wii-coming-soon__copy {
+  margin: 0;
+  max-width: 18rem;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: #5a6570;
+}
+
+/* ----- Experience board --------------------------------------------------- */
+
+.wii-exp {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.wii-exp-ticker-panel {
+  padding: 0.45rem;
+}
+
+.wii-exp-ticker {
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #0f5a2a 0%, #0a3d1c 100%);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.12) inset,
+    0 2px 8px rgb(0 0 0 / 0.18);
+  color: #fff;
+}
+
+.wii-exp-ticker__badge {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  padding: 0 0.75rem;
+  border-right: 1px solid rgb(255 255 255 / 0.18);
+  background: linear-gradient(180deg, #147a38 0%, #0c4f22 100%);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.wii-exp-ticker__viewport {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.wii-exp-ticker__viewport::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: var(--wii-scanline);
+  opacity: 0.35;
+}
+
+.wii-exp-ticker__track {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  width: max-content;
+  padding: 0.55rem 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.wii-exp-ticker__track.is-static {
+  width: auto;
+  padding-inline: 0.85rem;
+}
+
+.wii-exp-layout {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: 0.85rem;
+  align-items: start;
+}
+
+.wii-exp-rail {
+  position: sticky;
+  top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.35rem;
+  padding: 0.35rem 0 0.35rem 0.15rem;
+}
+
+.wii-exp-rail__line {
+  position: absolute;
+  left: 0.72rem;
+  top: 0.6rem;
+  bottom: 0.6rem;
+  width: 2px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--wii-accent), #9fd8f4);
+  opacity: 0.85;
+}
+
+.wii-exp-rail__node {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: #7c8590;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: color 160ms ease;
+}
+
+.wii-exp-rail__dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 999px;
+  border: 2px solid var(--wii-accent);
+  background: #fff;
+  box-shadow: 0 0 0 2px rgb(255 255 255 / 0.9);
+  transition:
+    background 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.wii-exp-rail__node.is-active {
+  color: #2f3a44;
+}
+
+.wii-exp-rail__node.is-active .wii-exp-rail__dot {
+  background: var(--wii-accent);
+  box-shadow:
+    0 0 0 2px rgb(255 255 255 / 0.9),
+    0 0 10px rgb(63 169 224 / 0.65);
+  transform: scale(1.12);
+}
+
+.wii-exp-years {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+  min-width: 0;
+}
+
+.wii-exp-year__label {
+  margin: 0 0 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a96a3;
+}
+
+.wii-exp-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+@media (width < 800px) {
+  .wii-exp-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .wii-exp-rail {
+    display: none;
+  }
+
+  .wii-exp-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wii-exp-tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border: 2px solid var(--wii-tile-border);
+  border-radius: 16px;
+  background: #fff;
+  padding: 0;
+  text-align: left;
+  color: inherit;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.9) inset,
+    var(--wii-shadow);
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.wii-exp-tile:hover,
+.wii-exp-tile:focus-visible {
+  outline: none;
+  border-color: var(--wii-accent);
+  border-width: 3px;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.9) inset,
+    var(--wii-glow),
+    0 8px 20px rgb(0 0 0 / 0.16);
+}
+
+.wii-exp-tile__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #dfe3e8;
+}
+
+.wii-exp-tile__media.is-contain,
+.wii-exp-detail__media.is-contain {
+  background: #fff;
+}
+
+.wii-exp-tile__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.wii-exp-tile__img--cover {
+  object-fit: cover;
+}
+
+.wii-exp-tile__img--contain {
+  object-fit: contain;
+  object-position: center;
+  padding: 1.1rem 1.35rem;
+  box-sizing: border-box;
+}
+
+.wii-exp-tile__gloss {
+  position: absolute;
+  inset: 0 0 55% 0;
+  background: linear-gradient(
+    180deg,
+    rgb(255 255 255 / 0.42) 0%,
+    rgb(255 255 255 / 0.08) 55%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.wii-exp-tile__scan {
+  position: absolute;
+  inset: 0;
+  background: var(--wii-scanline);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.wii-exp-tile__pill {
+  position: absolute;
+  left: 0.55rem;
+  right: 0.55rem;
+  bottom: 0.55rem;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15rem 0.35rem;
+  max-width: none;
+  border-radius: 12px;
+  border: 1px solid rgb(255 255 255 / 0.7);
+  background: rgb(255 255 255 / 0.94);
+  padding: 0.35rem 0.65rem;
+  font-size: clamp(0.68rem, 1.5vw, 0.78rem);
+  line-height: 1.25;
+  color: #6a7580;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.16);
+}
+
+.wii-exp-tile__pill strong {
+  color: #1e3a5f;
+  font-weight: 800;
+}
+
+.wii-exp-detail-root {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.wii-exp-detail-backdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  background: rgb(30 45 60 / 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.wii-exp-detail {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: min(100%, 42rem);
+  max-height: min(90dvh, 48rem);
+  overflow: auto;
+  border: 3px solid var(--wii-accent);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #fff 0%, #f4f6f8 100%);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.9) inset,
+    var(--wii-glow),
+    0 18px 40px rgb(0 0 0 / 0.22);
+}
+
+.wii-exp-detail__media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #dfe3e8;
+}
+
+.wii-exp-detail__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1rem 1.15rem 1.2rem;
+}
+
+.wii-exp-detail__head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.wii-exp-detail__title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1e3a5f;
+}
+
+.wii-exp-detail__title span {
+  font-weight: 600;
+  color: #5a6570;
+}
+
+.wii-exp-detail__dates {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #8a96a3;
+}
+
+.wii-exp-detail__summary {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: #4a5560;
+}
+
+.wii-exp-detail__block h3 {
+  margin: 0 0 0.4rem;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a96a3;
+}
+
+.wii-exp-detail__stack {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.wii-exp-detail__stack li {
+  border-radius: 999px;
+  border: 1px solid #d5dae2;
+  background: #f3f5f8;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #3f4d59;
+}
+
+.wii-exp-detail__list {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.88rem;
+  color: #4a5560;
+}
+
+/* ----- Me / Mii profile --------------------------------------------------- */
+
+.wii-me {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.wii-me-card-panel {
+  padding: 0;
+  overflow: hidden;
+}
+
+.wii-me-card {
+  position: relative;
+  padding: clamp(1rem, 2.5vw, 1.4rem);
+}
+
+.wii-me-card__checker {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgb(255 255 255 / 0.35), transparent 42%),
+    repeating-conic-gradient(
+      from 45deg at 50% 50%,
+      #ffd8b0 0deg 90deg,
+      #b8dff5 90deg 180deg
+    );
+  background-size: auto, 28px 28px;
+  opacity: 0.9;
+}
+
+.wii-me-card__row {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(0.9rem, 3vw, 1.5rem);
+  align-items: center;
+}
+
+.wii-me-avatar {
+  justify-self: center;
+}
+
+.wii-me-avatar__ring {
+  display: grid;
+  width: clamp(7.5rem, 18vw, 9.5rem);
+  height: clamp(7.5rem, 18vw, 9.5rem);
+  place-items: center;
+  overflow: hidden;
+  border-radius: 999px;
+  border: 4px solid #fff;
+  background: #fff7ee;
+  box-shadow:
+    0 0 0 3px rgb(63 169 224 / 0.45),
+    0 8px 18px rgb(0 0 0 / 0.16);
+}
+
+.wii-me-avatar__img {
+  width: 108%;
+  height: 108%;
+  object-fit: cover;
+  object-position: center 18%;
+  display: block;
+  transform-origin: center 40%;
+  transition: transform 120ms ease;
+}
+
+.wii-me-avatar:hover .wii-me-avatar__img,
+.wii-me-avatar:focus-within .wii-me-avatar__img {
+  animation: wii-me-blink 0.55s ease;
+}
+
+@keyframes wii-me-blink {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  40% {
+    transform: scaleY(0.88);
+  }
+  55% {
+    transform: scaleY(1.02);
+  }
+}
+
+.wii-me-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 1rem;
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  border: 2px solid var(--wii-tile-border);
+  background: rgb(255 255 255 / 0.92);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.95) inset;
+}
+
+.wii-me-field dt {
+  margin: 0 0 0.2rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a96a3;
+}
+
+.wii-me-field dd {
+  margin: 0;
+  font-size: clamp(0.88rem, 2vw, 1.02rem);
+  font-weight: 800;
+  line-height: 1.3;
+  color: #1e3a5f;
+}
+
+.wii-me-story {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 1rem 1.25rem;
+  align-items: start;
+}
+
+.wii-me-polaroid-wrap {
+  position: relative;
+  margin: 0;
+  padding: 1.35rem 1rem 1.5rem;
+}
+
+.wii-me-cork {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 20% 30%, rgb(255 255 255 / 0.12), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgb(0 0 0 / 0.08), transparent 45%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 2px,
+      rgb(0 0 0 / 0.03) 2px 3px
+    ),
+    #c8803d;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.2) inset,
+    0 4px 12px rgb(0 0 0 / 0.14);
+}
+
+.wii-me-tape {
+  position: absolute;
+  top: 0.55rem;
+  z-index: 2;
+  width: 2.4rem;
+  height: 0.85rem;
+  border-radius: 2px;
+  background: rgb(255 255 255 / 0.38);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.12);
+  backdrop-filter: blur(1px);
+}
+
+.wii-me-tape--left {
+  left: 18%;
+  transform: rotate(-8deg);
+}
+
+.wii-me-tape--right {
+  right: 18%;
+  transform: rotate(10deg);
+}
+
+.wii-me-polaroid {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 16.5rem);
+  margin: 0.35rem auto 0;
+  padding: 0.55rem 0.55rem 0.35rem;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.9) inset,
+    0 8px 18px rgb(0 0 0 / 0.22);
+  transform: rotate(-3deg);
+  transition:
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 220ms ease;
+}
+
+.wii-me-polaroid-wrap:hover .wii-me-polaroid,
+.wii-me-polaroid-wrap:focus-within .wii-me-polaroid {
+  transform: rotate(0deg) translateY(-4px);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.9) inset,
+    0 14px 28px rgb(0 0 0 / 0.24);
+}
+
+.wii-me-polaroid__photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  background: #e8ebef;
+}
+
+.wii-me-polaroid__caption {
+  margin: 0;
+  padding: 0.55rem 0.2rem 0.45rem;
+  font-family: "Segoe Print", "Bradley Hand", "Apple Chancery", "Comic Sans MS", cursive;
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: center;
+  color: #4a5560;
+}
+
+.wii-me-bubbles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  min-width: 0;
+}
+
+.wii-me-bubble {
+  position: relative;
+  max-width: 36rem;
+  border: 2px solid var(--wii-tile-border);
+  border-radius: 18px;
+  background: #fff;
+  padding: 0.85rem 1rem;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.95) inset,
+    0 4px 12px rgb(0 0 0 / 0.08);
+}
+
+.wii-me-bubble::after {
+  content: "";
+  position: absolute;
+  top: 1.1rem;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border-bottom: 2px solid var(--wii-tile-border);
+  border-left: 2px solid var(--wii-tile-border);
+}
+
+.wii-me-bubble--left {
+  align-self: flex-start;
+}
+
+.wii-me-bubble--left::after {
+  left: -7px;
+  transform: rotate(45deg);
+}
+
+.wii-me-bubble--right {
+  align-self: flex-end;
+}
+
+.wii-me-bubble--right::after {
+  right: -7px;
+  border: none;
+  border-top: 2px solid var(--wii-tile-border);
+  border-right: 2px solid var(--wii-tile-border);
+  transform: rotate(45deg);
+}
+
+.wii-me-bubble p {
+  margin: 0;
+  color: #4a5560;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.wii-me-bubble p + p {
+  margin-top: 0.65rem;
+}
+
+.wii-me-bubble.is-lead p {
+  font-family: var(--font-instrument), "Times New Roman", Georgia, serif;
+  font-size: clamp(1.05rem, 2.2vw, 1.28rem);
+  line-height: 1.35;
+  color: #1e3a5f;
+}
+
+.wii-me-scroll-note {
+  margin: 0.15rem 0 0;
+  font-size: 0.82rem;
+  color: #8a96a3;
+}
+
+.wii-me-section-panel {
+  padding: clamp(0.9rem, 2vw, 1.25rem);
+}
+
+.wii-me-section {
+  position: relative;
+  z-index: 1;
+}
+
+.wii-me-section__title {
+  margin: 0 0 0.85rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8a96a3;
+}
+
+@media (width < 800px) {
+  .wii-me-card__row {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .wii-me-fields {
+    width: 100%;
+    text-align: left;
+  }
+
+  .wii-me-story {
+    grid-template-columns: 1fr;
+  }
+
+  .wii-me-polaroid-wrap {
+    order: -1;
+  }
+
+  .wii-me-bubble--left,
+  .wii-me-bubble--right {
+    align-self: stretch;
+  }
+
+  .wii-me-bubble--right::after,
+  .wii-me-bubble--left::after {
+    left: 1.25rem;
+    right: auto;
+    top: auto;
+    bottom: -7px;
+    border: none;
+    border-bottom: 2px solid var(--wii-tile-border);
+    border-right: 2px solid var(--wii-tile-border);
+    transform: rotate(45deg);
+  }
+}
+
+@media (width < 560px) {
+  .wii-me-fields {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wii-me-avatar:hover .wii-me-avatar__img,
+  .wii-me-avatar:focus-within .wii-me-avatar__img {
+    animation: none;
+  }
+
+  .wii-me-polaroid {
+    transition: none;
+  }
+}
+
+/* ----- Lab Message Board -------------------------------------------------- */
+
+.wii-lab {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.wii-lab-cal-panel {
+  padding: 0.85rem clamp(0.7rem, 2vw, 1.1rem) 1rem;
+}
+
+.wii-lab-cal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  padding: 0.45rem 0.55rem;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #7ec8ee 0%, var(--wii-accent) 55%, #2a9ad0 100%);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.45) inset,
+    0 2px 6px rgb(30 80 120 / 0.2);
+}
+
+.wii-lab-cal__title {
+  margin: 0;
+  flex: 1;
+  text-align: center;
+  font-size: clamp(1rem, 2.4vw, 1.2rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #fff;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 0.2);
+}
+
+.wii-lab-cal__arrow {
+  position: relative;
+  top: auto;
+  left: auto;
+  right: auto;
+  transform: none;
+  width: 2.1rem;
+  height: 2.1rem;
+  flex-shrink: 0;
+}
+
+.wii-lab-cal__arrow--prev svg {
+  transform: scaleX(-1);
+}
+
+.wii-lab-cal__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 2px;
+  margin-bottom: 2px;
+  text-align: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #7c8590;
+  text-transform: uppercase;
+}
+
+.wii-lab-cal__grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 2px;
+  background: #c9ced6;
+  border: 2px solid #c9ced6;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.wii-lab-cal__day {
+  position: relative;
+  display: flex;
+  min-height: clamp(2.6rem, 7vw, 3.4rem);
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.15rem;
+  border: none;
+  background: #fff;
+  padding: 0.3rem 0.15rem 0.35rem;
+  color: #4a5560;
+  font: inherit;
+}
+
+.wii-lab-cal__day.is-pad {
+  background: #f0f2f5;
+}
+
+.wii-lab-cal__day:disabled {
+  cursor: default;
+}
+
+.wii-lab-cal__day.has-entry {
+  cursor: none;
+}
+
+.wii-lab-cal__day.has-entry:hover,
+.wii-lab-cal__day.has-entry:focus-visible {
+  outline: none;
+  background: #eef7fc;
+  box-shadow: inset 0 0 0 2px var(--wii-accent);
+}
+
+.wii-lab-cal__num {
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.wii-lab-cal__marks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  margin-top: auto;
+}
+
+.wii-lab-cal__dot {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.8);
+}
+
+.wii-lab-cal__icon {
+  width: 0.95rem;
+  height: 0.95rem;
+  border-radius: 3px;
+  object-fit: cover;
+  border: 1px solid rgb(0 0 0 / 0.12);
+  background: #fff;
+}
+
+.wii-lab-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.wii-lab-msg {
+  position: relative;
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  background: rgb(255 255 255 / 0.72);
+  padding: 0.75rem 0.85rem;
+  scroll-margin-top: 1.5rem;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background 160ms ease;
+}
+
+.wii-lab-msg:hover,
+.wii-lab-msg:focus-within,
+.wii-lab-msg.is-flash {
+  border-color: var(--wii-accent);
+  background: #fff;
+  box-shadow: 0 0 14px rgb(63 169 224 / 0.35);
+}
+
+.wii-lab-msg.is-flash {
+  animation: wii-lab-flash 2.2s ease;
+}
+
+@keyframes wii-lab-flash {
+  0%,
+  100% {
+    box-shadow: 0 0 14px rgb(63 169 224 / 0.35);
+  }
+  40% {
+    box-shadow: 0 0 22px rgb(63 169 224 / 0.7);
+  }
+}
+
+.wii-lab-msg__avatar-wrap {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.wii-lab-msg__avatar {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 999px;
+  border: 2px solid #c9ced6;
+  background: #eef2f6;
+  box-shadow:
+    0 0 0 2px rgb(255 255 255 / 0.9),
+    0 2px 6px rgb(0 0 0 / 0.12);
+}
+
+.wii-lab-msg:hover .wii-lab-msg__avatar,
+.wii-lab-msg:focus-within .wii-lab-msg__avatar {
+  animation: wii-lab-wiggle 0.45s ease;
+  border-color: var(--wii-accent);
+}
+
+@keyframes wii-lab-wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-7deg);
+  }
+  55% {
+    transform: rotate(6deg);
+  }
+}
+
+.wii-lab-msg__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.wii-lab-msg__avatar img.is-svg {
+  object-fit: contain;
+  padding: 0.35rem;
+  background: #fff;
+}
+
+.wii-lab-msg__initial {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #6a7580;
+}
+
+.wii-lab-msg__unread {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: var(--wii-accent);
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 8px rgb(63 169 224 / 0.7);
+}
+
+.wii-lab-msg__main {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.wii-lab-msg__topline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.65rem;
+}
+
+.wii-lab-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.18rem 0.55rem;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.18);
+}
+
+.wii-lab-badge::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 45% 0;
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.45), transparent);
+  pointer-events: none;
+}
+
+.wii-lab-badge--shipped {
+  background: linear-gradient(180deg, #6ed0a0 0%, #2fa86a 100%);
+}
+
+.wii-lab-badge--ongoing {
+  background: linear-gradient(180deg, #ffb45c 0%, #f07a45 100%);
+}
+
+.wii-lab-badge--paused {
+  background: linear-gradient(180deg, #c5ced6 0%, #8a96a3 100%);
+}
+
+.wii-lab-badge--abandoned {
+  background: linear-gradient(180deg, #8a96a3 0%, #4a5560 100%);
+}
+
+.wii-lab-msg__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #2f3a44;
+  text-decoration: none;
+  text-underline-offset: 0.18em;
+}
+
+.wii-lab-msg__title:not(.is-plain):hover,
+.wii-lab-msg__title:not(.is-plain):focus-visible {
+  color: #2f3a44;
+  text-decoration: underline;
+  text-decoration-color: #d4a017;
+  text-decoration-thickness: 2px;
+  outline: none;
+}
+
+.wii-lab-msg__desc {
+  margin: 0;
+  max-width: 65ch;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: #6a7580;
+}
+
+.wii-lab-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0.15rem 0 0;
+}
+
+.wii-lab-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  min-width: 0;
+  border-radius: 999px;
+  border: 1px solid #d5dae2;
+  background: #f3f5f8;
+  padding: 0.28rem 0.7rem 0.32rem;
+}
+
+.wii-lab-chip dt {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8a96a3;
+}
+
+.wii-lab-chip dd {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #3f4d59;
+  line-height: 1.25;
+}
+
 html[data-interface="wii"] body {
   background: var(--wii-bg-top);
 }
 
-html[data-interface="wii"]:has(.wii-menu) {
+html[data-interface="wii"]:has(.wii-menu),
+html[data-interface="wii"]:has(.wii-page) {
   overflow: hidden;
   height: 100%;
 }
 
-html[data-interface="wii"]:has(.wii-menu) body {
+html[data-interface="wii"]:has(.wii-menu) body,
+html[data-interface="wii"]:has(.wii-page) body {
   overflow: hidden;
   height: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .wii-channel__shine,
-  .wii-orb--mail.has-unread {
+  .wii-orb--mail.has-unread,
+  .wii-loading-bar__fill,
+  .wii-lab-msg.is-flash,
+  .wii-lab-msg:hover .wii-lab-msg__avatar,
+  .wii-lab-msg:focus-within .wii-lab-msg__avatar {
     animation: none !important;
+  }
+
+  .wii-loading-bar__fill {
+    transform: scaleX(0.7);
+  }
+
+  .wii-project-card__bubble {
+    transition: none;
   }
 }

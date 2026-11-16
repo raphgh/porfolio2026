@@ -1,4 +1,4 @@
-import type { Experience, Media } from "./types";
+import type { Experience, ExperienceBoardEntry, Media } from "./types";
 
 /**
  * Professional experience, most recent first.
@@ -263,3 +263,139 @@ export function experienceEntries(list: Experience[] = experience): Experience[]
 }
 
 export const formatDates = (start: string, end?: string) => `${start} — ${end ?? "Present"}`;
+
+/**
+ * Wii Experience board tiles — Nokia / CICS / CCSN channel cards.
+ * Keep `details` editable; empty fields show placeholders in the panel.
+ */
+export const experienceBoard: ExperienceBoardEntry[] = [
+  {
+    id: "nokia-2026",
+    company: "Nokia",
+    role: "Software Designer",
+    year: 2026,
+    image: "/logos/nokia.jpg",
+    fit: "cover",
+    details: {
+      summary:
+        "Continued work on the NSP System Health Admin Dashboard, and the NFM-P microservice.",
+      dates: "May 2026 — Aug 2026",
+      stack: [
+        "Java",
+        "Spring Boot",
+        "Cursor",
+        "Kubernetes K9s",
+        "Jira",
+        "Git/GitLab",
+        "IntelliJ",
+        "Linux",
+        "Podman",
+        "Gradle",
+        "Jenkins",
+      ],
+      highlights: [
+        "Women in Engineering meeting at Nokia",
+        "Student Ambassadors / NextGEN",
+      ],
+    },
+  },
+  {
+    id: "nokia-2025",
+    company: "Nokia",
+    role: "Software Designer",
+    year: 2025,
+    image: "/logos/nokia2.webp",
+    fit: "cover",
+    details: {
+      summary:
+        "Bridging Nokia’s NFM-P and NSP by implementing a new dashlet within the NSP System Health Admin Dashboard.",
+      dates: "Sep 2025 — Dec 2025",
+      stack: [
+        "Java",
+        "Spring Boot",
+        "IntelliJ",
+        "Linux",
+        "Podman",
+        "Jenkins",
+        "Jira",
+        "Confluence",
+      ],
+      highlights: ["Student Ambassador with NextGEN"],
+    },
+  },
+  {
+    id: "cics-2025",
+    company: "CICS",
+    role: "Full-Stack Systems Analyst",
+    year: 2025,
+    image: "/logos/cics.jpg",
+    fit: "cover",
+    details: {
+      summary:
+        "Assisted with the development and maintenance of the internal CICS platform, as well as the public-facing website.",
+      dates: "Jan 2025 — Apr 2025",
+      stack: ["Java", "C#", "HTML", "CSS", "JavaScript", "SQL", "Figma", "Razor views (.cshtml)"],
+      highlights: [
+        "Resolved 20+ IT tickets and bugs",
+        "Implemented 3 new features",
+        "Initiated UX/UI for a new internal platform",
+      ],
+    },
+  },
+  {
+    id: "ccsn-2024",
+    company: "CCSN",
+    role: "Web Manager",
+    year: 2024,
+    // TODO: replace with a higher-res or SVG CCSN logo — current square PNG still soft when enlarged
+    image: "/logos/CCSN_Logo_EN_SQUARE.png",
+    fit: "contain",
+    details: {
+      summary:
+        "Researched and updated content for the Canadian Cancer Survivor Network website.",
+      dates: "Apr 2024 — July 2024",
+      stack: ["WordPress"],
+      highlights: [
+        "Updated 50+ pages of content",
+        "Increased website speed by 30%",
+      ],
+    },
+  },
+  {
+    id: "la-rotonde-2024",
+    company: "La Rotonde",
+    role: "Videographer",
+    year: 2024,
+    image: "/logos/la-rotonde.png",
+    fit: "cover",
+    details: {
+      summary:
+        "Creating content about and for the uOttawa community, giving francophone students, athletes, and faculty members a voice.",
+      dates: "Sep 2023 — Apr 2024",
+      stack: ["Capcut", "Canva", "Slack"],
+      highlights: [
+        "Produced 30+ videos",
+        "Increased viewership by 20%",
+        "Covered Panda Game, Capital Hoops, and Colonel By Day",
+      ],
+    },
+  },
+  {
+    id: "carleton-2022",
+    company: "Carleton",
+    role: "Lab Research Assistant",
+    year: 2022,
+    image: "/logos/carleton-sign.png",
+    fit: "cover",
+    details: {
+      summary:
+        "Supported lab research at Carleton University as a high school student, running tasks alongside university peers.",
+      dates: "March 2022 — June 2022",
+      stack: [],
+      highlights: [
+        "Acknowledged for technical assistance in Freshwater Biology (Wiley)",
+        "Collaborated with university peers as a high school student",
+      ],
+    },
+  },
+];

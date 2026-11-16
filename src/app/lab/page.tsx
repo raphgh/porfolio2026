@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { LabItem, LabSheet } from "@/components/LabItem";
-import { PageHeader } from "@/components/PageHeader";
-import { lab } from "@/data/lab";
+import { WiiLabBoard } from "@/components/wii/WiiLabBoard";
+import { WiiPage } from "@/components/wii/WiiPage";
 
 export const metadata: Metadata = {
   title: "Lab",
@@ -10,16 +9,14 @@ export const metadata: Metadata = {
 
 export default function LabPage() {
   return (
-    <div className="shell pb-24 md:pb-32">
-      <PageHeader
-        title="Lab"
-        intro="prototypes, hackathon projects, and other experiments."
-      />
-      <LabSheet>
-        {lab.map((item) => (
-          <LabItem key={item.id} item={item} showDescription />
-        ))}
-      </LabSheet>
-    </div>
+    <WiiPage
+      title="Lab"
+      subtitle="prototypes, hackathon projects, and other experiments."
+      thumb="/lab/emoji-blast.png"
+      accent="#f9d6e4"
+      channelId="lab"
+    >
+      <WiiLabBoard />
+    </WiiPage>
   );
 }

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { ExperienceGallery } from "@/components/ExperienceGallery";
-import { PageHeader } from "@/components/PageHeader";
-import { experienceEntries } from "@/data/experience";
+import { WiiExperienceBoard } from "@/components/wii/WiiExperienceBoard";
+import { WiiPage } from "@/components/wii/WiiPage";
 
 export const metadata: Metadata = {
   title: "Experience",
@@ -10,9 +9,13 @@ export const metadata: Metadata = {
 
 export default function ExperiencePage() {
   return (
-    <div className="shell pb-24 md:pb-32">
-      <PageHeader title="Experience" />
-      <ExperienceGallery entries={experienceEntries()} />
-    </div>
+    <WiiPage
+      title="Experience"
+      thumb="/logos/nokia.jpg"
+      accent="#fce8d8"
+      channelId="experience"
+    >
+      <WiiExperienceBoard />
+    </WiiPage>
   );
 }
