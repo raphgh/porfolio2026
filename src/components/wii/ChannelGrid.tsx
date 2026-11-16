@@ -26,7 +26,7 @@ export function ChannelGrid({ page, onPageChange, onSelect, hoverId, onHoverChan
   const wrapRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const dragStart = useRef(0);
-  const [focusIndex, setFocusIndex] = useState(0);
+  const [focusIndex, setFocusIndex] = useState<number | null>(null);
   const [wiggleIndex, setWiggleIndex] = useState<number | null>(null);
   const pages = useMemo(
     () => Array.from({ length: WII_PAGE_COUNT }, (_, i) => getWiiPageSlots(i)),
@@ -76,16 +76,24 @@ export function ChannelGrid({ page, onPageChange, onSelect, hoverId, onHoverChan
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.key)) return;
+
+      const current = focusIndex ?? 0;
+      if (focusIndex === null) {
+        setFocusIndex(0);
+        return;
+      }
+
       if (e.key === "ArrowLeft") {
-        if (focusIndex % 4 === 0) goTo(page - 1);
-        else setFocusIndex((i) => Math.max(0, i - 1));
+        if (current % 4 === 0) goTo(page - 1);
+        else setFocusIndex(Math.max(0, current - 1));
       } else if (e.key === "ArrowRight") {
-        if ((focusIndex + 1) % 4 === 0) goTo(page + 1);
-        else setFocusIndex((i) => Math.min(WII_BOARD_SLOTS - 1, i + 1));
+        if ((current + 1) % 4 === 0) goTo(page + 1);
+        else setFocusIndex(Math.min(WII_BOARD_SLOTS - 1, current + 1));
       } else if (e.key === "ArrowUp") {
-        setFocusIndex((i) => Math.max(0, i - 4));
+        setFocusIndex(Math.max(0, current - 4));
       } else if (e.key === "ArrowDown") {
-        setFocusIndex((i) => Math.min(WII_BOARD_SLOTS - 1, i + 4));
+        setFocusIndex(Math.min(WII_BOARD_SLOTS - 1, current + 4));
       }
     };
     window.addEventListener("keydown", onKey);
@@ -143,11 +151,14 @@ export function ChannelGrid({ page, onPageChange, onSelect, hoverId, onHoverChan
                   channel={channel}
                   index={i}
                   pageIndex={pageIndex}
-                  focused={pageIndex === page && focusIndex === i && !!channel}
+                  focused={pageIndex === page && focusIndex !== null && focusIndex === i && !!channel}
                   hovered={!!channel && hoverId === channel.id}
                   dimmed={!!hoverId && !!channel && hoverId !== channel.id}
                   wiggle={pageIndex === page && wiggleIndex === i}
-                  onHoverChange={onHoverChange}
+                  onHoverChange={(id) => {
+                    if (id) setFocusIndex(null);
+                    onHoverChange(id);
+                  }}
                   onSelect={onSelect}
                   onFocusIndex={setFocusIndex}
                 />
