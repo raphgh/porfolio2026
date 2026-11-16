@@ -1,7 +1,9 @@
 "use client";
 
 import { m, useReducedMotion } from "motion/react";
+import { ModeToggle } from "@/components/ModeToggle";
 import { WiiClock } from "@/components/wii/WiiClock";
+import { site } from "@/data/site";
 
 type Props = {
   unread: number;
@@ -51,11 +53,15 @@ export function BottomBar({ unread, onOpenSettings, onOpenMail }: Props) {
           >
             <span className="wii-orb__label">rg</span>
           </button>
+          <p className="wii-menu__identity wii-menu__identity--dock">
+            <span className="wii-menu__identity-name">{site.name}</span>
+          </p>
         </div>
 
         <div aria-hidden />
 
         <div className="wii-menu__dock-right">
+          <ModeToggle variant="wii" />
           <div className="wii-mail-wrap">
             <button
               type="button"

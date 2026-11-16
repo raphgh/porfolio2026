@@ -1,12 +1,12 @@
 /**
  * Original Web Audio blips for Wii Mode — not Nintendo audio.
- * Muted by default; preference stored in localStorage.
+ * On by default; preference stored in localStorage.
  */
 
 const STORAGE_KEY = "wii-sound-enabled";
 
 let ctx: AudioContext | null = null;
-let enabled = false;
+let enabled = true;
 
 function getCtx() {
   if (typeof window === "undefined") return null;
@@ -19,8 +19,10 @@ export function isWiiSoundEnabled() {
 }
 
 export function loadWiiSoundPreference() {
-  if (typeof window === "undefined") return false;
-  enabled = window.localStorage.getItem(STORAGE_KEY) === "1";
+  if (typeof window === "undefined") return true;
+  const stored = window.localStorage.getItem(STORAGE_KEY);
+  // Default on when unset; only mute when explicitly "0"
+  enabled = stored !== "0";
   return enabled;
 }
 

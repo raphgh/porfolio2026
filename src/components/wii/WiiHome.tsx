@@ -3,14 +3,12 @@
 import { useCallback, useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, m, useReducedMotion } from "motion/react";
-import { ModeToggle } from "@/components/ModeToggle";
 import { BottomBar } from "@/components/wii/BottomBar";
 import { ChannelDialog } from "@/components/wii/ChannelDialog";
 import { ChannelGrid } from "@/components/wii/ChannelGrid";
 import { MessageBoard } from "@/components/wii/MessageBoard";
 import { SettingsPanel } from "@/components/wii/SettingsPanel";
 import { WiiCursor } from "@/components/wii/WiiCursor";
-import { site } from "@/data/site";
 import type { WiiChannel } from "@/data/wiiChannels";
 import { loadWiiSoundPreference, unlockWiiSound, wiiSound } from "@/lib/wiiSound";
 
@@ -86,14 +84,6 @@ export function WiiHome() {
           />
         ) : null}
       </AnimatePresence>
-
-      <div className="wii-menu__top">
-        <p className="wii-menu__identity">
-          <span className="wii-menu__identity-name">{site.name}</span>
-          <span className="wii-menu__identity-sub">portfolio channels</span>
-        </p>
-        <ModeToggle variant="wii" />
-      </div>
 
       <div className="wii-menu__board-wrap">
         <ChannelGrid
