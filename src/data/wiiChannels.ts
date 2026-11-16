@@ -32,7 +32,7 @@ export type WiiChannel = {
 export const wiiChannels: WiiChannel[] = [
   {
     id: "about",
-    label: "Me",
+    label: "About",
     href: "/me",
     thumb: "me",
     accent: "#e88a6a",

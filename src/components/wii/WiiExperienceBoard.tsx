@@ -1,17 +1,13 @@
 "use client";
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
-import { AnimatePresence, m, useAnimationControls, useReducedMotion } from "motion/react";
+import { AnimatePresence, m, useReducedMotion } from "motion/react";
 import { ExperienceDetail } from "@/components/ExperienceCard";
 import { ExperienceGallery } from "@/components/ExperienceGallery";
 import { useInterfaceMode } from "@/components/InterfaceModeProvider";
-import { WiiPanel } from "@/components/wii/WiiPanel";
 import { experience, experienceBoard, experienceEntries } from "@/data/experience";
 import type { ExperienceBoardEntry } from "@/data/types";
 import { wiiSound } from "@/lib/wiiSound";
-
-const NEWS_LINE = "currently looking for a summer 2027 internship..";
-const NEWS_LOOP = `${NEWS_LINE}  ·  ${NEWS_LINE}  ·  ${NEWS_LINE}  ·  `;
 
 function sourceEntry(board: ExperienceBoardEntry) {
   return experience.find((e) => e.id === board.sourceId) ?? null;
@@ -27,9 +23,7 @@ export function WiiExperienceBoard() {
   const detailTitleId = useId();
   const [activeId, setActiveId] = useState<string | null>(null);
   const [activeYear, setActiveYear] = useState(experienceBoard[0]?.year ?? 2026);
-  const [tickerPaused, setTickerPaused] = useState(false);
   const yearRefs = useRef(new Map<number, HTMLElement>());
-  const tickerControls = useAnimationControls();
 
   const years = useMemo(() => {
     const set = new Set(experienceBoard.map((e) => e.year));
@@ -48,18 +42,6 @@ export function WiiExperienceBoard() {
 
   const activeBoard = experienceBoard.find((e) => e.id === activeId) ?? null;
   const active = activeBoard ? sourceEntry(activeBoard) : null;
-
-  useEffect(() => {
-    if (mode !== "wii" || reduce) return;
-    if (tickerPaused) {
-      tickerControls.stop();
-      return;
-    }
-    void tickerControls.start({
-      x: ["0%", "-33.333%"],
-      transition: { duration: 28, ease: "linear", repeat: Infinity },
-    });
-  }, [mode, reduce, tickerPaused, tickerControls]);
 
   useEffect(() => {
     if (mode !== "wii") return;
@@ -103,26 +85,6 @@ export function WiiExperienceBoard() {
 
   return (
     <div className="wii-exp">
-      <WiiPanel className="wii-exp-ticker-panel">
-        <div
-          className="wii-exp-ticker"
-          aria-label="Experience news ticker"
-          onMouseEnter={() => setTickerPaused(true)}
-          onMouseLeave={() => setTickerPaused(false)}
-        >
-          <span className="wii-exp-ticker__badge">NEWS</span>
-          <div className="wii-exp-ticker__viewport">
-            {reduce ? (
-              <p className="wii-exp-ticker__track is-static">{NEWS_LINE}</p>
-            ) : (
-              <m.p className="wii-exp-ticker__track" animate={tickerControls}>
-                {NEWS_LOOP}
-              </m.p>
-            )}
-          </div>
-        </div>
-      </WiiPanel>
-
       <div className="wii-exp-layout">
         <aside className="wii-exp-rail" aria-label="Years">
           <div className="wii-exp-rail__line" aria-hidden />
