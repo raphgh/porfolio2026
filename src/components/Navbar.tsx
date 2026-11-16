@@ -6,6 +6,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { megaMenuColumns, type MegaMenuItem } from "@/data/megaMenu";
 import { site } from "@/data/site";
+import { ModeToggle } from "./ModeToggle";
 import { ResumeLink } from "./ResumeLink";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -150,6 +151,7 @@ export function Navbar() {
           </Link>
 
           <div className="flex items-center gap-2 sm:gap-3">
+            <ModeToggle variant="modern" />
             <ThemeToggle />
             <ResumeLink plain />
             <button

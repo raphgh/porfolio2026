@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Geist_Mono, Instrument_Sans, Instrument_Serif } from "next/font/google";
+import { Geist_Mono, Instrument_Sans, Instrument_Serif, Nunito } from "next/font/google";
 import Script from "next/script";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import { ThreadTrail } from "@/components/ThreadTrail";
+import { InterfaceModeProvider } from "@/components/InterfaceModeProvider";
 import { MotionProvider } from "@/components/MotionProvider";
+import { SiteChrome } from "@/components/SiteChrome";
+import { interfaceBootScript } from "@/lib/interfaceMode";
 import { themeBootScript } from "@/lib/theme";
 import { site } from "@/data/site";
 import "./globals.css";
@@ -28,6 +28,13 @@ const mono = Geist_Mono({
   display: "swap",
 });
 
+/** Rounded humanist sans — close to Wii Rodin, used only in Wii Mode. */
+const wiiSans = Nunito({
+  variable: "--font-wii-sans",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
@@ -44,7 +51,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#d5dce4",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -52,13 +59,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${sans.variable} ${display.variable} ${mono.variable} antialiased`}
+      data-interface="wii"
+      className={`${sans.variable} ${display.variable} ${mono.variable} ${wiiSans.variable} antialiased`}
       suppressHydrationWarning
     >
       <body
         className="flex min-h-dvh flex-col bg-white text-charcoal"
         suppressHydrationWarning
       >
+        <Script id="interface-boot" strategy="beforeInteractive">
+          {interfaceBootScript}
+        </Script>
         <Script id="theme-boot" strategy="beforeInteractive">
           {themeBootScript}
         </Script>
@@ -72,12 +83,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <MotionProvider>
-          <ThreadTrail />
-          <Navbar />
-          <main id="main" className="relative z-10 flex-1">
-            {children}
-          </main>
-          <Footer />
+          <InterfaceModeProvider>
+            <SiteChrome>{children}</SiteChrome>
+          </InterfaceModeProvider>
         </MotionProvider>
       </body>
     </html>

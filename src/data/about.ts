@@ -99,6 +99,12 @@ export const inspirations: Inspiration[] = [
     href: "https://www.allthingsgofestival.com/",
   },
   {
+    name: "Cosmos",
+    kind: "Product",
+    note: "visual bookmarking for creatives — saving and sorting inspiration",
+    href: "https://cosmos.so",
+  },
+  {
     name: "Sonic Liberation Devices",
     kind: "Product",
     note: "collective of artists, musicians, technologists, designers, organizers, and researchers.",
