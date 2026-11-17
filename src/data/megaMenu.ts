@@ -78,7 +78,7 @@ export function megaMenuColumns(): MegaMenuColumn[] {
 
   const byHref: Record<string, MegaMenuColumn> = {
     "/me": {
-      label: "Me",
+      label: "About",
       href: "/me",
       description: "Bio, scrapbook, inspirations, and tools.",
       items: meItems,

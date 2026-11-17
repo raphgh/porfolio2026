@@ -30,7 +30,7 @@ export const hero = {
 
 /** Primary site navigation (header / footer). Route paths are unchanged. */
 export const nav = [
-  { label: "Me", href: "/me" },
+  { label: "About", href: "/me" },
   { label: "Experience", href: "/experience" },
   { label: "Projects", href: "/work" },
   { label: "Lab", href: "/lab" },
@@ -38,7 +38,7 @@ export const nav = [
 
 /** Stacked landing-page cards — same destinations as `nav`. */
 export const stackNav = [
-  { label: "Me", href: "/me" },
+  { label: "About", href: "/me" },
   { label: "Experience", href: "/experience" },
   { label: "Projects", href: "/work" },
   { label: "Lab", href: "/lab" },

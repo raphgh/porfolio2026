@@ -15,12 +15,12 @@ export function Footer() {
   const right = indexLinks.slice(mid);
 
   return (
-    <footer className="relative z-10 border-t border-silver-soft bg-white">
+    <footer className="relative z-10 border-t border-silver-soft bg-white pb-[env(safe-area-inset-bottom,0px)]">
       <div className="shell flex flex-col gap-8 pt-10 pb-8 md:gap-10 md:pt-12">
         <div className="grid grid-cols-12 gap-x-4 gap-y-8 md:gap-x-8">
           <div className="col-span-12 flex flex-col gap-1.5 md:col-span-5">
             <p
-              className="display bg-clip-text text-2xl text-transparent lowercase"
+              className="display bg-clip-text text-2xl text-transparent lowercase sm:text-[1.65rem]"
               style={{
                 backgroundImage:
                   "linear-gradient(90deg, #e6b422, #f07a45, #e85a8a, #d94f5c, #f0a06a)",
@@ -31,7 +31,7 @@ export function Footer() {
             <LocalTime className="text-sm text-charcoal-muted tabular-nums" />
           </div>
 
-          <nav aria-label="Footer" className="col-span-6 md:col-span-4">
+          <nav aria-label="Footer" className="col-span-12 sm:col-span-6 md:col-span-4">
             <h2 className="label mb-3 text-charcoal-muted">Index</h2>
             <div className="grid grid-cols-2 gap-x-6 gap-y-2">
               <ul className="flex flex-col gap-2">
@@ -81,7 +81,7 @@ export function Footer() {
             </div>
           </nav>
 
-          <div className="col-span-6 md:col-span-3">
+          <div className="col-span-12 sm:col-span-6 md:col-span-3">
             <h2 className="label mb-3 text-charcoal-muted">reach out!</h2>
             <div className="flex flex-col gap-3">
               {site.contact.email && (

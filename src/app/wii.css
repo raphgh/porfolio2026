@@ -287,58 +287,8 @@
   }
 
   .wii-menu {
-    --wii-dock-h: clamp(92px, 20vw, 128px);
-  }
-
-  .wii-menu__dock-inner {
-    gap: 0.4rem;
-    padding: 0 0.65rem 1.05rem;
-  }
-
-  .wii-menu__dock-left,
-  .wii-menu__dock-right {
-    gap: 0.4rem;
-  }
-
-  .wii-orb {
-    width: 2.75rem;
-    height: 2.75rem;
-  }
-
-  .wii-orb__label {
-    font-size: 0.8rem;
-  }
-
-  .wii-orb--mail svg {
-    width: 1.35rem;
-  }
-
-  .wii-mail-count {
-    bottom: 0.35rem;
-    font-size: 0.62rem;
-  }
-
-  .wii-clock__time {
-    top: 0.25rem;
-    gap: 0.2rem;
-  }
-
-  .wii-clock__digits {
-    font-size: 1.1rem;
-  }
-
-  .wii-clock__ampm {
-    font-size: 0.55rem;
-  }
-
-  .wii-clock__date {
-    top: calc(37.3% + 0.2rem);
-    font-size: 0.68rem;
-  }
-
-  .wii-menu__dock-right [role="group"] {
-    transform: scale(0.88);
-    transform-origin: right bottom;
+    /* Taller dock so clock sits in the notch above the orbs; include home-indicator. */
+    --wii-dock-h: calc(118px + env(safe-area-inset-bottom, 0px));
   }
 
   .wii-channel__tip {
@@ -857,12 +807,6 @@
   line-height: 1.1;
 }
 
-@media (width < 640px) {
-  .wii-menu__identity--dock {
-    display: none;
-  }
-}
-
 /* Time sits in the page background above the center dip; date below the blue line */
 .wii-menu__dock-clock {
   position: absolute;
@@ -1039,6 +983,74 @@
 
 .wii-orb--mail.has-unread {
   animation: wii-mail-bob 8s ease-in-out infinite;
+}
+
+@media (width < 640px) {
+  .wii-menu__identity--dock {
+    display: none;
+  }
+
+  .wii-menu__dock-inner {
+    gap: 0.35rem;
+    padding: 0 0.55rem max(0.7rem, env(safe-area-inset-bottom, 0px));
+    align-items: flex-end;
+  }
+
+  .wii-menu__dock-left,
+  .wii-menu__dock-right {
+    gap: 0.35rem;
+    max-width: 34%;
+  }
+
+  .wii-menu__dock-clock {
+    width: min(38%, 8.75rem);
+    height: 42%;
+    top: 0.2rem;
+  }
+
+  .wii-orb {
+    width: 2.55rem;
+    height: 2.55rem;
+  }
+
+  .wii-orb__label {
+    font-size: 0.8rem;
+  }
+
+  .wii-orb--mail svg {
+    width: 1.25rem;
+  }
+
+  .wii-mail-count {
+    bottom: 0.3rem;
+    font-size: 0.58rem;
+  }
+
+  .wii-clock__time {
+    top: 0;
+    gap: 0.12rem;
+  }
+
+  .wii-clock__digits {
+    font-size: 0.95rem;
+  }
+
+  .wii-clock__ampm {
+    font-size: 0.48rem;
+    margin-bottom: 0.05rem;
+  }
+
+  .wii-clock__date {
+    top: auto;
+    bottom: 0;
+    font-size: 0.58rem;
+    line-height: 1;
+  }
+
+  .wii-menu__dock-right [role="group"] {
+    transform: scale(0.82);
+    transform-origin: right bottom;
+  }
 }
 
 /* ----- Dialogs / panels --------------------------------------------------- */
@@ -1255,7 +1267,7 @@
 /* ----- Channel pages (internal) ------------------------------------------- */
 
 .wii-channel-page {
-  --wii-page-back-h: 5.5rem;
+  --wii-page-back-h: calc(5.5rem + env(safe-area-inset-bottom, 0px));
   position: relative;
   min-height: 100dvh;
   background: linear-gradient(180deg, var(--wii-bg-top) 0%, var(--wii-bg-bot) 100%);
@@ -1377,7 +1389,7 @@
 .wii-page__back {
   position: fixed;
   left: clamp(1rem, 4vw, 2rem);
-  bottom: clamp(0.85rem, 2.5vh, 1.35rem);
+  bottom: max(clamp(0.85rem, 2.5vh, 1.35rem), env(safe-area-inset-bottom, 0px));
   z-index: 30;
   pointer-events: auto;
 }
@@ -1442,6 +1454,26 @@
   letter-spacing: -0.02em;
   color: #2f3a44;
   text-transform: lowercase;
+}
+
+@media (width < 640px) {
+  .wii-page__back {
+    left: 0.85rem;
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .wii-page__top {
+    padding-top: max(0.55rem, env(safe-area-inset-top, 0px));
+  }
+
+  .wii-page__column {
+    width: min(100% - 1.1rem, 1100px);
+  }
+
+  .wii-page__heading {
+    font-size: clamp(1.55rem, 7vw, 2.1rem);
+  }
 }
 
 .wii-page__rule {
