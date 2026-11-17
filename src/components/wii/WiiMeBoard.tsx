@@ -10,8 +10,9 @@ import { Reveal } from "@/components/Reveal";
 import { TechStack } from "@/components/TechStack";
 import { useInterfaceMode } from "@/components/InterfaceModeProvider";
 import { WiiPanel } from "@/components/wii/WiiPanel";
-import { about, books, inspirations, scrapbook } from "@/data/about";
+import { about, awards, books, inspirations, scrapbook } from "@/data/about";
 import { site } from "@/data/site";
+import type { Award } from "@/data/types";
 
 const POLAROID_CAPTION = "music fundraiser @ the Ottawa Bike Café, raising $1,200+";
 
@@ -96,6 +97,15 @@ export function WiiMeBoard() {
       </WiiPanel>
 
       <WiiPanel className="wii-me-section-panel">
+        <section id="awards" aria-labelledby="awards-title" className="wii-me-section">
+          <h2 id="awards-title" className="wii-me-section__title">
+            awards
+          </h2>
+          <AwardsList items={awards} />
+        </section>
+      </WiiPanel>
+
+      <WiiPanel className="wii-me-section-panel">
         <section id="inspo" aria-labelledby="inspo-title" className="wii-me-section">
           <h2 id="inspo-title" className="wii-me-section__title">
             likings/things I appreciate
@@ -122,6 +132,44 @@ export function WiiMeBoard() {
         </section>
       </WiiPanel>
     </div>
+  );
+}
+
+function AwardsList({ items }: { items: Award[] }) {
+  return (
+    <ul className="flex flex-col gap-3">
+      {items.map((award) => {
+        const label = (
+          <>
+            <span className="font-medium text-navy">{award.title}</span>
+            {award.detail ? (
+              <>
+                <span className="text-charcoal-muted"> — </span>
+                <span className="text-charcoal-soft tabular-nums">{award.detail}</span>
+              </>
+            ) : null}
+          </>
+        );
+
+        return (
+          <li key={award.title} className="flex gap-3 text-[0.98rem] leading-snug">
+            <span aria-hidden className="mt-[0.55em] size-1.5 shrink-0 rounded-full bg-mustard/70" />
+            {award.href ? (
+              <a
+                href={award.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-mustard-deep"
+              >
+                {label}
+              </a>
+            ) : (
+              <span>{label}</span>
+            )}
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 
@@ -226,6 +274,24 @@ function ModernMe() {
       <section id="scrapbook" aria-label="Scrapbook" className="mt-28 scroll-mt-24 md:mt-36">
         <Reveal className="mt-12 md:mt-16">
           <AboutGallery items={scrapbook} />
+        </Reveal>
+      </section>
+
+      <section id="awards" aria-labelledby="awards-title" className="mt-28 scroll-mt-24 md:mt-36">
+        <Reveal>
+          <div className="grid grid-cols-12 items-start gap-x-4 gap-y-6 md:gap-x-8">
+            <div className="col-span-12 md:col-span-3 md:pt-1">
+              <h2
+                id="awards-title"
+                className="text-[0.72rem] font-medium tracking-[0.08em] text-charcoal-soft uppercase"
+              >
+                awards
+              </h2>
+            </div>
+            <div className="col-span-12 md:col-span-9">
+              <AwardsList items={awards} />
+            </div>
+          </div>
         </Reveal>
       </section>
 

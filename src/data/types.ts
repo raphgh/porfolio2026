@@ -294,3 +294,10 @@ export type Inspiration = {
   /** Renders as a blank gap in the list. */
   spacer?: boolean;
 };
+
+export type Award = {
+  title: string;
+  /** Optional amount or short detail, e.g. "$1,500". */
+  detail?: string;
+  href?: string;
+};

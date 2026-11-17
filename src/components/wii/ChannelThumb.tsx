@@ -76,6 +76,8 @@ function ThumbArt({
       return <MeThumb hovered={hovered} reduce={reduce} />;
     case "resume":
       return <ResumeThumb hovered={hovered} reduce={reduce} />;
+    case "awards":
+      return <AwardsThumb hovered={hovered} reduce={reduce} />;
     case "contact":
       return <IconThumb kind="mail" accent={accent} />;
     case "github":
@@ -222,6 +224,26 @@ function ResumeThumb({ hovered, reduce }: { hovered: boolean; reduce: boolean })
   );
 }
 
+function AwardsThumb({ hovered, reduce }: { hovered: boolean; reduce: boolean }) {
+  return (
+    <span className="wii-thumb__art wii-thumb-awards">
+      <m.span
+        className="wii-thumb-awards__medal"
+        animate={
+          reduce
+            ? undefined
+            : hovered
+              ? { y: -6, rotate: -8, scale: 1.06 }
+              : { y: 0, rotate: 0, scale: 1 }
+        }
+        transition={{ type: "spring", stiffness: 320, damping: 16 }}
+      >
+        <MedalGlyph />
+      </m.span>
+    </span>
+  );
+}
+
 function IconThumb({
   kind,
 }: {
@@ -244,6 +266,21 @@ function ComingSoonThumb() {
     <span className="wii-thumb__art wii-thumb-soon">
       <span className="wii-thumb-soon__glow" aria-hidden />
     </span>
+  );
+}
+
+function MedalGlyph() {
+  return (
+    <svg viewBox="0 0 64 72" width="48" height="54" aria-hidden>
+      <path d="M18 4h10l4 22H22L18 4zm28 0H36l-4 22h10l4-22z" fill="#c45a28" />
+      <path d="M22 4h6l3 22h-9L22 4zm20 0h-6l-3 22h9l3-22z" fill="#e07a45" />
+      <circle cx="32" cy="46" r="18" fill="#f0c14a" stroke="#fff" strokeWidth="3" />
+      <circle cx="32" cy="46" r="12" fill="#d4a017" stroke="#fff8e0" strokeWidth="2" />
+      <path
+        d="M32 36.5l2.4 4.9 5.4.8-3.9 3.8.9 5.4L32 48.8l-4.8 2.6.9-5.4-3.9-3.8 5.4-.8z"
+        fill="#fff8e0"
+      />
+    </svg>
   );
 }
 

@@ -9,6 +9,7 @@ export type ChannelThumbVariant =
   | "contact"
   | "github"
   | "linkedin"
+  | "awards"
   | "comingSoon";
 
 export type WiiChannel = {
@@ -89,6 +90,13 @@ export const wiiChannels: WiiChannel[] = [
     external: true,
     thumb: "linkedin",
     accent: "#0a66c2",
+  },
+  {
+    id: "awards",
+    label: "Awards",
+    href: "/me#awards",
+    thumb: "awards",
+    accent: "#d4a017",
   },
 ];
 

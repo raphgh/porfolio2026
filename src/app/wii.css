@@ -580,6 +580,18 @@
   transform-origin: center bottom;
 }
 
+.wii-thumb-awards {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(160deg, #ffe9a8 0%, #f0c14a 45%, #d4a017 100%);
+}
+
+.wii-thumb-awards__medal {
+  display: grid;
+  place-items: center;
+  filter: drop-shadow(0 4px 8px rgb(120 70 10 / 0.28));
+}
+
 .wii-thumb-resume {
   background: linear-gradient(165deg, #c8eef7 0%, #9fd8e8 55%, #7ec8dc 100%);
   perspective: 400px;
@@ -725,6 +737,77 @@
   opacity: 1;
   visibility: visible;
   transform: translate(-50%, 0);
+}
+
+/* Bottom-row tips sit above the tile so the dock doesn't cover them. */
+.wii-channel-grid__page > li:nth-child(n + 9) .wii-channel__tip {
+  top: auto;
+  bottom: calc(100% + 0.4rem);
+  transform: translate(-50%, 4px);
+}
+
+.wii-channel-grid__page > li:nth-child(n + 9) .wii-channel.is-hover .wii-channel__tip,
+.wii-channel-grid__page > li:nth-child(n + 9) .wii-channel:focus-visible .wii-channel__tip {
+  transform: translate(-50%, 0);
+}
+
+@media (width < 900px) {
+  .wii-channel-grid__page > li:nth-child(n + 9) .wii-channel__tip,
+  .wii-channel-grid__page > li:nth-child(n + 9) .wii-channel.is-hover .wii-channel__tip,
+  .wii-channel-grid__page > li:nth-child(n + 9) .wii-channel:focus-visible .wii-channel__tip {
+    top: calc(100% + 0.4rem);
+    bottom: auto;
+    transform: translate(-50%, -4px);
+  }
+
+  .wii-channel-grid__page > li:nth-child(n + 9) .wii-channel.is-hover .wii-channel__tip,
+  .wii-channel-grid__page > li:nth-child(n + 9) .wii-channel:focus-visible .wii-channel__tip {
+    transform: translate(-50%, 0);
+  }
+
+  .wii-channel-grid__page > li:nth-child(n + 10) .wii-channel__tip {
+    top: auto;
+    bottom: calc(100% + 0.4rem);
+    transform: translate(-50%, 4px);
+  }
+
+  .wii-channel-grid__page > li:nth-child(n + 10) .wii-channel.is-hover .wii-channel__tip,
+  .wii-channel-grid__page > li:nth-child(n + 10) .wii-channel:focus-visible .wii-channel__tip {
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (width < 640px) {
+  .wii-channel-grid__page > li:nth-child(n + 10) .wii-channel__tip,
+  .wii-channel-grid__page > li:nth-child(n + 10) .wii-channel.is-hover .wii-channel__tip,
+  .wii-channel-grid__page > li:nth-child(n + 10) .wii-channel:focus-visible .wii-channel__tip {
+    top: calc(100% + 0.4rem);
+    bottom: auto;
+    transform: translate(-50%, -4px);
+  }
+
+  .wii-channel-grid__page > li:nth-child(n + 10) .wii-channel.is-hover .wii-channel__tip,
+  .wii-channel-grid__page > li:nth-child(n + 10) .wii-channel:focus-visible .wii-channel__tip {
+    transform: translate(-50%, 0);
+  }
+
+  .wii-channel-grid__page > li:nth-child(n + 11) .wii-channel__tip {
+    top: auto;
+    bottom: calc(100% + 0.4rem);
+    transform: translate(-50%, 4px);
+  }
+
+  .wii-channel-grid__page > li:nth-child(n + 11) .wii-channel.is-hover .wii-channel__tip,
+  .wii-channel-grid__page > li:nth-child(n + 11) .wii-channel:focus-visible .wii-channel__tip {
+    transform: translate(-50%, 0);
+  }
+}
+
+/* Let the open tip paint over the neighboring tile. */
+.wii-channel-grid__page > li:has(.wii-channel.is-hover),
+.wii-channel-grid__page > li:has(.wii-channel:focus-visible) {
+  position: relative;
+  z-index: 7;
 }
 
 .wii-channel--empty {

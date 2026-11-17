@@ -1,4 +1,4 @@
-import type { Book, Inspiration, ScrapbookItem } from "./types";
+import type { Award, Book, Inspiration, ScrapbookItem } from "./types";
 
 /**
  * Draft copy built only from what's already stated elsewhere on the site.
@@ -7,10 +7,10 @@ import type { Book, Inspiration, ScrapbookItem } from "./types";
 export const about = {
   intro: "",
   paragraphs: [
-    "i'm currently at uOttawa finishing up my bachelor's in software engineering (with a microprogram in AI- giving me early access to masters-level courses in AI/ML).",
-    "i'm extremely passionate about art, music, and culture. i’m very drawn to community and to technology that creates social good. it's where a lot of my ideas come from.",
+    "currently at uOttawa finishing up my bachelor's in software engineering- a microprogram in interdisciplinary AI and ML.",
+    "i'm extremely passionate about art, music, and culture. i’m very drawn to community and to technology that creates social good- it's where a lot of my ideas come from.",
     "i'm certainly just motivated by what can be done with it and how quickly and so easily it can make an impact.",
-    "i also love- and am great at- working with others and leading things :)",
+    "i also love, and am great at, working with others and leading cool projects :)",
     "scroll down for more!",
   ],
 };
@@ -52,6 +52,17 @@ export const scrapbook: ScrapbookItem[] = [
   },
 ];
 
+
+/** Scholarships and recognition. */
+export const awards: Award[] = [
+  {
+    title: "Ontario Professional Engineers Foundation for Education",
+    detail: "$1,500",
+  },
+  {
+    title: "1st Place Team in SEG2900 2023 Engineering Pitch Competition",
+  },
+];
 
 /** Simple bullets — add `href` when you want them to link out. */
 export const inspirations: Inspiration[] = [
@@ -97,12 +108,6 @@ export const inspirations: Inspiration[] = [
     kind: "Product",
     note: "cool looking festival website",
     href: "https://www.allthingsgofestival.com/",
-  },
-  {
-    name: "Cosmos",
-    kind: "Product",
-    note: "visual bookmarking for creatives — saving and sorting inspiration",
-    href: "https://cosmos.so",
   },
   {
     name: "Sonic Liberation Devices",
