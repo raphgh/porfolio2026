@@ -10,6 +10,11 @@ const DOCK_TOP =
   "M0,0 H330 C520,0 620,110 800,110 H1120 C1300,110 1400,0 1590,0 H1920";
 const DOCK_SHAPE = `${DOCK_TOP} V295 H0 Z`;
 
+/** Shallower dip for narrow screens so controls fit without colliding. */
+const DOCK_TOP_MOBILE =
+  "M0,0 H260 C420,0 520,48 720,48 H1200 C1400,48 1500,0 1660,0 H1920";
+const DOCK_SHAPE_MOBILE = `${DOCK_TOP_MOBILE} V295 H0 Z`;
+
 type Props = {
   unread: number;
   onOpenSettings: () => void;
@@ -23,44 +28,25 @@ export function BottomBar({ unread, onOpenSettings, onOpenMail }: Props) {
   return (
     <m.footer
       className="wii-menu__dock"
-      initial={reduce ? false : { y: 80, opacity: 0 }}
+      initial={reduce ? false : { y: 64, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: "spring", stiffness: 220, damping: 28, delay: 0.25 }}
     >
       <div className="wii-menu__dock-svg-wrap" aria-hidden>
         <svg
-          className="wii-menu__dock-svg"
+          className="wii-menu__dock-svg wii-menu__dock-svg--desktop"
           viewBox="0 0 1920 295"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <defs>
-            <linearGradient id="wii-dock-fill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#e6e8ec" />
-              <stop offset="100%" stopColor="#c3c8d0" />
-            </linearGradient>
-            <linearGradient id="wii-dock-bevel" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.55" />
-              <stop offset="12%" stopColor="#ffffff" stopOpacity="0" />
-            </linearGradient>
-            <pattern id="wii-dock-scan" patternUnits="userSpaceOnUse" width="4" height="3">
-              <rect width="4" height="1" fill="rgb(0 0 0 / 0.035)" />
-            </pattern>
-            <clipPath id="wii-dock-clip">
-              <path d={DOCK_SHAPE} />
-            </clipPath>
-            <filter id="wii-dock-blue-glow" x="-20%" y="-40%" width="140%" height="180%">
-              <feDropShadow dx="0" dy="-1" stdDeviation="2" floodColor="#3fa9e0" floodOpacity="0.45" />
-            </filter>
-          </defs>
-
-          <path d={DOCK_SHAPE} fill="url(#wii-dock-fill)" />
-          <path d={DOCK_SHAPE} fill="url(#wii-dock-scan)" />
+          <DockSvgDefs idPrefix="desk" shape={DOCK_SHAPE} />
+          <path d={DOCK_SHAPE} fill="url(#desk-wii-dock-fill)" />
+          <path d={DOCK_SHAPE} fill="url(#desk-wii-dock-scan)" />
           <path
             d={DOCK_SHAPE}
-            fill="url(#wii-dock-bevel)"
+            fill="url(#desk-wii-dock-bevel)"
             transform="translate(0 3)"
-            clipPath="url(#wii-dock-clip)"
+            clipPath="url(#desk-wii-dock-clip)"
           />
           <path
             d={DOCK_TOP}
@@ -70,19 +56,37 @@ export function BottomBar({ unread, onOpenSettings, onOpenMail }: Props) {
             strokeLinejoin="round"
             strokeLinecap="round"
             vectorEffect="non-scaling-stroke"
-            filter="url(#wii-dock-blue-glow)"
+            filter="url(#desk-wii-dock-blue-glow)"
+          />
+        </svg>
+
+        <svg
+          className="wii-menu__dock-svg wii-menu__dock-svg--mobile"
+          viewBox="0 0 1920 295"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <DockSvgDefs idPrefix="mob" shape={DOCK_SHAPE_MOBILE} />
+          <path d={DOCK_SHAPE_MOBILE} fill="url(#mob-wii-dock-fill)" />
+          <path d={DOCK_SHAPE_MOBILE} fill="url(#mob-wii-dock-scan)" />
+          <path
+            d={DOCK_SHAPE_MOBILE}
+            fill="url(#mob-wii-dock-bevel)"
+            transform="translate(0 3)"
+            clipPath="url(#mob-wii-dock-clip)"
+          />
+          <path
+            d={DOCK_TOP_MOBILE}
+            fill="none"
+            stroke="#3fa9e0"
+            strokeWidth="3"
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            vectorEffect="non-scaling-stroke"
+            filter="url(#mob-wii-dock-blue-glow)"
           />
         </svg>
       </div>
-
-      <m.div
-        className="wii-menu__dock-clock"
-        initial={reduce ? false : { opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.55, duration: 0.35 }}
-      >
-        <WiiClock />
-      </m.div>
 
       <div className="wii-menu__dock-inner">
         <div className="wii-menu__dock-left">
@@ -107,6 +111,15 @@ export function BottomBar({ unread, onOpenSettings, onOpenMail }: Props) {
           </div>
         </div>
 
+        <m.div
+          className="wii-menu__dock-center"
+          initial={reduce ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.55, duration: 0.35 }}
+        >
+          <WiiClock />
+        </m.div>
+
         <div className="wii-menu__dock-right">
           <p className="wii-menu__identity wii-menu__identity--dock">
             <span className="wii-menu__identity-name">{site.name}</span>
@@ -115,6 +128,41 @@ export function BottomBar({ unread, onOpenSettings, onOpenMail }: Props) {
         </div>
       </div>
     </m.footer>
+  );
+}
+
+function DockSvgDefs({ idPrefix, shape }: { idPrefix: string; shape: string }) {
+  return (
+    <defs>
+      <linearGradient id={`${idPrefix}-wii-dock-fill`} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stopColor="#e6e8ec" />
+        <stop offset="100%" stopColor="#c3c8d0" />
+      </linearGradient>
+      <linearGradient id={`${idPrefix}-wii-dock-bevel`} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stopColor="#ffffff" stopOpacity="0.55" />
+        <stop offset="12%" stopColor="#ffffff" stopOpacity="0" />
+      </linearGradient>
+      <pattern
+        id={`${idPrefix}-wii-dock-scan`}
+        patternUnits="userSpaceOnUse"
+        width="4"
+        height="3"
+      >
+        <rect width="4" height="1" fill="rgb(0 0 0 / 0.035)" />
+      </pattern>
+      <clipPath id={`${idPrefix}-wii-dock-clip`}>
+        <path d={shape} />
+      </clipPath>
+      <filter
+        id={`${idPrefix}-wii-dock-blue-glow`}
+        x="-20%"
+        y="-40%"
+        width="140%"
+        height="180%"
+      >
+        <feDropShadow dx="0" dy="-1" stdDeviation="2" floodColor="#3fa9e0" floodOpacity="0.45" />
+      </filter>
+    </defs>
   );
 }
 
