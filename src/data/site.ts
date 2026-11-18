@@ -31,7 +31,7 @@ export const hero = {
 /** Primary site navigation (header / footer). Route paths are unchanged. */
 export const nav = [
   { label: "About", href: "/me" },
-  { label: "Experience", href: "/experience" },
+  { label: "Work", href: "/experience" },
   { label: "Projects", href: "/work" },
   { label: "Lab", href: "/lab" },
 ] as const;
@@ -39,7 +39,7 @@ export const nav = [
 /** Stacked landing-page cards — same destinations as `nav`. */
 export const stackNav = [
   { label: "About", href: "/me" },
-  { label: "Experience", href: "/experience" },
+  { label: "Work", href: "/experience" },
   { label: "Projects", href: "/work" },
   { label: "Lab", href: "/lab" },
 ] as const;
@@ -50,7 +50,7 @@ export const stackNav = [
  */
 export const stackNavColors = [
   { bg: "#f5d0d4", border: "#d94f5c", number: "#a83842" }, // Me — terracotta
-  { bg: "#fce8d8", border: "#f0a06a", number: "#c47a3a" }, // Experience — peach
+  { bg: "#fce8d8", border: "#f0a06a", number: "#c47a3a" }, // Work — peach
   { bg: "#fde0d2", border: "#f07a45", number: "#c45a28" }, // Projects — coral
   { bg: "#f9d6e4", border: "#e85a8a", number: "#b03860" }, // Lab — rose
 ] as const;

@@ -56,7 +56,7 @@ export function Hero() {
             href="/experience"
             className="group inline-flex h-11 items-center gap-2 rounded-full border border-rule-strong bg-paper/80 px-5 text-[0.95rem] transition-colors hover:border-ink"
           >
-            Experience
+            Work
             <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
               →
             </span>

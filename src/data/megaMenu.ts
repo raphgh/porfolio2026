@@ -89,7 +89,7 @@ export function megaMenuColumns(): MegaMenuColumn[] {
       items: meItems,
     },
     "/experience": {
-      label: "Experience",
+      label: "Work",
       href: "/experience",
       description: "Roles, teams, and what I worked on.",
       items: experienceItems,

@@ -40,7 +40,7 @@ export const wiiChannels: WiiChannel[] = [
   },
   {
     id: "experience",
-    label: "Experience",
+    label: "Work",
     href: "/experience",
     thumb: "experience",
     accent: "#1a3a6e",

@@ -1680,6 +1680,19 @@
   z-index: 1;
 }
 
+/* Panels stay white in dark mode, so body copy has to stay dark too. */
+html.dark .wii-panel,
+html.dark .wii-exp-detail {
+  --color-charcoal: #1a1a1a;
+  --color-charcoal-soft: #4a4a4a;
+  --color-charcoal-muted: #8a8a8a;
+  --color-navy: #1e3a6e;
+  --color-navy-deep: #13284f;
+  --color-ink: #1a1a1a;
+  --color-ink-soft: #4a4a4a;
+  --color-ink-muted: #8a8a8a;
+}
+
 /* ----- Project channel cards ---------------------------------------------- */
 
 .wii-project-grid {
