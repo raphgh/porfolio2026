@@ -150,7 +150,7 @@ export function MessageBoard({ open, onClose, onRead }: Props) {
               ) : null}
               {status === "sent" ? (
                 <p style={{ margin: 0, color: "#1a8fc0", fontSize: "0.82rem", fontWeight: 700 }}>
-                  Sent. Check your inbox.
+                  thank you for reaching out!
                 </p>
               ) : null}
               <div className="wii-dialog-actions">

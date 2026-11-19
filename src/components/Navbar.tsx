@@ -133,27 +133,7 @@ export function Navbar() {
         }`}
       >
         <nav aria-label="Primary" className="shell flex h-14 items-center justify-between gap-4 md:h-16">
-          <Link
-            href="/"
-            className="group flex shrink-0 items-center gap-2.5"
-            aria-label={`${site.name} - home`}
-          >
-            <span
-              aria-hidden
-              className="size-8 shrink-0 overflow-hidden transition-transform duration-300 ease-(--ease-out-soft) group-hover:-rotate-6"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logos/me.jpg" alt="" className="size-full object-cover" />
-            </span>
-            <span className="display text-[1.15rem] leading-none text-navy">
-              {site.shortName}
-            </span>
-          </Link>
-
-          <div className="flex items-center gap-2 sm:gap-3">
-            <ModeToggle variant="modern" />
-            <ThemeToggle />
-            <ResumeLink plain />
+          <div className="flex min-w-0 items-center gap-2 sm:gap-3">
             <button
               ref={toggleRef}
               type="button"
@@ -180,6 +160,26 @@ export function Navbar() {
                 )}
               </span>
             </button>
+
+            <Link
+              href="/"
+              className="group flex shrink-0 items-center"
+              aria-label={`${site.name} - home`}
+            >
+              <span
+                aria-hidden
+                className="size-8 shrink-0 overflow-hidden transition-transform duration-300 ease-(--ease-out-soft) group-hover:-rotate-6"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/logos/me.jpg" alt="" className="size-full object-cover" />
+              </span>
+            </Link>
+          </div>
+
+          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+            <ResumeLink plain />
+            <ThemeToggle />
+            <ModeToggle variant="modern" />
           </div>
         </nav>
 
