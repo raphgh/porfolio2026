@@ -103,12 +103,12 @@ const insiteCaseStudy: CaseStudySection[] = [
     blocks: [
       {
         type: "text",
-        body: "Concerts and sports events put thousands of people in the same venue for the same reason, then leave them strangers. You share a floor, a song, a score, and still have almost no way to see what other people there are actually up to in the moment: outfits, fan posters, phone videos, little scenes you’d never notice from your seat.",
+        body: "You’re at a concert or a game with thousands of people who came for the same thing, and somehow everyone still feels like a stranger. Same floor, same song, same score, and almost no way to see what other people are actually doing in the moment. Outfits. Fan posters. Phone videos. Little scenes you’d never catch from your seat.",
       },
       {
         type: "note",
         label: "WHY THIS?",
-        body: "The idea showed up on the way to a concert. How cool would it be to meet a few of those faces, not just stand next to them?",
+        body: "The idea hit me on the way to a concert. How cool would it be to actually meet a few of those faces, not just stand next to them?",
       },
     ],
   },
@@ -118,12 +118,12 @@ const insiteCaseStudy: CaseStudySection[] = [
     blocks: [
       {
         type: "text",
-        body: "Insite is for people already inside the same shared event, whether that’s ten people or fifty thousand. Concert-goers and sports fans first. The product gives that crowd a temporary shared space (think folders) where they can post photos, videos, outfits, posters, and small moments from the night. Being there isn’t enough; the app is meant to give you an insight into what the room is actually doing.",
+        body: "Insite is for people who are already at the same event, ten people or fifty thousand. Concerts and sports first. Everyone gets a temporary shared space (think folders) to post photos, videos, outfits, posters, and little moments from the night. Being there isn’t enough. I wanted the app to actually show you what the room is doing.",
       },
       {
         type: "note",
         label: "WHY THIS?",
-        body: "Same city, same venue, same purpose: the connection is already there. The app just makes it visible and social.",
+        body: "Same city, same venue, same reason you’re there. The connection is already happening. The app just makes it visible.",
       },
     ],
   },
@@ -132,7 +132,7 @@ const insiteCaseStudy: CaseStudySection[] = [
     blocks: [
       {
         type: "text",
-        body: "The concept was mine for a while before I brought it to a team of six. We settled on my idea, then I led the design direction (mockups and prototypes in Figma) while we built a demo website and a pitch deck together for the market story.",
+        body: "I’d been sitting on the idea for a while before I brought it to a team of six. We went with my concept, I led design in Figma (mockups + prototypes), and together we built a demo site and a pitch deck for the market story.",
       },
     ],
   },
@@ -141,7 +141,7 @@ const insiteCaseStudy: CaseStudySection[] = [
     blocks: [
       {
         type: "text",
-        body: "Early drafts started on paper. This profile sketch was one of the first passes at how someone shows up inside an event: who you are, what you’ve posted, what you’re into, and how people find you outside the app.",
+        body: "I started on paper. This profile sketch was one of the first tries at how someone shows up inside an event: who you are, what you’ve posted, what you’re into, and how people can find you after.",
       },
       {
         type: "media",
@@ -151,15 +151,15 @@ const insiteCaseStudy: CaseStudySection[] = [
           type: "image",
           src: "/projects/insite/profile-sketch.jpg",
           alt: "Hand-drawn Insite profile wireframe with avatar, content folders, likes tags, socials, and bottom nav",
-          caption: "Early profile brainstorm: folders for posted content, likes as fandom tags, optional public hide.",
+          caption: "Early profile brainstorm: folders for posts, likes as fandom tags, option to hide from public.",
         },
       },
       {
         type: "list",
         items: [
-          "Content posted as folders: could be empty, and could be hidden from the public",
-          "Likes as interest tags (artists, teams) so people can recognize shared taste at the same show",
-          "Socials (Instagram, TikTok) for connecting beyond the event space",
+          "Content lives in folders: can be empty, can be hidden from the public",
+          "Likes as interest tags (artists, teams) so you can spot shared taste at the same show",
+          "Socials (Instagram, TikTok) for connecting after the event",
           "Bottom nav: home, search, profile, settings",
         ],
       },
@@ -171,7 +171,7 @@ const insiteCaseStudy: CaseStudySection[] = [
     blocks: [
       {
         type: "text",
-        body: "The high-fidelity screens walk the product loop: browse what people are sharing at events, open an event’s folder, pick a show, then sit with a single post. Content stays scoped to the venue and the night, not a generic social feed, so the app stays about presence and belonging.",
+        body: "The hi-fi screens follow the night: browse what people are sharing, open an event’s folder, pick a show, then sit with one post. Everything stays tied to that venue and that night, not another endless social feed. I wanted it to feel like you were actually there with people.",
       },
       {
         type: "media",
@@ -181,7 +181,7 @@ const insiteCaseStudy: CaseStudySection[] = [
           type: "image",
           src: "/projects/insite/home-page.jpg",
           alt: "Insite home page mockup - masonry grid of event photos with purple header and bottom nav",
-          caption: "Home: scroll the crowd’s perspective from the shared event space.",
+          caption: "Home: scroll what the crowd is seeing.",
         },
       },
       {
@@ -192,7 +192,7 @@ const insiteCaseStudy: CaseStudySection[] = [
           type: "image",
           src: "/projects/insite/event-folder.jpg",
           alt: "Insite event folder mockup for Bluesfest Festival Ottawa with a photo grid",
-          caption: "Event folder: everything related to one event in one place.",
+          caption: "Event folder: everything for one night in one place.",
         },
       },
       {
@@ -203,7 +203,7 @@ const insiteCaseStudy: CaseStudySection[] = [
           type: "image",
           src: "/projects/insite/events-page.png",
           alt: "Insite events page mockup with colorful event tiles and search and date filter",
-          caption: "Events: search, filter, and select upcoming or past shows and games.",
+          caption: "Events: search, filter, pick a show or game.",
         },
       },
       {
@@ -214,7 +214,7 @@ const insiteCaseStudy: CaseStudySection[] = [
           type: "image",
           src: "/projects/insite/post-page.png",
           alt: "Insite post page mockup with a concert photo and comment, like, and save actions",
-          caption: "Post: open a moment in detail; comment, like, or save.",
+          caption: "Post: open a moment; comment, like, or save.",
         },
       },
       // TODO: CHANGED / decision note - fill when ready
@@ -225,7 +225,7 @@ const insiteCaseStudy: CaseStudySection[] = [
     blocks: [
       {
         type: "text",
-        body: "We designed in Figma, then shipped a demo site in HTML, CSS, and JavaScript for the pitch. Alongside the demo we built a slide deck covering the market study and the product story, enough to present the idea end-to-end without a production app.",
+        body: "We designed in Figma, then built a demo site in HTML, CSS, and JavaScript for the pitch. We also made a slide deck with the market study and the product story, enough to present the whole idea without needing a finished app.",
       },
       {
         type: "list",
@@ -242,12 +242,12 @@ const insiteCaseStudy: CaseStudySection[] = [
     blocks: [
       {
         type: "text",
-        body: "Insite won first place in the SEG2900 engineering pitch competition. We delivered a working demo and a full pitch. The app itself hasn’t shipped as a live product yet, but it’s something that could still grow into one.",
+        body: "We took first place in the SEG2900 engineering pitch competition. Demo + full pitch, done. The app isn’t live yet, but it’s still something I could see growing into a real product.",
       },
       {
         type: "note",
         label: "LEARNED",
-        body: "A clear product story plus a tangible demo can carry a concept further than a half-built backend, especially when the idea has to land with judges in minutes.",
+        body: "A clear story and a real demo go further than a half-built backend, especially when you only have a few minutes with judges.",
       },
     ],
   },
@@ -298,12 +298,12 @@ const thisWebsiteCaseStudy: CaseStudySection[] = [
     blocks: [
       {
         type: "text",
-        body: "Most student portfolios look interchangeable: clean, modern, and easy to skim past. I needed a site for recruiters and design managers that still felt close to who I am: creative, multi-interested, and someone who pulls art, music, culture, and engineering into the same place. This isn’t a freelancing site; I keep that separate. This one is for people who want to know me and my work.",
+        body: "A lot of student portfolios look the same: clean, modern, easy to forget. I wanted something for recruiters and design managers that still felt like me: creative, into a bunch of things, someone who pulls art, music, culture, and engineering into the same place. This isn’t my freelancing site (that’s separate). This one is for people who actually want to know me and my work.",
       },
       {
         type: "note",
         label: "WHY THIS?",
-        body: "In the first 30 seconds, I want someone to see I’m more than a developer, that I bring mixed experiences and passions together through technology.",
+        body: "In the first 30 seconds I want someone to get that I’m more than a developer, that I bring mixed experiences and passions together through tech.",
       },
     ],
   },
@@ -312,7 +312,7 @@ const thisWebsiteCaseStudy: CaseStudySection[] = [
     blocks: [
       {
         type: "text",
-        body: "I started with a big Pinterest board of scrapbook layouts, playful type, collage energy, and interactive ideas. I pivoted a few times before locking a direction, including dropping a dedicated extracurriculars page and folding that story into About instead.",
+        body: "I started with a huge Pinterest board: scrapbook layouts, playful type, collage energy, interactive ideas. I pivoted a few times before locking anything in, including killing a dedicated extracurriculars page and folding that stuff into About instead.",
       },
       {
         type: "media",
@@ -322,13 +322,13 @@ const thisWebsiteCaseStudy: CaseStudySection[] = [
           type: "image",
           src: "/projects/this-website/pinterest-inspiration.jpg",
           alt: "Pinterest board of design ideas including Wii menu references, scrapbook layouts, and colorful portfolio concepts",
-          caption: "Early design board: scrapbook, collage, playful type, and Wii menu references before the Classic direction landed.",
+          caption: "Early board: scrapbook, collage, playful type, and Wii menu refs before Classic stuck.",
         },
       },
       {
         type: "note",
         label: "REJECTED",
-        body: "A standalone extracurriculars page. Better as texture inside About than as its own destination.",
+        body: "A standalone extracurriculars page. Better as texture inside About than its own destination.",
       },
     ],
   },
@@ -337,27 +337,27 @@ const thisWebsiteCaseStudy: CaseStudySection[] = [
     blocks: [
       {
         type: "text",
-        body: "The big product decision was two interfaces for one portfolio: Classic, a nostalgic channel-style home inspired by the System Menu, and Modern, a cleaner layout for people who want a neat browse. Same content, two moods. Classic carries personality and interaction; Modern keeps colour play (yellow / pink / coral) and a colourful mouse trail without getting loud.",
+        body: "The big call was two interfaces for one portfolio. Classic is the nostalgic channel home inspired by the System Menu. Modern is cleaner, for people who just want to browse. Same content, two moods. Classic is where the personality and interaction live; Modern keeps the colour play (yellow / pink / coral) and a colourful mouse trail without being too much.",
       },
       {
         type: "note",
         label: "WHY THIS?",
-        body: "Classic is the heart piece. Modern is the escape hatch, so the site can feel fun without trapping every visitor in nostalgia.",
+        body: "Classic is the part I care about most. Modern is there so the site can feel fun without trapping everyone in nostalgia.",
       },
       { type: "component", id: "wii-design-museum" },
       {
         type: "list",
         items: [
           "Classic channel grid: projects, work, lab, and me as selectable spaces",
-          "Modern mode: same information architecture, quieter visual system",
-          "About as a fuller self-portrait: scrapbook gallery (running, music, travel), likings / creators / orgs I appreciate, and cool reads",
-          "Lab: a home for smaller experiments and hackathons that don’t need a full case-study backstory",
+          "Modern mode: same structure, quieter look",
+          "About as more of a self-portrait: scrapbook gallery (running, music, travel), likings / creators / orgs I love, and cool reads",
+          "Lab for smaller experiments and hackathons that don’t need a full case study",
         ],
       },
       {
         type: "note",
         label: "CHANGED",
-        body: "Personalization got heavier on purpose: likings, creators, books, and a gallery so the Me page reads as a person, not a résumé dump.",
+        body: "I leaned harder into personalization on purpose (likings, creators, books, a gallery) so Me feels like a person, not a résumé dump.",
       },
     ],
   },
@@ -366,12 +366,12 @@ const thisWebsiteCaseStudy: CaseStudySection[] = [
     blocks: [
       {
         type: "text",
-        body: "Designed and built as a Next.js app with React, TypeScript, Tailwind, and Motion for the interactive bits: mode switching, channel motion, and the Modern cursor trail.",
+        body: "I designed and built it as a Next.js app with React, TypeScript, Tailwind, and Motion for the fun bits: mode switching, channel motion, and the Modern cursor trail.",
       },
       {
         type: "list",
         items: [
-          "React + Next.js: pages, routing, and the dual-interface shell",
+          "React + Next.js: pages, routing, dual-interface shell",
           "TypeScript + Tailwind: content model and styling",
           "Motion: channel hover, mode transitions, cursor trail",
         ],
@@ -383,7 +383,7 @@ const thisWebsiteCaseStudy: CaseStudySection[] = [
     blocks: [
       {
         type: "text",
-        body: "I shipped a portfolio I’m confident putting on applications and my résumé. It doesn’t feel like a template, and that uniqueness was the goal. Classic gives the twist; Modern keeps it usable for anyone who wants a straight read.",
+        body: "I shipped a portfolio I’m actually happy putting on applications and my résumé. It doesn’t feel like a template, and that was the whole point. Classic is the twist; Modern is there if you just want a straight read.",
       },
     ],
   },
@@ -409,7 +409,7 @@ export const projects: Project[] = [
     slug: "this-website",
     title: "This Website",
     summary:
-      "A dual-mode portfolio to showcase my personality and work, with Wii-inspired and Modern UI.",
+      "A dual-mode portfolio for my personality and work, with Classic (Wii-inspired) and Modern.",
     role: "Designer & Developer",
     tags: ["UI/UX", "PRODUCT", "FRONTEND"],
     stack: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Motion"],
@@ -432,7 +432,7 @@ export const projects: Project[] = [
     slug: "insite",
     title: "Insite",
     summary:
-      "An app concept for people at the same concert, game, or venue: a shared space to post photos, outfits, posters, and small moments that turn a crowd into a community.",
+      "An app for people at the same concert, game, or venue: a shared space to post photos, outfits, posters, and little moments from the night.",
     role: "Ideator, Designer, Co-Developer",
     tags: ["PRODUCT", "UI/UX", "FRONTEND"],
     stack: ["Figma", "HTML", "CSS", "JavaScript"],
