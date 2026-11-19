@@ -337,13 +337,14 @@ const thisWebsiteCaseStudy: CaseStudySection[] = [
     blocks: [
       {
         type: "text",
-        body: "The big product decision was two interfaces for one portfolio: Classic, a nostalgic channel-style home inspired by the Wii menu, and Modern, a cleaner layout for people who want a neat browse. Same content, two moods. Classic carries personality and interaction; Modern keeps colour play (yellow / pink / coral) and a colourful mouse trail without getting loud.",
+        body: "The big product decision was two interfaces for one portfolio: Classic, a nostalgic channel-style home inspired by the System Menu, and Modern, a cleaner layout for people who want a neat browse. Same content, two moods. Classic carries personality and interaction; Modern keeps colour play (yellow / pink / coral) and a colourful mouse trail without getting loud.",
       },
       {
         type: "note",
         label: "WHY THIS?",
         body: "Classic is the heart piece. Modern is the escape hatch, so the site can feel fun without trapping every visitor in nostalgia.",
       },
+      { type: "component", id: "wii-design-museum" },
       {
         type: "list",
         items: [
@@ -383,11 +384,6 @@ const thisWebsiteCaseStudy: CaseStudySection[] = [
       {
         type: "text",
         body: "I shipped a portfolio I’m confident putting on applications and my résumé. It doesn’t feel like a template, and that uniqueness was the goal. Classic gives the twist; Modern keeps it usable for anyone who wants a straight read.",
-      },
-      {
-        type: "note",
-        label: "LEARNED",
-        body: "Personality lands harder when it’s structured: two modes, a Lab for small work, and an About that shows taste, not just titles.",
       },
     ],
   },

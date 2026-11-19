@@ -59,7 +59,9 @@ export type CaseStudyBlock =
   | { type: "flow"; nodes: string[]; caption?: string }
   | { type: "compare"; before: CaseStudyBlock; after: CaseStudyBlock; beforeLabel?: string; afterLabel?: string }
   /** Editorial margin note. Rendered beside the section on large screens. */
-  | { type: "note"; label: Annotation; body: string };
+  | { type: "note"; label: Annotation; body: string }
+  /** Project-specific interactive embed (kept out of JSX pages). */
+  | { type: "component"; id: "wii-design-museum" };
 
 export type CaseStudySectionKind =
   | "context"

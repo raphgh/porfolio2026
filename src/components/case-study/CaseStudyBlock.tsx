@@ -2,6 +2,7 @@
 
 import type { Annotation, CaseStudyBlock as Block } from "@/data/types";
 import { useInterfaceMode } from "@/components/InterfaceModeProvider";
+import { WiiDesignMuseum } from "@/components/case-study/WiiDesignMuseum";
 import { MediaFrame } from "../MediaFrame";
 
 const artifactAspect = { wide: "aspect-[16/9]", square: "aspect-square", tall: "aspect-[3/4]" } as const;
@@ -131,6 +132,10 @@ export function CaseStudyBlock({ block }: { block: Block }) {
 
     case "note":
       return <Note label={block.label} body={block.body} />;
+
+    case "component":
+      if (block.id === "wii-design-museum") return <WiiDesignMuseum />;
+      return null;
   }
 }
 
