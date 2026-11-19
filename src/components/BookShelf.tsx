@@ -1,6 +1,6 @@
 import type { Book } from "@/data/types";
 
-/** Compact row of book covers — placeholders until real covers land. */
+/** Compact row of book covers - placeholders until real covers land. */
 export function BookShelf({ books }: { books: Book[] }) {
   return (
     <ul className="flex flex-wrap items-start gap-3 sm:gap-3.5">

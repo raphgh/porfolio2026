@@ -1,4 +1,7 @@
+"use client";
+
 import type { Annotation, CaseStudyBlock as Block } from "@/data/types";
+import { useInterfaceMode } from "@/components/InterfaceModeProvider";
 import { MediaFrame } from "../MediaFrame";
 
 const artifactAspect = { wide: "aspect-[16/9]", square: "aspect-square", tall: "aspect-[3/4]" } as const;
@@ -17,6 +20,14 @@ const noteMark: Record<Annotation, string> = {
   CHANGED: "↻",
   TRADEOFF: "⇄",
   LEARNED: "✳",
+};
+
+const wiiNoteKind: Record<Annotation, string> = {
+  "WHY THIS?": "why",
+  REJECTED: "rejected",
+  CHANGED: "changed",
+  TRADEOFF: "tradeoff",
+  LEARNED: "learned",
 };
 
 export function CaseStudyBlock({ block }: { block: Block }) {
@@ -41,7 +52,12 @@ export function CaseStudyBlock({ block }: { block: Block }) {
     case "media":
       return (
         <figure className="flex max-w-[42rem] flex-col gap-3">
-          <MediaFrame media={block.media} aspect="aspect-[16/9]" sizes="(min-width: 1024px) 66vw, 100vw" />
+          <MediaFrame
+            media={block.media}
+            aspect={artifactAspect[block.aspect ?? "wide"]}
+            fit={block.fit ?? "cover"}
+            sizes="(min-width: 1024px) 66vw, 100vw"
+          />
           {block.media.caption && <figcaption className="label text-charcoal-soft">{block.media.caption}</figcaption>}
         </figure>
       );
@@ -119,6 +135,22 @@ export function CaseStudyBlock({ block }: { block: Block }) {
 }
 
 export function Note({ label, body }: { label: Annotation; body: string }) {
+  const { mode } = useInterfaceMode();
+
+  if (mode === "wii") {
+    return (
+      <aside className={`wii-case-note wii-case-note--${wiiNoteKind[label]}`}>
+        <p className="wii-case-note__label">
+          <span className="wii-case-note__orb" aria-hidden>
+            {noteMark[label]}
+          </span>
+          {label}
+        </p>
+        <p className="wii-case-note__body">{body}</p>
+      </aside>
+    );
+  }
+
   return (
     <aside className={`rounded-2xl border p-4 ${noteTone[label]}`}>
       <p className="label flex items-center gap-2 text-charcoal">

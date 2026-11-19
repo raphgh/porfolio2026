@@ -19,6 +19,8 @@ type Props = {
   thumb?: string;
   accent?: string;
   channelId: string;
+  /** Where the back orb goes. Defaults to the channel home. */
+  backHref?: string;
   children: ReactNode;
 };
 
@@ -33,6 +35,7 @@ export function WiiPage({
   thumb,
   accent = "#eef2f6",
   channelId,
+  backHref = "/",
   children,
 }: Props) {
   const { mode, ready } = useInterfaceMode();
@@ -40,12 +43,12 @@ export function WiiPage({
   const reduce = useReducedMotion();
   const [exiting, setExiting] = useState(false);
 
-  const goHome = useCallback(() => {
+  const goBack = useCallback(() => {
     if (exiting) return;
     wiiSound.back();
     setExiting(true);
-    window.setTimeout(() => router.push("/"), reduce ? 120 : 420);
-  }, [exiting, reduce, router]);
+    window.setTimeout(() => router.push(backHref), reduce ? 120 : 420);
+  }, [backHref, exiting, reduce, router]);
 
   if (!ready || mode === "modern") {
     return (
@@ -148,11 +151,11 @@ export function WiiPage({
       <m.button
         type="button"
         className="wii-orb wii-page__back"
-        aria-label="Back to channels"
+        aria-label={backHref === "/" ? "Back to channels" : "Back"}
         initial={reduce ? false : { opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 260, damping: 24, delay: 0.2 }}
-        onClick={goHome}
+        onClick={goBack}
       >
         <BackIcon />
       </m.button>

@@ -17,7 +17,7 @@ function photoSlots(label: string, count = 3): Media[] {
   return Array.from({ length: count }, (_, i) => ({
     type: "image" as const,
     src: "",
-    alt: `${label} — photo ${i + 1}`,
+    alt: `${label} - photo ${i + 1}`,
   }));
 }
 
@@ -237,13 +237,13 @@ export const experience: Experience[] = [
         embeds: [
           {
             src: "https://onlinelibrary.wiley.com/doi/10.1111/fwb.70066",
-            title: "Freshwater Biology article — title page",
+            title: "Freshwater Biology article - title page",
             image: "/photos/carleton-paper-1.png",
             note: "Acknowledged for technical assistance in Freshwater Biology (Wiley).",
           },
           {
             src: "https://onlinelibrary.wiley.com/doi/10.1111/fwb.70066",
-            title: "Freshwater Biology article — acknowledgements",
+            title: "Freshwater Biology article - acknowledgements",
             image: "/photos/carleton-paper-2.png",
             linkLabel: "Full article here",
           },
@@ -262,10 +262,10 @@ export function experienceEntries(list: Experience[] = experience): Experience[]
   );
 }
 
-export const formatDates = (start: string, end?: string) => `${start} — ${end ?? "Present"}`;
+export const formatDates = (start: string, end?: string) => `${start} - ${end ?? "Present"}`;
 
 /**
- * Wii Experience board tiles — Nokia / CICS / CCSN channel cards.
+ * Wii Experience board tiles - Nokia / CICS / CCSN channel cards.
  * Keep `details` editable; empty fields show placeholders in the panel.
  */
 export const experienceBoard: ExperienceBoardEntry[] = [
@@ -280,7 +280,7 @@ export const experienceBoard: ExperienceBoardEntry[] = [
     details: {
       summary:
         "Continued work on the NSP System Health Admin Dashboard, and the NFM-P microservice.",
-      dates: "May 2026 — Aug 2026",
+      dates: "May 2026 - Aug 2026",
       stack: [
         "Java",
         "Spring Boot",
@@ -311,7 +311,7 @@ export const experienceBoard: ExperienceBoardEntry[] = [
     details: {
       summary:
         "Bridging Nokia’s NFM-P and NSP by implementing a new dashlet within the NSP System Health Admin Dashboard.",
-      dates: "Sep 2025 — Dec 2025",
+      dates: "Sep 2025 - Dec 2025",
       stack: [
         "Java",
         "Spring Boot",
@@ -336,7 +336,7 @@ export const experienceBoard: ExperienceBoardEntry[] = [
     details: {
       summary:
         "Assisted with the development and maintenance of the internal CICS platform, as well as the public-facing website.",
-      dates: "Jan 2025 — Apr 2025",
+      dates: "Jan 2025 - Apr 2025",
       stack: ["Java", "C#", "HTML", "CSS", "JavaScript", "SQL", "Figma", "Razor views (.cshtml)"],
       highlights: [
         "Resolved 20+ IT tickets and bugs",
@@ -350,14 +350,14 @@ export const experienceBoard: ExperienceBoardEntry[] = [
     company: "CCSN",
     role: "Web Manager",
     year: 2024,
-    // TODO: replace with a higher-res or SVG CCSN logo — current square PNG still soft when enlarged
+    // TODO: replace with a higher-res or SVG CCSN logo - current square PNG still soft when enlarged
     image: "/logos/CCSN_Logo_EN_SQUARE.png",
     fit: "contain",
     sourceId: "experience-four",
     details: {
       summary:
         "Researched and updated content for the Canadian Cancer Survivor Network website.",
-      dates: "Apr 2024 — July 2024",
+      dates: "Apr 2024 - July 2024",
       stack: ["WordPress"],
       highlights: [
         "Updated 50+ pages of content",
@@ -377,7 +377,7 @@ export const experienceBoard: ExperienceBoardEntry[] = [
     details: {
       summary:
         "Creating content about and for the uOttawa community, giving francophone students, athletes, and faculty members a voice.",
-      dates: "Sep 2023 — Apr 2024",
+      dates: "Sep 2023 - Apr 2024",
       stack: ["Capcut", "Canva", "Slack"],
       highlights: [
         "Produced 30+ videos",
@@ -397,7 +397,7 @@ export const experienceBoard: ExperienceBoardEntry[] = [
     details: {
       summary:
         "Supported lab research at Carleton University as a high school student, running tasks alongside university peers.",
-      dates: "March 2022 — June 2022",
+      dates: "March 2022 - June 2022",
       stack: [],
       highlights: [
         "Acknowledged for technical assistance in Freshwater Biology (Wiley)",

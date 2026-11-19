@@ -120,7 +120,7 @@ export function StickerHunt() {
           <m.button
             key={popup.id}
             type="button"
-            aria-label="You found a hidden sticker — collect it"
+            aria-label="You found a hidden sticker - collect it"
             onClick={() => collect(popup.id)}
             initial={{ scale: 0, rotate: popup.side === "right" ? 50 : -50, x: popup.side === "right" ? 60 : -60 }}
             animate={{ scale: 1, rotate: popup.side === "right" ? -12 : 12, x: 0 }}
@@ -190,7 +190,7 @@ export function StickerHunt() {
               {complete ? "Thanks for stopping by!" : "You found a secret!"}
             </h2>
             <p className="mt-1 text-berry-soft">
-              {complete ? "Here’s a sticker :)" : `${found.length} of ${stickers.length} — the rest are hiding on other pages.`}
+              {complete ? "Here’s a sticker :)" : `${found.length} of ${stickers.length}. The rest are hiding on other pages.`}
             </p>
 
             <ul className="mx-auto mt-9 grid w-fit grid-cols-3 gap-5 md:gap-7">

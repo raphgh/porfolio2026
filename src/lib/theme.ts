@@ -22,5 +22,5 @@ export function toggleTheme(current: Theme): Theme {
   return next;
 }
 
-/** Inline boot script — runs before paint to avoid a light/dark flash. */
+/** Inline boot script - runs before paint to avoid a light/dark flash. */
 export const themeBootScript = `(function(){try{var k=${JSON.stringify(THEME_STORAGE_KEY)};var t=localStorage.getItem(k);var d=t==='dark'||(t!=='light'&&window.matchMedia('(prefers-color-scheme: dark)').matches);var r=document.documentElement;r.classList.toggle('dark',d);r.style.colorScheme=d?'dark':'light';}catch(e){}})();`;

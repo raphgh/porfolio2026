@@ -15,7 +15,7 @@ export function ProcessSection({ index }: { index?: string }) {
           kicker="understand → design → build → ship"
           title="How I build"
           tone="dark"
-          description="Not a design process or an engineering process — just the loop I run, whichever layer the problem lives in."
+          description="Not a design process or an engineering process, just the loop I run, whichever layer the problem lives in."
         />
 
         <Reveal>

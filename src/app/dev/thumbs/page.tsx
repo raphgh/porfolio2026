@@ -9,7 +9,7 @@ const EXTRAS: { variant: ChannelThumbVariant; title: string; accent?: string }[]
 ];
 
 /**
- * Side-by-side thumbnail review — compare designed channel faces.
+ * Side-by-side thumbnail review - compare designed channel faces.
  * Visit `/dev/thumbs` while iterating on the Wii home grid.
  */
 export default function DevThumbsPage() {

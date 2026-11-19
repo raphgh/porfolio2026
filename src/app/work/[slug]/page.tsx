@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CaseStudySection } from "@/components/case-study/CaseStudySection";
-import { ProjectHero } from "@/components/case-study/ProjectHero";
+import { CaseStudyView } from "@/components/case-study/CaseStudyView";
 import { getProject, projects } from "@/data/projects";
 
 export const dynamicParams = false;
@@ -23,34 +21,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
   if (!project?.caseStudy) notFound();
 
   const withStudies = projects.filter((p) => p.caseStudy);
-  const next = withStudies[(withStudies.indexOf(project) + 1) % withStudies.length];
+  const next = withStudies[(withStudies.indexOf(project) + 1) % withStudies.length] ?? null;
 
-  return (
-    <article className="shell pt-10 pb-24 md:pt-14 md:pb-32">
-      <ProjectHero project={project} />
-
-      <div className="mt-20 flex flex-col gap-20 md:mt-28 md:gap-28">
-        {project.caseStudy.sections.map((section, i) => (
-          <CaseStudySection key={i} section={section} index={i} />
-        ))}
-      </div>
-
-      {next && next !== project && (
-        <nav aria-label="Next project" className="mt-28">
-          <Link
-            href={`/work/${next.slug}`}
-            className="group flex flex-col gap-3 rounded-[1.5rem] border border-navy bg-navy p-6 text-white transition-colors hover:bg-navy-deep md:p-10"
-          >
-            <span className="label text-mustard-soft">Next project</span>
-            <span className="display flex items-baseline gap-4 text-title">
-              {next.title}
-              <span aria-hidden className="text-[0.6em] transition-transform duration-300 group-hover:translate-x-2">
-                →
-              </span>
-            </span>
-          </Link>
-        </nav>
-      )}
-    </article>
-  );
+  return <CaseStudyView project={project} next={next} />;
 }

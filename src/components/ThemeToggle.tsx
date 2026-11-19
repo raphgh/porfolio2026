@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { applyTheme, getPreferredTheme, toggleTheme, type Theme } from "@/lib/theme";
 
-/** Sun / moon control in the header — toggles the `dark` class on `<html>`. */
+/** Sun / moon control in the header - toggles the `dark` class on `<html>`. */
 export function ThemeToggle() {
   const [theme, setTheme] = useState<Theme>("light");
   const [ready, setReady] = useState(false);

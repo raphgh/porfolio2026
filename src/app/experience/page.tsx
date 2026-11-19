@@ -4,7 +4,7 @@ import { WiiPage } from "@/components/wii/WiiPage";
 
 export const metadata: Metadata = {
   title: "Work",
-  description: "Professional work experience — companies, teams, and impact.",
+  description: "Professional work experience - companies, teams, and impact.",
 };
 
 export default function ExperiencePage() {

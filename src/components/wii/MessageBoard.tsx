@@ -124,7 +124,7 @@ export function MessageBoard({ open, onClose, onRead }: Props) {
               </li>
             </ul>
             <form className="wii-message-form" onSubmit={onSubmit}>
-              {/* Honeypot — leave empty */}
+              {/* Honeypot - leave empty */}
               <input
                 type="text"
                 name="website"
@@ -150,7 +150,7 @@ export function MessageBoard({ open, onClose, onRead }: Props) {
               ) : null}
               {status === "sent" ? (
                 <p style={{ margin: 0, color: "#1a8fc0", fontSize: "0.82rem", fontWeight: 700 }}>
-                  Sent — check your inbox.
+                  Sent. Check your inbox.
                 </p>
               ) : null}
               <div className="wii-dialog-actions">

@@ -1,4 +1,5 @@
 import { about } from "./about";
+import { blogPosts } from "./blog";
 import { experienceEntries } from "./experience";
 import { lab } from "./lab";
 import { projects } from "./projects";
@@ -18,7 +19,7 @@ export type MegaMenuColumn = {
   items: MegaMenuItem[];
 };
 
-/** Columns for the header mega menu — one per primary section. */
+/** Columns for the header mega menu - one per primary section. */
 export function megaMenuColumns(): MegaMenuColumn[] {
   const experienceItems: MegaMenuItem[] = experienceEntries().map((entry) => {
     const role = entry.roles[0];
@@ -105,6 +106,16 @@ export function megaMenuColumns(): MegaMenuColumn[] {
       href: "/lab",
       description: "Prototypes, hackathons, and experiments.",
       items: labItems,
+    },
+    "/blog": {
+      label: "Blog",
+      href: "/blog",
+      description: "cool things worth sharing! ",
+      items: blogPosts.map((post) => ({
+        label: post.title,
+        href: `/blog#${post.slug}`,
+        description: post.summary,
+      })),
     },
   };
 

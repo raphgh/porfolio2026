@@ -5,7 +5,7 @@ import { about } from "@/data/about";
 
 export const metadata: Metadata = {
   title: "Me",
-  description: "About Raphaelle Ghanem — software engineering, art, music, and culture.",
+  description: "About Raphaelle Ghanem - software engineering, art, music, and culture.",
 };
 
 export default function MePage() {

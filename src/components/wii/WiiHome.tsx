@@ -13,7 +13,7 @@ import type { WiiChannel } from "@/data/wiiChannels";
 import { loadWiiSoundPreference, unlockWiiSound, wiiSound } from "@/lib/wiiSound";
 
 /**
- * Faithful Wii Menu channel-selection screen — portfolio content in the channels.
+ * Faithful Wii Menu channel-selection screen - portfolio content in the channels.
  * No Nintendo branding or copyrighted assets.
  */
 export function WiiHome() {

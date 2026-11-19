@@ -40,7 +40,7 @@ function CompanyLogo({ entry }: { entry: Experience }) {
   );
 }
 
-/** Full experience content — used inside the gallery detail dialog. */
+/** Full experience content - used inside the gallery detail dialog. */
 export function ExperienceDetail({
   entry,
   titleId,
@@ -84,9 +84,9 @@ export function ExperienceDetail({
 
       <dl className="grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-4">
         <MetaCell label="Dates" value={entryDates(entry)} />
-        <MetaCell label="Role" value={role?.title ?? "—"} />
-        <MetaCell label="Type" value={role?.employmentType ?? "—"} />
-        <MetaCell label="Location" value={role?.location ?? "—"} />
+        <MetaCell label="Role" value={role?.title ?? "-"} />
+        <MetaCell label="Type" value={role?.employmentType ?? "-"} />
+        <MetaCell label="Location" value={role?.location ?? "-"} />
       </dl>
 
       <div className="mt-10 border-t border-rule pt-10 md:mt-12 md:pt-12">
@@ -172,7 +172,7 @@ function RoleDetail({ role, showMeta }: { role: Role; showMeta: boolean }) {
               {role.overview}
             </p>
           ) : (
-            <p className="text-charcoal-muted">—</p>
+            <p className="text-charcoal-muted">-</p>
           )}
         </ScrollFade>
 

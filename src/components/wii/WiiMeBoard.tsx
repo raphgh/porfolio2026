@@ -26,7 +26,7 @@ const MII_FIELDS = [
   { label: "Currently", value: "finishing my bachelor's" },
 ] as const;
 
-/** First three bio beats — exact copy; third bubble carries the next lines too. */
+/** First three bio beats - exact copy; third bubble carries the next lines too. */
 const BIO_BUBBLES: { lead?: boolean; lines: string[] }[] = [
   { lead: true, lines: [about.paragraphs[0]!] },
   { lines: [about.paragraphs[1]!] },
@@ -144,7 +144,7 @@ function AwardsList({ items }: { items: Award[] }) {
             <span className="font-medium text-navy">{award.title}</span>
             {award.detail ? (
               <>
-                <span className="text-charcoal-muted"> — </span>
+                <span className="text-charcoal-muted">, </span>
                 <span className="text-charcoal-soft tabular-nums">{award.detail}</span>
               </>
             ) : null}

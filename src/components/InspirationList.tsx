@@ -1,6 +1,6 @@
 import type { Inspiration } from "@/data/types";
 
-/** Simple bullet list — link later via `href` when ready. */
+/** Simple bullet list - link later via `href` when ready. */
 export function InspirationList({ items }: { items: Inspiration[] }) {
   return (
     <ul className="flex flex-col gap-3">
@@ -13,7 +13,7 @@ export function InspirationList({ items }: { items: Inspiration[] }) {
         const label = item.note ? (
           <>
             <span className="font-medium text-navy">{item.name}</span>
-            <span className="text-charcoal-muted"> — </span>
+            <span className="text-charcoal-muted">, </span>
             <span className="text-charcoal-soft">{item.note}</span>
           </>
         ) : (

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { m, useMotionValue, useSpring, useReducedMotion } from "motion/react";
 
 /**
- * Wii Mode cursor — pixel pointing hand by default, fist while pressing.
+ * Wii Mode cursor - pixel pointing hand by default, fist while pressing.
  * Hotspot sits at the fingertip (top-left). Shrinks over text/content areas.
  */
 export function WiiCursor({

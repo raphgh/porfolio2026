@@ -24,7 +24,7 @@ export const hero = {
     lead: "I build things at the intersection of",
     emphasis: "technology, design & culture.",
   },
-  body: "Software engineering student building products end-to-end — from backend systems and APIs to interfaces and experiences. Outside of software, I make music, content, and other things I’m curious about.",
+  body: "Software engineering student building products end-to-end, from backend systems and APIs to interfaces and experiences. Outside of software, I make music, content, and other things I’m curious about.",
   capabilities: ["Backend", "APIs", "Full-stack", "Infrastructure", "Interfaces", "Product"],
 } as const;
 
@@ -34,28 +34,31 @@ export const nav = [
   { label: "Work", href: "/experience" },
   { label: "Projects", href: "/work" },
   { label: "Lab", href: "/lab" },
+  { label: "Blog", href: "/blog" },
 ] as const;
 
-/** Stacked landing-page cards — same destinations as `nav`. */
+/** Stacked landing-page cards - same destinations as `nav`. */
 export const stackNav = [
   { label: "About", href: "/me" },
   { label: "Work", href: "/experience" },
   { label: "Projects", href: "/work" },
   { label: "Lab", href: "/lab" },
+  { label: "Blog", href: "/blog" },
 ] as const;
 
 /**
  * Soft washes from the embroidery trail palette
- * (terracotta, peach, coral, rose) — one per stackNav entry.
+ * (terracotta, peach, coral, rose, sky) - one per stackNav entry.
  */
 export const stackNavColors = [
-  { bg: "#f5d0d4", border: "#d94f5c", number: "#a83842" }, // Me — terracotta
-  { bg: "#fce8d8", border: "#f0a06a", number: "#c47a3a" }, // Work — peach
-  { bg: "#fde0d2", border: "#f07a45", number: "#c45a28" }, // Projects — coral
-  { bg: "#f9d6e4", border: "#e85a8a", number: "#b03860" }, // Lab — rose
+  { bg: "#f5d0d4", border: "#d94f5c", number: "#a83842" }, // Me - terracotta
+  { bg: "#fce8d8", border: "#f0a06a", number: "#c47a3a" }, // Work - peach
+  { bg: "#fde0d2", border: "#f07a45", number: "#c45a28" }, // Projects - coral
+  { bg: "#f9d6e4", border: "#e85a8a", number: "#b03860" }, // Lab - rose
+  { bg: "#e8eef3", border: "#3fa9e0", number: "#1a8fc0" }, // Blog - sky
 ] as const;
 
-/** Stack grouped for the About page — expand as tools change. */
+/** Stack grouped for the About page - expand as tools change. */
 export const technologies = [
   { name: "Java", group: "Languages (other than English, French, and Arabic)" as const },
   { name: "Python", group: "Languages (other than English, French, and Arabic)" as const },

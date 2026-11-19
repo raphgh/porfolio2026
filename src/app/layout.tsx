@@ -28,7 +28,7 @@ const mono = Geist_Mono({
   display: "swap",
 });
 
-/** Rounded humanist sans — close to Wii Rodin, used only in Wii Mode. */
+/** Rounded humanist sans - close to Wii Rodin, used only in Wii Mode. */
 const wiiSans = Nunito({
   variable: "--font-wii-sans",
   subsets: ["latin"],
@@ -38,13 +38,13 @@ const wiiSans = Nunito({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — ${site.title}`,
-    template: `%s — ${site.name}`,
+    default: `${site.name} - ${site.title}`,
+    template: `%s - ${site.name}`,
   },
   description: site.description,
   openGraph: {
     type: "website",
-    title: `${site.name} — ${site.title}`,
+    title: `${site.name} - ${site.title}`,
     description: site.description,
     siteName: site.name,
   },

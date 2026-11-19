@@ -82,7 +82,7 @@ export function Navbar() {
       htmlOverflow: documentElement.style.overflow,
     };
 
-    // overflow-only lock — avoid body position:fixed, which yanks the header
+    // overflow-only lock - avoid body position:fixed, which yanks the header
     // off-screen when the page isn't scrolled to the top.
     body.style.overflow = "hidden";
     documentElement.style.overflow = "hidden";
@@ -136,7 +136,7 @@ export function Navbar() {
           <Link
             href="/"
             className="group flex shrink-0 items-center gap-2.5"
-            aria-label={`${site.name} — home`}
+            aria-label={`${site.name} - home`}
           >
             <span
               aria-hidden

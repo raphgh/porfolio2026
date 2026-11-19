@@ -8,7 +8,7 @@ export const process = {
     },
     {
       name: "Design",
-      body: "Architecture, data, interaction and information structure — the decisions that are expensive to change later.",
+      body: "Architecture, data, interaction and information structure: the decisions that are expensive to change later.",
       outputs: ["Architecture", "Data model", "Interaction", "Product calls"],
     },
     {

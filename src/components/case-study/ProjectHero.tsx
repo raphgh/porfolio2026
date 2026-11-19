@@ -9,7 +9,7 @@ export function ProjectHero({ project }: { project: Project }) {
   const sections = project.caseStudy?.sections ?? [];
   const facts = [
     { label: "Role", value: project.role },
-    { label: "Stack", value: project.stack.length ? project.stack.join(", ") : "—" },
+    { label: "Stack", value: project.stack.length ? project.stack.join(", ") : "-" },
     ...(project.year ? [{ label: "Year", value: project.year }] : []),
     ...(project.caseStudy?.facts ?? []),
   ];
@@ -99,7 +99,7 @@ export function ProjectHero({ project }: { project: Project }) {
 
       <MediaFrame
         media={project.cover}
-        placeholder={`${project.title} — cover`}
+        placeholder={`${project.title} - cover`}
         aspect="aspect-[4/3] md:aspect-[21/9]"
         sizes="100vw"
         priority

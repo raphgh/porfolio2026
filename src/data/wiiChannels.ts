@@ -5,6 +5,7 @@ export type ChannelThumbVariant =
   | "lab"
   | "experience"
   | "me"
+  | "blog"
   | "resume"
   | "contact"
   | "github"
@@ -22,7 +23,7 @@ export type WiiChannel = {
   accent?: string;
   /** Designed thumbnail face for the home grid. */
   thumb: ChannelThumbVariant;
-  /** Show title badge on the tile face (top-left). Default false — hover tip handles naming. */
+  /** Show title badge on the tile face (top-left). Default false - hover tip handles naming. */
   showLabel?: boolean;
 };
 
@@ -60,12 +61,19 @@ export const wiiChannels: WiiChannel[] = [
     accent: "#f0a06a",
   },
   {
-    id: "resume",
-    label: "Resume",
-    href: site.resume,
+    id: "blog",
+    label: "Blog",
+    href: "/blog",
+    thumb: "blog",
+    accent: "#3fa9e0",
+  },
+  {
+    id: "linkedin",
+    label: "LinkedIn",
+    href: site.contact.linkedin,
     external: true,
-    thumb: "resume",
-    accent: "#9fd8e8",
+    thumb: "linkedin",
+    accent: "#0a66c2",
   },
   {
     id: "contact",
@@ -84,12 +92,12 @@ export const wiiChannels: WiiChannel[] = [
     accent: "#4a5560",
   },
   {
-    id: "linkedin",
-    label: "LinkedIn",
-    href: site.contact.linkedin,
+    id: "resume",
+    label: "Resume",
+    href: site.resume,
     external: true,
-    thumb: "linkedin",
-    accent: "#0a66c2",
+    thumb: "resume",
+    accent: "#9fd8e8",
   },
   {
     id: "awards",

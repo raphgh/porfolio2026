@@ -14,7 +14,7 @@ function sourceEntry(board: ExperienceBoardEntry) {
 }
 
 /**
- * Wii Experience board — year rail, glossy channel tiles, detail zoom.
+ * Wii Experience board - year rail, glossy channel tiles, detail zoom.
  * Modern mode keeps the existing ExperienceGallery.
  */
 export function WiiExperienceBoard() {

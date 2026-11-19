@@ -17,7 +17,7 @@ function orderFromFront(active: number | null) {
 /**
  * Centered section links + physical card stack.
  * Hovering a menu item pulls that card forward and highlights its label.
- * Cards stay put on hover — they only navigate on click.
+ * Cards stay put on hover - they only navigate on click.
  */
 export function NavStack() {
   const [active, setActive] = useState<number | null>(null);

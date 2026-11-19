@@ -56,7 +56,7 @@ function formatDisplayDate(iso: string) {
 }
 
 /**
- * Wii Message Board for Lab — calendar + message rows.
+ * Wii Message Board for Lab - calendar + message rows.
  * Modern mode keeps the existing LabItem list.
  */
 export function WiiLabBoard() {

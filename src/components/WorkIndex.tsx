@@ -2,7 +2,7 @@ import Link from "next/link";
 import { projectHref } from "@/data/projects";
 import type { Project } from "@/data/types";
 
-/** Soft washes from the embroidery trail palette — same as Experience. */
+/** Soft washes from the embroidery trail palette - same as Experience. */
 const CARD_TONES = [
   { bg: "#f5e6b8", accent: "#e6b422" }, // mustard
   { bg: "#fde0d2", accent: "#f07a45" }, // coral
@@ -13,7 +13,7 @@ const CARD_TONES = [
 
 /**
  * 2-column project grid matching the Experience look.
- * Cards link through to existing case-study pages — no modal, no filters.
+ * Cards link through to existing case-study pages - no modal, no filters.
  */
 export function WorkIndex({ projects }: { projects: Project[] }) {
   return (

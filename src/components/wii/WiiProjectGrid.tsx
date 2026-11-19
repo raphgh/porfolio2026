@@ -37,8 +37,6 @@ export function WiiProjectGrid({ projects }: Props) {
           const cover = project.cover?.type === "image" ? project.cover : null;
           const active = hoverId === project.slug;
           const dimmed = hoverId !== null && !active;
-          const isWebsite = project.slug === "project-two";
-
           return (
             <li key={project.slug} id={project.slug} className="wii-project-grid__item">
               <m.button
@@ -75,7 +73,7 @@ export function WiiProjectGrid({ projects }: Props) {
                     <img
                       src={cover.src}
                       alt=""
-                      className={`wii-project-card__img${isWebsite ? " wii-project-card__img--website" : ""}`}
+                      className="wii-project-card__img"
                     />
                   ) : (
                     <span className="wii-project-card__wash" />
@@ -141,7 +139,7 @@ export function WiiProjectGrid({ projects }: Props) {
             >
               <p className="wii-coming-soon__ghost">Coming soon</p>
               <p className="wii-coming-soon__copy">
-                The {comingSoon} case study isn&apos;t ready yet — check back soon.
+                The {comingSoon} case study isn&apos;t ready yet. Check back soon.
               </p>
               <button
                 type="button"

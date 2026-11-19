@@ -3,7 +3,7 @@ import { NavStack } from "@/components/NavStack";
 
 /**
  * Sticky landing name stays put while the intro + nav cards
- * scroll up over it — reads as holding still while content arrives.
+ * scroll up over it - reads as holding still while content arrives.
  */
 export default function Home() {
   return (

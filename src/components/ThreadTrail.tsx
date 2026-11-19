@@ -3,13 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 
 /**
- * Light embroidery cursor trail — airy, smooth, fades as it ages (no linger).
+ * Light embroidery cursor trail - airy, smooth, fades as it ages (no linger).
  * Warm palette only (no blue). Off for reduced motion.
  */
 const MAX_POINTS = 28;
 const FADE_MS = 480;
 const MIN_DIST = 10;
-/** Warm embroidery tones — mustard, coral, rose, terracotta, peach */
+/** Warm embroidery tones - mustard, coral, rose, terracotta, peach */
 const THREAD_A = ["#e6b422", "#f07a45", "#e85a8a", "#d94f5c", "#f0a06a"];
 const THREAD_B = ["#f5c84a", "#ff8f5a", "#e070a8", "#e6b422", "#d94f5c"];
 
@@ -105,7 +105,7 @@ function crossStitches(points: Point[], every = 9, size = 4) {
   return parts.join(" ");
 }
 
-/** Trail opacity fades from the oldest point's age — no full-opacity linger. */
+/** Trail opacity fades from the oldest point's age - no full-opacity linger. */
 function trailOpacity(pts: Point[], now: number) {
   if (pts.length < 2) return 0;
   const oldest = now - pts[0].t;

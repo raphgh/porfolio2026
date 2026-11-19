@@ -5,7 +5,7 @@
 
 @theme {
   --color-white: #ffffff;
-  /** Always-bright white — safe for text overlays when `white` is remapped in dark mode. */
+  /** Always-bright white - safe for text overlays when `white` is remapped in dark mode. */
   --color-snow: #ffffff;
   --color-paper: #ffffff;
   --color-paper-deep: #f4f5f7;
@@ -22,7 +22,7 @@
   --color-navy-deep: #13284f;
   --color-navy-soft: #d6e0f0;
   --color-navy-tint: #eef2f9;
-  /** Stays dark in both themes — for text on pastel / light card surfaces. */
+  /** Stays dark in both themes - for text on pastel / light card surfaces. */
   --color-navy-ink: #1e3a6e;
 
   --color-mustard: #d4a017;

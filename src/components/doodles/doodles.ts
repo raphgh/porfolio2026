@@ -8,7 +8,7 @@ export type DoodleConfig = {
   Art: (props: { className?: string }) => React.ReactNode;
   /** Resting rotation in degrees. */
   tilt: number;
-  /** Seconds for one float cycle — varied so objects never move in sync. */
+  /** Seconds for one float cycle - varied so objects never move in sync. */
   float: number;
   desktop: Placement;
   /** Omit to hide the doodle on small screens. */

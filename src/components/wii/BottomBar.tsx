@@ -5,7 +5,7 @@ import { ModeToggle } from "@/components/ModeToggle";
 import { WiiClock } from "@/components/wii/WiiClock";
 import { site } from "@/data/site";
 
-/** Top-edge of the Wii dock — high shoulders, flat low center. */
+/** Top-edge of the Wii dock - high shoulders, flat low center. */
 const DOCK_TOP =
   "M0,0 H330 C520,0 620,110 800,110 H1120 C1300,110 1400,0 1590,0 H1920";
 const DOCK_SHAPE = `${DOCK_TOP} V295 H0 Z`;
@@ -21,7 +21,7 @@ type Props = {
   onOpenMail: () => void;
 };
 
-/** Home-menu dock only — channel pages use a standalone back orb. */
+/** Home-menu dock only - channel pages use a standalone back orb. */
 export function BottomBar({ unread, onOpenSettings, onOpenMail }: Props) {
   const reduce = useReducedMotion();
 

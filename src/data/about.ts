@@ -15,7 +15,7 @@ export const about = {
   ],
 };
 
-/** A few strong images — not a creative portfolio. */
+/** A few strong images - not a creative portfolio. */
 export const scrapbook: ScrapbookItem[] = [
   {
     caption: "back home in lebanon :)",
@@ -31,7 +31,7 @@ export const scrapbook: ScrapbookItem[] = [
     media: {
       type: "image",
       src: "/scrapbook/travelling.jpg",
-      alt: "Travelling — overlooking the Eiffel Tower in Paris",
+      alt: "Travelling, overlooking the Eiffel Tower in Paris",
     },
   },
   {
@@ -64,7 +64,7 @@ export const awards: Award[] = [
   },
 ];
 
-/** Simple bullets — add `href` when you want them to link out. */
+/** Simple bullets - add `href` when you want them to link out. */
 export const inspirations: Inspiration[] = [
   {
     name: "Nabihah Ahmad",
@@ -75,7 +75,7 @@ export const inspirations: Inspiration[] = [
   {
     name: "Gazi Jarin",
     kind: "Creator",
-    note: "tech and lifestyle creator - previous work at Pinterest, Google, and Amazon",
+    note: "tech and lifestyle creator, previous work at Pinterest, Google, and Amazon",
     href: "https://www.instagram.com/gazisj/",
   },
   {
@@ -87,7 +87,7 @@ export const inspirations: Inspiration[] = [
    {
     name: "julip.mp3",
     kind: "Creator",
-    note: "musician & creative engineer — making music with hand-tracking code",
+    note: "musician & creative engineer, making music with hand-tracking code",
     href: "https://www.instagram.com/julip.mp3/",
   },
   {
@@ -123,7 +123,7 @@ export const inspirations: Inspiration[] = [
   },
 ];
 
-/** Current reads — covers live under `/public/books/`. */
+/** Current reads - covers live under `/public/books/`. */
 export const books: Book[] = [
   {
     title: "How to Teach Quantum Physics to Your Dog",

@@ -23,12 +23,12 @@ const LAB_ICONS = [
 const EXP_TICKER = "Nokia · CICS · CCSN · La Rotonde · Carleton · Nokia · CICS · CCSN · ";
 
 const PROJECT_SHOTS = {
-  a: ["/logos/yard365.png", "/logos/this-website.png"],
+  a: ["/logos/yard365.png", "/projects/this-website/cover.png"],
   b: ["/logos/insite.jpg", "/logos/newomelet.png"],
 } as const;
 
 /**
- * Designed Wii Menu channel face — one strong subject + shared gloss/scan/title.
+ * Designed Wii Menu channel face - one strong subject + shared gloss/scan/title.
  */
 export function ChannelThumb({ variant, title, accent, hovered = false }: ChannelThumbProps) {
   const reduce = useReducedMotion();
@@ -74,6 +74,8 @@ function ThumbArt({
       return <ExperienceThumb hovered={hovered} reduce={reduce} />;
     case "me":
       return <MeThumb hovered={hovered} reduce={reduce} />;
+    case "blog":
+      return <BlogThumb hovered={hovered} reduce={reduce} />;
     case "resume":
       return <ResumeThumb hovered={hovered} reduce={reduce} />;
     case "awards":
@@ -197,7 +199,42 @@ function MeThumb({ hovered, reduce }: { hovered: boolean; reduce: boolean }) {
         }
         transition={{ type: "spring", stiffness: 280, damping: 12 }}
       >
-        <Image src="/logos/me.jpg" alt="" fill sizes="140px" className="object-cover" />
+        <Image
+          src="/scrapbook/fundraiser.jpg"
+          alt=""
+          fill
+          sizes="140px"
+          className="object-cover object-[50%_18%]"
+        />
+      </m.span>
+    </span>
+  );
+}
+
+function BlogThumb({ hovered, reduce }: { hovered: boolean; reduce: boolean }) {
+  return (
+    <span className="wii-thumb__art wii-thumb-blog">
+      <m.span
+        className="wii-thumb-blog__page"
+        animate={
+          reduce
+            ? undefined
+            : hovered
+              ? { y: -7, rotate: -4 }
+              : { y: 0, rotate: -2 }
+        }
+        transition={{ type: "spring", stiffness: 300, damping: 18 }}
+      >
+        <span className="wii-thumb-blog__lines" aria-hidden />
+        <span className="wii-thumb-blog__stamp">
+          <Image
+            src="/scrapbook/fundraiser.jpg"
+            alt=""
+            fill
+            sizes="64px"
+            className="object-cover object-[50%_18%]"
+          />
+        </span>
       </m.span>
     </span>
   );

@@ -1,7 +1,7 @@
 import type { LabEntry, LabExperiment } from "./types";
 
 /**
- * Lab message-board entries — single source for the Wii calendar + list.
+ * Lab message-board entries - single source for the Wii calendar + list.
  * `date` is ISO so the calendar can mark days.
  */
 export const labEntries: LabEntry[] = [
@@ -91,7 +91,7 @@ export const labEntries: LabEntry[] = [
 
 const monthFmt = new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric", timeZone: "UTC" });
 
-/** Modern-mode / mega-menu adapter — same content, display dates. */
+/** Modern-mode / mega-menu adapter - same content, display dates. */
 export const lab: LabExperiment[] = labEntries.map((entry) => ({
   id: entry.id,
   title: entry.title,

@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  // Bots fill hidden fields — silently succeed
+  // Bots fill hidden fields - silently succeed
   if (body.website) {
     return NextResponse.json({ ok: true });
   }
@@ -55,7 +55,7 @@ export async function POST(request: Request) {
       "",
       message,
       "",
-      `— sent via ${site.url}`,
+      ` -  sent via ${site.url}`,
     ].join("\n"),
   });
 

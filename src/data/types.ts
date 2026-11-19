@@ -46,11 +46,16 @@ export type Annotation = "WHY THIS?" | "REJECTED" | "CHANGED" | "TRADEOFF" | "LE
 export type CaseStudyBlock =
   | { type: "text"; body: string }
   | { type: "list"; items: string[]; ordered?: boolean }
-  | { type: "media"; media: Media }
+  | {
+      type: "media";
+      media: Media;
+      aspect?: "wide" | "square" | "tall";
+      fit?: "cover" | "contain";
+    }
   /** Reserved slot for an artifact that hasn't been added yet (diagram, Figma screen, sketch…). */
   | { type: "artifact"; label: string; note?: string; aspect?: "wide" | "square" | "tall" }
   | { type: "code"; code: string; language?: string; filename?: string; caption?: string }
-  /** Lightweight box-and-arrow diagram rendered in HTML — no image needed. */
+  /** Lightweight box-and-arrow diagram rendered in HTML - no image needed. */
   | { type: "flow"; nodes: string[]; caption?: string }
   | { type: "compare"; before: CaseStudyBlock; after: CaseStudyBlock; beforeLabel?: string; afterLabel?: string }
   /** Editorial margin note. Rendered beside the section on large screens. */
@@ -202,7 +207,7 @@ export type ExperienceBoardEntry = {
   fit: "cover" | "contain";
   /** Links to the full `experience` entry (photos, LinkedIn embeds, etc.). */
   sourceId: string;
-  /** Fill in later — detail panel uses placeholders when empty. */
+  /** Fill in later - detail panel uses placeholders when empty. */
   details?: {
     summary?: string;
     dates?: string;
@@ -233,7 +238,7 @@ export type Extracurricular = {
 
 export type LabStatus = "SHIPPED" | "ONGOING" | "PAUSED" | "ABANDONED";
 
-/** Canonical lab entry — calendar + message board share this shape. */
+/** Canonical lab entry - calendar + message board share this shape. */
 export type LabEntry = {
   id: string;
   title: string;
@@ -271,7 +276,7 @@ export type ScrapbookItem = {
   media?: Media;
   /** Visual tilt in degrees for the scrapbook layout. */
   tilt?: number;
-  /** Frame shape — defaults to portrait. */
+  /** Frame shape - defaults to portrait. */
   aspect?: "portrait" | "landscape";
 };
 
@@ -300,4 +305,21 @@ export type Award = {
   /** Optional amount or short detail, e.g. "$1,500". */
   detail?: string;
   href?: string;
+};
+
+/* -------------------------------------------------------------------------- */
+/* Blog / logs                                                                */
+/* -------------------------------------------------------------------------- */
+
+export type BlogPost = {
+  slug: string;
+  title: string;
+  /** Display date, e.g. "Nov 2024". */
+  date: string;
+  /** ISO date for sorting. */
+  dateISO: string;
+  summary: string;
+  /** Short log paragraphs. */
+  body: string[];
+  photos?: Media[];
 };

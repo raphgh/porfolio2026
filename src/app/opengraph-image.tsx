@@ -4,7 +4,7 @@ export const alt = "Raphaelle Ghanem";
 export const size = { width: 512, height: 512 };
 export const contentType = "image/png";
 
-/** Simple mustard circle — site thumbnail / link preview. */
+/** Simple mustard circle - site thumbnail / link preview. */
 export default function OpenGraphImage() {
   return new ImageResponse(
     (

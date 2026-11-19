@@ -8,17 +8,18 @@ import { WiiCursor } from "@/components/wii/WiiCursor";
 import { site } from "@/data/site";
 
 /**
- * Lightweight Wii chrome for internal pages — channel framing without
+ * Lightweight Wii chrome for internal pages - channel framing without
  * drowning portfolio content. Homepage uses the full `WiiHome` instead.
  */
 /** Routes that render their own full `<WiiPage>` chrome. */
-const SELF_CONTAINED = new Set(["/work", "/lab", "/experience", "/me"]);
+const SELF_CONTAINED = new Set(["/work", "/lab", "/experience", "/me", "/blog"]);
 
 export function WiiShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const isCaseStudy = pathname.startsWith("/work/");
 
-  if (isHome || SELF_CONTAINED.has(pathname)) return <>{children}</>;
+  if (isHome || SELF_CONTAINED.has(pathname) || isCaseStudy) return <>{children}</>;
 
   return (
     <div className="wii-channel-page">

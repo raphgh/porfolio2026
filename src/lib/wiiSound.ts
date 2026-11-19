@@ -1,5 +1,5 @@
 /**
- * Original Web Audio blips for Wii Mode — not Nintendo audio.
+ * Original Web Audio blips for Wii Mode - not Nintendo audio.
  * On by default; preference stored in localStorage.
  */
 

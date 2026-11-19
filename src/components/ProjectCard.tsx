@@ -65,7 +65,7 @@ export function ProjectCard({
       <div className={feature ? "md:col-span-7 md:order-2" : ""}>
         <MediaFrame
           media={project.cover}
-          placeholder={`${project.title} — cover`}
+          placeholder={`${project.title} - cover`}
           aspect={mediaAspect ?? (feature ? "aspect-[16/10]" : "aspect-[4/3]")}
           sizes={feature ? "(min-width: 768px) 58vw, 100vw" : "(min-width: 768px) 45vw, 100vw"}
           fit="contain"
@@ -80,7 +80,7 @@ export function ProjectCard({
           <dt className="label pt-0.5 text-charcoal-muted">Role</dt>
           <dd>{project.role}</dd>
           <dt className="label pt-0.5 text-charcoal-muted">Stack</dt>
-          <dd>{project.stack.length ? project.stack.join(", ") : "—"}</dd>
+          <dd>{project.stack.length ? project.stack.join(", ") : "-"}</dd>
           {project.year && (
             <>
               <dt className="label pt-0.5 text-charcoal-muted">Year</dt>

@@ -61,7 +61,7 @@ export function ExtracurricularCard({ item, index, variant = "compact" }: Props)
         )}
       </div>
       <div className={`col-span-12 md:col-span-6 ${flip ? "md:order-1" : ""}`}>
-        <MediaFrame media={item.media} aspect="aspect-[4/3]" placeholder={`${item.title} — photo`} />
+        <MediaFrame media={item.media} aspect="aspect-[4/3]" placeholder={`${item.title} - photo`} />
       </div>
     </article>
   );
