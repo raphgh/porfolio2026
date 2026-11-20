@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { Media } from "@/data/types";
 import { AutoVideo } from "./AutoVideo";
 
@@ -17,7 +16,7 @@ export function MediaFrame({
   media,
   aspect = "aspect-[16/10]",
   placeholder = "Media",
-  sizes = "(min-width: 1024px) 50vw, 100vw",
+  sizes: _sizes,
   priority,
   className = "",
   fit = "cover",
@@ -41,13 +40,13 @@ export function MediaFrame({
         </div>
       )}
       {media?.type === "image" && (
-        <Image
+        // Native img avoids next/image optimizer blanks on some mobile browsers.
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
           src={media.src}
           alt={media.alt}
-          fill
-          sizes={sizes}
-          priority={priority}
-          className={`${fit === "contain" ? "object-contain" : "object-cover"} transition-transform duration-700 ease-out group-hover:scale-[1.025]`}
+          fetchPriority={priority ? "high" : undefined}
+          className={`absolute inset-0 size-full ${fit === "contain" ? "object-contain" : "object-cover"} transition-transform duration-700 ease-out group-hover:scale-[1.025]`}
         />
       )}
       {media?.type === "video" && <AutoVideo media={media} />}

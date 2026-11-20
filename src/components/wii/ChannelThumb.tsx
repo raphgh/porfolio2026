@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { m, useReducedMotion } from "motion/react";
 import type { ChannelThumbVariant } from "@/data/wiiChannels";
 
@@ -103,19 +102,20 @@ function ProjectsThumb({ hovered, reduce }: { hovered: boolean; reduce: boolean 
       >
         {(["a", "b"] as const).map((slot) => (
           <span key={slot} className={`wii-thumb-phone wii-thumb-phone--${slot}`}>
-            <Image
+            {/* Native img: next/image optimizer was blanking on some mobile browsers */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={PROJECT_SHOTS[slot][0]}
               alt=""
-              fill
-              sizes="120px"
               className="wii-thumb-phone__img wii-thumb-phone__img--a"
+              draggable={false}
             />
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={PROJECT_SHOTS[slot][1]}
               alt=""
-              fill
-              sizes="120px"
               className={`wii-thumb-phone__img wii-thumb-phone__img--b${hovered ? " is-on" : ""}`}
+              draggable={false}
             />
           </span>
         ))}
@@ -152,7 +152,8 @@ function LabThumb({ hovered, reduce }: { hovered: boolean; reduce: boolean }) {
             }
             transition={{ type: "spring", stiffness: 420, damping: 14, delay: i * 0.035 }}
           >
-            <Image src={icon.src} alt="" width={48} height={48} sizes="48px" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={icon.src} alt="" draggable={false} />
           </m.span>
         ))}
       </span>
@@ -164,7 +165,8 @@ function ExperienceThumb({ hovered, reduce }: { hovered: boolean; reduce: boolea
   return (
     <span className="wii-thumb__art wii-thumb-exp">
       <span className="wii-thumb-exp__logo">
-        <Image src="/logos/nokia.jpg" alt="" fill sizes="160px" className="object-cover" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/logos/nokia.jpg" alt="" className="wii-thumb-fill" draggable={false} />
       </span>
       <span className="wii-thumb-exp__ticker-wrap">
         <m.span
@@ -199,12 +201,12 @@ function MeThumb({ hovered, reduce }: { hovered: boolean; reduce: boolean }) {
         }
         transition={{ type: "spring", stiffness: 280, damping: 12 }}
       >
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src="/scrapbook/fundraiser.jpg"
           alt=""
-          fill
-          sizes="140px"
-          className="object-cover object-[50%_18%]"
+          className="wii-thumb-fill wii-thumb-fill--top"
+          draggable={false}
         />
       </m.span>
     </span>
@@ -227,12 +229,12 @@ function BlogThumb({ hovered, reduce }: { hovered: boolean; reduce: boolean }) {
       >
         <span className="wii-thumb-blog__lines" aria-hidden />
         <span className="wii-thumb-blog__stamp">
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src="/scrapbook/fundraiser.jpg"
             alt=""
-            fill
-            sizes="64px"
-            className="object-cover object-[50%_18%]"
+            className="wii-thumb-fill wii-thumb-fill--top"
+            draggable={false}
           />
         </span>
       </m.span>

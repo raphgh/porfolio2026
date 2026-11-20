@@ -475,9 +475,19 @@
   transform: translateY(4%) rotate(-3deg);
 }
 
-.wii-thumb-phone__img {
+.wii-thumb-phone__img,
+.wii-thumb-fill {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center top;
+}
+
+.wii-thumb-fill--top {
+  object-position: 50% 18%;
 }
 
 .wii-thumb-phone__img--b {

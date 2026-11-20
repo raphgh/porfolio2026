@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useInterfaceMode } from "@/components/InterfaceModeProvider";
 import { WiiPage } from "@/components/wii/WiiPage";
 import { blogPosts } from "@/data/blog";
@@ -86,13 +85,12 @@ function BlogEntry({
               photo.type === "image" ? (
                 <figure key={i} className="flex flex-col gap-2">
                   <div className="relative aspect-[4/5] overflow-hidden sm:aspect-[4/3]">
-                    <Image
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
                       src={photo.src}
                       alt={photo.alt}
-                      fill
-                      sizes="(min-width: 640px) 40vw, 100vw"
-                      className="object-cover"
-                      priority={priority && i === 0}
+                      className="absolute inset-0 size-full object-cover"
+                      fetchPriority={priority && i === 0 ? "high" : undefined}
                     />
                   </div>
                   {photo.caption ? (

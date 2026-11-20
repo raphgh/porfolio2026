@@ -9,7 +9,7 @@ export const site = {
   description:
     "Software engineering student and creative based in Ottawa.",
   /** Used for canonical URLs, sitemap and Open Graph. Set NEXT_PUBLIC_SITE_URL in Vercel. */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://rghanem.vercel.app",
   /** Drop the real file at /public/resume.pdf. */
   resume: "/resume.pdf",
   contact: {
