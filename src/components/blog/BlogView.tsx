@@ -23,7 +23,7 @@ function ModernBlog({ posts }: { posts: BlogPost[] }) {
         <p className="label text-charcoal-muted">Blog</p>
         <h1 className="display mt-2 text-title text-navy">logs</h1>
         <p className="mt-3 text-lede text-charcoal-soft">
-          Short notes on events, thoughts, and things worth remembering.
+        cool things worth sharing :p
         </p>
       </header>
 
