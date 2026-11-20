@@ -9,6 +9,9 @@ const localIcon: Record<string, string> = {
   "C#": "/icons/csharp.svg",
   "REST APIs": "/icons/rest-api.png",
   "Microsoft SSMS": "/icons/ssms.png",
+  Claude: "/icons/claude.svg",
+  Lovable: "/icons/lovable.svg",
+  Base44: "/icons/base44.svg",
 };
 
 const iconSlug: Record<string, string> = {
@@ -59,6 +62,9 @@ const brandColor: Record<string, string> = {
   "REST APIs": "1E3A6E",
   Figma: "F24E1E",
   Cursor: "000000",
+  Claude: "D97757",
+  Lovable: "FF5C8A",
+  Base44: "1E3A6E",
   IntelliJ: "000000",
   "VS Code": "007ACC",
   "Android Studio": "3DDC84",

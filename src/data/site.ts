@@ -79,6 +79,9 @@ export const technologies = [
 
   { name: "Figma", group: "Design & IDEs" as const },
   { name: "Cursor", group: "Design & IDEs" as const },
+  { name: "Claude", group: "Design & IDEs" as const },
+  { name: "Lovable", group: "Design & IDEs" as const },
+  { name: "Base44", group: "Design & IDEs" as const },
   { name: "IntelliJ", group: "Design & IDEs" as const },
   { name: "VS Code", group: "Design & IDEs" as const },
   { name: "Android Studio", group: "Design & IDEs" as const },
