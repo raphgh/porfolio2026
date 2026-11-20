@@ -16,11 +16,12 @@ export function AboutGallery({ items, compact = false }: { items: ScrapbookItem[
           <li key={item.caption} className="group mb-4 break-inside-avoid sm:mb-5 md:mb-6">
             <figure className="relative overflow-hidden rounded-2xl border border-navy/30 bg-white">
               {media ? (
+                // Native img keeps natural height for the masonry columns.
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={media.src}
                   alt={media.alt}
-                  className="h-auto w-full transition-[filter] duration-300 ease-out sm:group-hover:brightness-[0.55]"
+                  className="h-auto w-full transition-opacity duration-300 ease-out sm:group-hover:opacity-70"
                 />
               ) : (
                 <div className="aspect-[5/6] bg-paper-deep" />

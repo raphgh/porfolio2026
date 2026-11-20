@@ -15,6 +15,7 @@ type Props = { projects: Project[] };
 /**
  * Wii: glossy 2-col channel cards + confirm dialog.
  * Modern: existing WorkIndex.
+ * Covers use background-image - Safari can blank <img> under Motion transforms.
  */
 export function WiiProjectGrid({ projects }: Props) {
   const { mode } = useInterfaceMode();
@@ -39,20 +40,10 @@ export function WiiProjectGrid({ projects }: Props) {
           const dimmed = hoverId !== null && !active;
           return (
             <li key={project.slug} id={project.slug} className="wii-project-grid__item">
-              <m.button
+              <button
                 type="button"
                 className={`wii-project-card${active ? " is-hot" : ""}${dimmed ? " is-dim" : ""}`}
                 aria-label={`${project.title}. ${project.role}.`}
-                initial={false}
-                animate={{
-                  scale: active ? 1.04 : 1,
-                  zIndex: active ? 4 : 1,
-                }}
-                transition={
-                  reduce
-                    ? { duration: 0.2 }
-                    : { type: "spring", stiffness: 380, damping: 24 }
-                }
                 onMouseEnter={() => {
                   wiiSound.hover();
                   setHoverId(project.slug);
@@ -65,17 +56,19 @@ export function WiiProjectGrid({ projects }: Props) {
                   setPending(project);
                 }}
               >
-                <span className="wii-project-card__media">
-                  {cover ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={cover.src}
-                      alt=""
-                      className="wii-project-card__img"
-                    />
-                  ) : (
-                    <span className="wii-project-card__wash" />
-                  )}
+                <span
+                  className="wii-project-card__media"
+                  style={
+                    cover
+                      ? {
+                          backgroundImage: `url(${cover.src})`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                        }
+                      : undefined
+                  }
+                >
+                  {!cover ? <span className="wii-project-card__wash" /> : null}
                   <span className="wii-project-card__gloss" aria-hidden />
                   <span className="wii-project-card__scan" aria-hidden />
                   <span className="wii-project-card__title">{project.title}</span>
@@ -87,7 +80,7 @@ export function WiiProjectGrid({ projects }: Props) {
                 <span className="wii-project-card__body">
                   <span className="wii-project-card__lede">{project.summary}</span>
                 </span>
-              </m.button>
+              </button>
             </li>
           );
         })}

@@ -69,7 +69,19 @@ export function WiiPage({
       <WiiCursor />
 
       <header className="wii-page__top">
-        <span className="wii-page__top-spacer" aria-hidden />
+        <div className="wii-page__top-start">
+          <m.button
+            type="button"
+            className="wii-orb wii-page__back"
+            aria-label={backHref === "/" ? "Back to channels" : "Back"}
+            initial={reduce ? false : { opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ type: "spring", stiffness: 260, damping: 24, delay: 0.12 }}
+            onClick={goBack}
+          >
+            <BackIcon />
+          </m.button>
+        </div>
         <p className="wii-page__mark">{site.shortName}</p>
         <div className="wii-page__top-end">
           <ModeToggle variant="wii" />
@@ -99,17 +111,12 @@ export function WiiPage({
               reduce ? { duration: 0.25 } : { type: "spring", stiffness: 260, damping: 28 }
             }
           >
-            <m.div
-              className="wii-page__thumb"
-              layoutId={`wii-channel-${channelId}`}
-              transition={{ type: "spring", stiffness: 180, damping: 24 }}
-              style={{ background: accent }}
-            >
+            <div className="wii-page__thumb" style={{ background: accent }}>
               {thumb ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={thumb} alt="" />
               ) : null}
-            </m.div>
+            </div>
             <div className="wii-page__title-text">
               <h1 className="wii-page__heading">
                 {title.toLowerCase()}
@@ -147,18 +154,6 @@ export function WiiPage({
           </div>
         </div>
       </m.div>
-
-      <m.button
-        type="button"
-        className="wii-orb wii-page__back"
-        aria-label={backHref === "/" ? "Back to channels" : "Back"}
-        initial={reduce ? false : { opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ type: "spring", stiffness: 260, damping: 24, delay: 0.2 }}
-        onClick={goBack}
-      >
-        <BackIcon />
-      </m.button>
     </div>
   );
 }

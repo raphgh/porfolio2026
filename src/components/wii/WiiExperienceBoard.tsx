@@ -121,22 +121,12 @@ export function WiiExperienceBoard() {
             >
               <h2 className="wii-exp-year__label">{year}</h2>
               <ul className="wii-exp-grid">
-                {(byYear.get(year) ?? []).map((entry, i) => (
+                {(byYear.get(year) ?? []).map((entry) => (
                   <li key={entry.id} className="wii-exp-grid__item">
-                    <m.button
+                    <button
                       type="button"
                       className="wii-exp-tile"
-                      layoutId={`wii-exp-${entry.id}`}
                       aria-label={`${entry.company}, ${entry.role}, ${entry.year}`}
-                      initial={reduce ? false : { y: 16 }}
-                      animate={{ y: 0 }}
-                      whileHover={reduce ? undefined : { scale: 1.04, zIndex: 3 }}
-                      whileFocus={reduce ? undefined : { scale: 1.04, zIndex: 3 }}
-                      transition={
-                        reduce
-                          ? { duration: 0.2 }
-                          : { type: "spring", stiffness: 360, damping: 24, delay: i * 0.05 }
-                      }
                       onClick={() => {
                         wiiSound.confirm();
                         setActiveId(entry.id);
@@ -144,13 +134,13 @@ export function WiiExperienceBoard() {
                     >
                       <span
                         className={`wii-exp-tile__media${entry.fit === "contain" ? " is-contain" : ""}`}
+                        style={{
+                          backgroundImage: `url(${entry.image})`,
+                          backgroundSize: entry.fit === "contain" ? "contain" : "cover",
+                          backgroundPosition: "center",
+                          backgroundRepeat: "no-repeat",
+                        }}
                       >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={entry.image}
-                          alt=""
-                          className={`wii-exp-tile__img wii-exp-tile__img--${entry.fit}`}
-                        />
                         <span className="wii-exp-tile__gloss" aria-hidden />
                         <span className="wii-exp-tile__scan" aria-hidden />
                         <span className="wii-exp-tile__pill">
@@ -160,7 +150,7 @@ export function WiiExperienceBoard() {
                           </span>
                         </span>
                       </span>
-                    </m.button>
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -185,11 +175,13 @@ export function WiiExperienceBoard() {
               }}
             />
             <m.article
-              layoutId={`wii-exp-${activeBoard.id}`}
               className="wii-exp-detail"
               role="dialog"
               aria-modal="true"
               aria-labelledby={detailTitleId}
+              initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.94, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: 8 }}
               transition={{ type: "spring", stiffness: 220, damping: 26 }}
             >
               <div className="wii-exp-detail__toolbar">

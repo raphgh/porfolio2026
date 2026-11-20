@@ -134,6 +134,20 @@ export function Navbar() {
       >
         <nav aria-label="Primary" className="shell flex h-14 items-center justify-between gap-4 md:h-16">
           <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+            <Link
+              href="/"
+              className="group flex shrink-0 items-center"
+              aria-label={`${site.name} - home`}
+            >
+              <span
+                aria-hidden
+                className="size-8 shrink-0 overflow-hidden transition-transform duration-300 ease-(--ease-out-soft) group-hover:-rotate-6"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/logos/me.jpg" alt="" className="size-full object-cover" />
+              </span>
+            </Link>
+
             <button
               ref={toggleRef}
               type="button"
@@ -160,20 +174,6 @@ export function Navbar() {
                 )}
               </span>
             </button>
-
-            <Link
-              href="/"
-              className="group flex shrink-0 items-center"
-              aria-label={`${site.name} - home`}
-            >
-              <span
-                aria-hidden
-                className="size-8 shrink-0 overflow-hidden transition-transform duration-300 ease-(--ease-out-soft) group-hover:-rotate-6"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/logos/me.jpg" alt="" className="size-full object-cover" />
-              </span>
-            </Link>
           </div>
 
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">

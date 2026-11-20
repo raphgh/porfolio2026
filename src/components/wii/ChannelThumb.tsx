@@ -1,6 +1,5 @@
 "use client";
 
-import { m, useReducedMotion } from "motion/react";
 import type { ChannelThumbVariant } from "@/data/wiiChannels";
 
 export type ChannelThumbProps = {
@@ -27,16 +26,16 @@ const PROJECT_SHOTS = {
 } as const;
 
 /**
- * Designed Wii Menu channel face - one strong subject + shared gloss/scan/title.
+ * Designed Wii Menu channel face - CSS motion only (no Motion transforms).
+ * Safari blanks <img> when a transformed ancestor wraps overflow-clipped media.
  */
 export function ChannelThumb({ variant, title, accent, hovered = false }: ChannelThumbProps) {
-  const reduce = useReducedMotion();
   const lightTitle = variant === "resume" || variant === "comingSoon";
 
   return (
     <span className={`wii-thumb wii-thumb--${variant}`} data-hovered={hovered ? "true" : "false"}>
       <span aria-hidden>
-        <ThumbArt variant={variant} hovered={hovered} reduce={!!reduce} accent={accent} />
+        <ThumbArt variant={variant} hovered={hovered} accent={accent} />
       </span>
       <span className="wii-thumb__scan" aria-hidden />
       <span className="wii-thumb__gloss" aria-hidden />
@@ -56,29 +55,27 @@ export function ChannelThumb({ variant, title, accent, hovered = false }: Channe
 function ThumbArt({
   variant,
   hovered,
-  reduce,
   accent,
 }: {
   variant: ChannelThumbVariant;
   hovered: boolean;
-  reduce: boolean;
   accent?: string;
 }) {
   switch (variant) {
     case "projects":
-      return <ProjectsThumb hovered={hovered} reduce={reduce} />;
+      return <ProjectsThumb hovered={hovered} />;
     case "lab":
-      return <LabThumb hovered={hovered} reduce={reduce} />;
+      return <LabThumb hovered={hovered} />;
     case "experience":
-      return <ExperienceThumb hovered={hovered} reduce={reduce} />;
+      return <ExperienceThumb hovered={hovered} />;
     case "me":
-      return <MeThumb hovered={hovered} reduce={reduce} />;
+      return <MeThumb hovered={hovered} />;
     case "blog":
-      return <BlogThumb hovered={hovered} reduce={reduce} />;
+      return <BlogThumb hovered={hovered} />;
     case "resume":
-      return <ResumeThumb hovered={hovered} reduce={reduce} />;
+      return <ResumeThumb hovered={hovered} />;
     case "awards":
-      return <AwardsThumb hovered={hovered} reduce={reduce} />;
+      return <AwardsThumb hovered={hovered} />;
     case "contact":
       return <IconThumb kind="mail" accent={accent} />;
     case "github":
@@ -91,45 +88,34 @@ function ThumbArt({
   }
 }
 
-function ProjectsThumb({ hovered, reduce }: { hovered: boolean; reduce: boolean }) {
+function ProjectsThumb({ hovered }: { hovered: boolean }) {
   return (
-    <span className="wii-thumb__art wii-thumb-projects">
+    <span className="wii-thumb__art wii-thumb-projects" data-hot={hovered ? "true" : "false"}>
       <span className="wii-thumb-projects__lawn" aria-hidden />
-      <m.span
-        className="wii-thumb-projects__phones"
-        animate={reduce ? undefined : { y: hovered ? -12 : 0 }}
-        transition={{ type: "spring", stiffness: 320, damping: 22 }}
-      >
+      <span className="wii-thumb-projects__phones">
         {(["a", "b"] as const).map((slot) => (
           <span key={slot} className={`wii-thumb-phone wii-thumb-phone--${slot}`}>
-            {/* Native img: next/image optimizer was blanking on some mobile browsers */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={PROJECT_SHOTS[slot][0]}
-              alt=""
-              className="wii-thumb-phone__img wii-thumb-phone__img--a"
-              draggable={false}
+            <span
+              className="wii-thumb-phone__shot wii-thumb-phone__shot--a"
+              style={{ backgroundImage: `url(${PROJECT_SHOTS[slot][0]})` }}
             />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={PROJECT_SHOTS[slot][1]}
-              alt=""
-              className={`wii-thumb-phone__img wii-thumb-phone__img--b${hovered ? " is-on" : ""}`}
-              draggable={false}
+            <span
+              className={`wii-thumb-phone__shot wii-thumb-phone__shot--b${hovered ? " is-on" : ""}`}
+              style={{ backgroundImage: `url(${PROJECT_SHOTS[slot][1]})` }}
             />
           </span>
         ))}
-      </m.span>
+      </span>
     </span>
   );
 }
 
-function LabThumb({ hovered, reduce }: { hovered: boolean; reduce: boolean }) {
+function LabThumb({ hovered }: { hovered: boolean }) {
   return (
-    <span className="wii-thumb__art wii-thumb-lab">
+    <span className="wii-thumb__art wii-thumb-lab" data-hot={hovered ? "true" : "false"}>
       <span className="wii-thumb-lab__crowd">
         {LAB_ICONS.map((icon, i) => (
-          <m.span
+          <span
             key={icon.alt}
             className="wii-thumb-lab__bubble-wrap"
             style={{
@@ -138,154 +124,81 @@ function LabThumb({ hovered, reduce }: { hovered: boolean; reduce: boolean }) {
               width: icon.size,
               zIndex: i + 1,
             }}
-            animate={
-              reduce
-                ? undefined
-                : hovered
-                  ? {
-                      x: (i % 2 === 0 ? 1 : -1) * (4 + i),
-                      y: (i % 2 === 0 ? -1 : 1) * (3 + i),
-                      rotate: i % 2 === 0 ? 8 : -8,
-                      scale: 1.06,
-                    }
-                  : { x: 0, y: 0, rotate: 0, scale: 1 }
-            }
-            transition={{ type: "spring", stiffness: 420, damping: 14, delay: i * 0.035 }}
           >
-            <span className="wii-thumb-lab__bubble">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={icon.src} alt="" draggable={false} />
-            </span>
-          </m.span>
+            <span
+              className="wii-thumb-lab__bubble"
+              style={{ backgroundImage: `url(${icon.src})` }}
+            />
+          </span>
         ))}
       </span>
     </span>
   );
 }
 
-function ExperienceThumb({ hovered, reduce }: { hovered: boolean; reduce: boolean }) {
+function ExperienceThumb({ hovered }: { hovered: boolean }) {
   return (
-    <span className="wii-thumb__art wii-thumb-exp">
-      <span className="wii-thumb-exp__logo">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/logos/nokia.jpg" alt="" className="wii-thumb-fill" draggable={false} />
-      </span>
+    <span className="wii-thumb__art wii-thumb-exp" data-hot={hovered ? "true" : "false"}>
+      <span
+        className="wii-thumb-exp__logo"
+        style={{ backgroundImage: "url(/logos/nokia.jpg)" }}
+      />
       <span className="wii-thumb-exp__ticker-wrap">
-        <m.span
-          className="wii-thumb-exp__ticker"
-          animate={reduce ? undefined : { x: ["0%", "-50%"] }}
-          transition={{
-            duration: hovered ? 6 : 16,
-            ease: "linear",
-            repeat: Infinity,
-          }}
-        >
+        <span className="wii-thumb-exp__ticker">
           {EXP_TICKER}
           {EXP_TICKER}
-        </m.span>
+        </span>
       </span>
     </span>
   );
 }
 
-function MeThumb({ hovered, reduce }: { hovered: boolean; reduce: boolean }) {
+function MeThumb({ hovered }: { hovered: boolean }) {
   return (
-    <span className="wii-thumb__art wii-thumb-me">
+    <span className="wii-thumb__art wii-thumb-me" data-hot={hovered ? "true" : "false"}>
       <span className="wii-thumb-me__checker" aria-hidden />
-      {/* Motion wrap separate from overflow clip - Safari blanks imgs when both share a node */}
-      <m.span
-        className="wii-thumb-me__avatar-wrap"
-        animate={
-          reduce
-            ? undefined
-            : hovered
-              ? { y: -6, rotate: 3 }
-              : { y: 0, rotate: 0 }
-        }
-        transition={{ type: "spring", stiffness: 280, damping: 12 }}
-      >
-        <span className="wii-thumb-me__avatar">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/scrapbook/fundraiser.jpg"
-            alt=""
-            className="wii-thumb-fill wii-thumb-fill--top"
-            draggable={false}
-          />
-        </span>
-      </m.span>
+      <span className="wii-thumb-me__avatar-wrap">
+        <span
+          className="wii-thumb-me__avatar"
+          style={{ backgroundImage: "url(/scrapbook/fundraiser.jpg)" }}
+        />
+      </span>
     </span>
   );
 }
 
-function BlogThumb({ hovered, reduce }: { hovered: boolean; reduce: boolean }) {
+function BlogThumb({ hovered }: { hovered: boolean }) {
   return (
-    <span className="wii-thumb__art wii-thumb-blog">
-      <m.span
-        className="wii-thumb-blog__page-wrap"
-        animate={
-          reduce
-            ? undefined
-            : hovered
-              ? { y: -7, rotate: -4 }
-              : { y: 0, rotate: -2 }
-        }
-        transition={{ type: "spring", stiffness: 300, damping: 18 }}
-      >
+    <span className="wii-thumb__art wii-thumb-blog" data-hot={hovered ? "true" : "false"}>
+      <span className="wii-thumb-blog__page-wrap">
         <span className="wii-thumb-blog__page">
           <span className="wii-thumb-blog__lines" aria-hidden />
-          <span className="wii-thumb-blog__stamp">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/scrapbook/fundraiser.jpg"
-              alt=""
-              className="wii-thumb-fill wii-thumb-fill--top"
-              draggable={false}
-            />
-          </span>
+          <span
+            className="wii-thumb-blog__stamp"
+            style={{ backgroundImage: "url(/scrapbook/fundraiser.jpg)" }}
+          />
         </span>
-      </m.span>
+      </span>
     </span>
   );
 }
 
-function ResumeThumb({ hovered, reduce }: { hovered: boolean; reduce: boolean }) {
+function ResumeThumb({ hovered }: { hovered: boolean }) {
   return (
-    <span className="wii-thumb__art wii-thumb-resume">
-      <m.span
-        className="wii-thumb-resume__doc"
-        animate={
-          reduce
-            ? undefined
-            : hovered
-              ? { y: -8, rotateY: 18, rotateX: -6 }
-              : { y: 0, rotateY: 0, rotateX: 0 }
-        }
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-        style={{ transformStyle: "preserve-3d" }}
-      >
+    <span className="wii-thumb__art wii-thumb-resume" data-hot={hovered ? "true" : "false"}>
+      <span className="wii-thumb-resume__doc">
         <span className="wii-thumb-resume__lines" aria-hidden />
-      </m.span>
+      </span>
     </span>
   );
 }
 
-function AwardsThumb({ hovered, reduce }: { hovered: boolean; reduce: boolean }) {
+function AwardsThumb({ hovered }: { hovered: boolean }) {
   return (
-    <span className="wii-thumb__art wii-thumb-awards">
-      <m.span
-        className="wii-thumb-awards__medal"
-        animate={
-          reduce
-            ? undefined
-            : hovered
-              ? { y: -6, rotate: -8, scale: 1.06 }
-              : { y: 0, rotate: 0, scale: 1 }
-        }
-        transition={{ type: "spring", stiffness: 320, damping: 16 }}
-      >
+    <span className="wii-thumb__art wii-thumb-awards" data-hot={hovered ? "true" : "false"}>
+      <span className="wii-thumb-awards__medal">
         <MedalGlyph />
-      </m.span>
+      </span>
     </span>
   );
 }

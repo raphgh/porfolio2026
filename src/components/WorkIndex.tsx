@@ -28,19 +28,18 @@ export function WorkIndex({ projects }: { projects: Project[] }) {
           <>
             <div
               className="relative aspect-[2/1] w-full overflow-hidden"
-              style={{ backgroundColor: cover ? undefined : tone.bg }}
-            >
-              {cover ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={cover.src}
-                  alt={cover.alt}
-                  className="absolute inset-0 size-full object-cover"
-                />
-              ) : (
-                <span className="absolute inset-0" style={{ backgroundColor: tone.bg }} />
-              )}
-            </div>
+              role={cover ? "img" : undefined}
+              aria-label={cover?.alt}
+              style={
+                cover
+                  ? {
+                      backgroundImage: `url(${cover.src})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }
+                  : { backgroundColor: tone.bg }
+              }
+            />
 
             <div className="flex flex-col gap-2 px-5 py-4 md:px-6 md:py-5">
               <h2 className="display text-heading text-navy">{project.title}</h2>

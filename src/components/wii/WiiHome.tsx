@@ -126,27 +126,16 @@ export function WiiHome() {
         {zooming ? (
           <m.div
             key={zooming.id}
-            layoutId={`wii-channel-${zooming.id}`}
-            style={{
-              position: "fixed",
-              inset: "8%",
-              zIndex: 70,
-              borderRadius: 16,
-              background: zooming.accent ?? "#eef2f6",
-              border: "3px solid #3fa9e0",
-              boxShadow: "0 0 40px rgb(63 169 224 / 0.45)",
-              overflow: "hidden",
-            }}
-            animate={{ inset: "0%", borderRadius: 0 }}
+            className="wii-channel-zoom"
+            style={{ background: zooming.accent ?? "#eef2f6" }}
+            initial={reduce ? { opacity: 1 } : { opacity: 0.6, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ type: "spring", stiffness: 180, damping: 24 }}
           >
             {zooming.preview ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={zooming.preview}
-                alt=""
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
+              <img src={zooming.preview} alt="" className="wii-channel-zoom__img" />
             ) : null}
           </m.div>
         ) : null}
