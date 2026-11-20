@@ -32,10 +32,17 @@ export function InterfaceModeProvider({ children }: { children: ReactNode }) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const initial = getPreferredInterfaceMode();
-    applyInterfaceMode(initial);
-    setModeState(initial);
-    setReady(true);
+    try {
+      const initial = getPreferredInterfaceMode();
+      applyInterfaceMode(initial);
+      setModeState(initial);
+    } catch {
+      applyInterfaceMode("wii");
+      setModeState("wii");
+    } finally {
+      // Always clear the boot gate - Safari private mode can throw on storage
+      setReady(true);
+    }
   }, []);
 
   const setMode = useCallback((next: InterfaceMode) => {

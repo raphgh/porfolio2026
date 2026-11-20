@@ -134,13 +134,14 @@ export function WiiExperienceBoard() {
                     >
                       <span
                         className={`wii-exp-tile__media${entry.fit === "contain" ? " is-contain" : ""}`}
-                        style={{
-                          backgroundImage: `url(${entry.image})`,
-                          backgroundSize: entry.fit === "contain" ? "contain" : "cover",
-                          backgroundPosition: "center",
-                          backgroundRepeat: "no-repeat",
-                        }}
                       >
+                        <img
+                          className={`wii-exp-tile__img${entry.fit === "contain" ? " wii-exp-tile__img--contain" : " wii-exp-tile__img--cover"}`}
+                          src={entry.image}
+                          alt=""
+                          decoding="async"
+                          draggable={false}
+                        />
                         <span className="wii-exp-tile__gloss" aria-hidden />
                         <span className="wii-exp-tile__scan" aria-hidden />
                         <span className="wii-exp-tile__pill">

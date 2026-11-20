@@ -28,18 +28,18 @@ export function WorkIndex({ projects }: { projects: Project[] }) {
           <>
             <div
               className="relative aspect-[2/1] w-full overflow-hidden"
-              role={cover ? "img" : undefined}
-              aria-label={cover?.alt}
-              style={
-                cover
-                  ? {
-                      backgroundImage: `url(${cover.src})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                    }
-                  : { backgroundColor: tone.bg }
-              }
-            />
+              style={cover ? undefined : { backgroundColor: tone.bg }}
+            >
+              {cover ? (
+                <img
+                  src={cover.src}
+                  alt={cover.alt || ""}
+                  className="absolute inset-0 size-full object-cover"
+                  decoding="async"
+                  draggable={false}
+                />
+              ) : null}
+            </div>
 
             <div className="flex flex-col gap-2 px-5 py-4 md:px-6 md:py-5">
               <h2 className="display text-heading text-navy">{project.title}</h2>

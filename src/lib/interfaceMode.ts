@@ -5,15 +5,23 @@ export const INTERFACE_STORAGE_KEY = "interface-mode";
 /** First visit defaults to Wii Mode. */
 export function getPreferredInterfaceMode(): InterfaceMode {
   if (typeof window === "undefined") return "wii";
-  const stored = localStorage.getItem(INTERFACE_STORAGE_KEY);
-  if (stored === "wii" || stored === "modern") return stored;
+  try {
+    const stored = localStorage.getItem(INTERFACE_STORAGE_KEY);
+    if (stored === "wii" || stored === "modern") return stored;
+  } catch {
+    /* Safari private / blocked storage */
+  }
   return "wii";
 }
 
 export function applyInterfaceMode(mode: InterfaceMode) {
   const root = document.documentElement;
   root.dataset.interface = mode;
-  localStorage.setItem(INTERFACE_STORAGE_KEY, mode);
+  try {
+    localStorage.setItem(INTERFACE_STORAGE_KEY, mode);
+  } catch {
+    /* Safari private / blocked storage - mode still applies for this session */
+  }
 }
 
 export function toggleInterfaceMode(current: InterfaceMode): InterfaceMode {

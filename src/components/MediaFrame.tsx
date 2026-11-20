@@ -13,8 +13,8 @@ type Props = {
 };
 
 /**
- * Uses CSS background-image for stills - Safari can blank <img> under
- * overflow/transform compositing layers that are common on this site.
+ * Still frames use plain <img> - Safari blanks CSS backgrounds more often
+ * under overflow + radius compositing.
  */
 export function MediaFrame({
   media,
@@ -28,19 +28,16 @@ export function MediaFrame({
   return (
     <div
       className={`relative overflow-hidden rounded-2xl border border-navy/40 bg-paper-deep ${aspect} ${className}`}
-      style={
-        media?.type === "image"
-          ? {
-              backgroundImage: `url(${media.src})`,
-              backgroundSize: fit === "contain" ? "contain" : "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-            }
-          : undefined
-      }
-      role={media?.type === "image" ? "img" : undefined}
-      aria-label={media?.type === "image" ? media.alt : undefined}
     >
+      {media?.type === "image" ? (
+        <img
+          src={media.src}
+          alt={media.alt || ""}
+          className={`absolute inset-0 size-full ${fit === "contain" ? "object-contain" : "object-cover"}`}
+          decoding="async"
+          draggable={false}
+        />
+      ) : null}
       {!media && (
         <div className="hatch absolute inset-0 flex items-end justify-between p-3 md:p-4">
           {placeholder ? (

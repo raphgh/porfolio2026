@@ -15,7 +15,7 @@ type Props = { projects: Project[] };
 /**
  * Wii: glossy 2-col channel cards + confirm dialog.
  * Modern: existing WorkIndex.
- * Covers use background-image - Safari can blank <img> under Motion transforms.
+ * Covers use plain <img> (not CSS backgrounds) for Safari paint reliability.
  */
 export function WiiProjectGrid({ projects }: Props) {
   const { mode } = useInterfaceMode();
@@ -56,19 +56,18 @@ export function WiiProjectGrid({ projects }: Props) {
                   setPending(project);
                 }}
               >
-                <span
-                  className="wii-project-card__media"
-                  style={
-                    cover
-                      ? {
-                          backgroundImage: `url(${cover.src})`,
-                          backgroundSize: "cover",
-                          backgroundPosition: "center",
-                        }
-                      : undefined
-                  }
-                >
-                  {!cover ? <span className="wii-project-card__wash" /> : null}
+                <span className="wii-project-card__media">
+                  {cover ? (
+                    <img
+                      className="wii-project-card__img"
+                      src={cover.src}
+                      alt=""
+                      decoding="async"
+                      draggable={false}
+                    />
+                  ) : (
+                    <span className="wii-project-card__wash" />
+                  )}
                   <span className="wii-project-card__gloss" aria-hidden />
                   <span className="wii-project-card__scan" aria-hidden />
                   <span className="wii-project-card__title">{project.title}</span>

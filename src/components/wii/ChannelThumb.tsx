@@ -26,17 +26,16 @@ const PROJECT_SHOTS = {
 } as const;
 
 /**
- * Designed Wii Menu channel face - CSS motion only (no Motion transforms).
- * Safari blanks <img> when a transformed ancestor wraps overflow-clipped media.
+ * Channel face art. Prefer real <img> over CSS background-image - Safari
+ * often blanks backgrounds under overflow + radius + transform stacks.
  */
 export function ChannelThumb({ variant, title, accent, hovered = false }: ChannelThumbProps) {
   const lightTitle = variant === "resume" || variant === "comingSoon";
 
   return (
     <span className={`wii-thumb wii-thumb--${variant}`} data-hovered={hovered ? "true" : "false"}>
-      <span aria-hidden>
-        <ThumbArt variant={variant} hovered={hovered} accent={accent} />
-      </span>
+      <ThumbArt variant={variant} hovered={hovered} accent={accent} />
+      {/* Overlays stay out of the art stacking context */}
       <span className="wii-thumb__scan" aria-hidden />
       <span className="wii-thumb__gloss" aria-hidden />
       {variant !== "comingSoon" ? (
@@ -94,15 +93,23 @@ function ProjectsThumb({ hovered }: { hovered: boolean }) {
       <span className="wii-thumb-projects__lawn" aria-hidden />
       <span className="wii-thumb-projects__phones">
         {(["a", "b"] as const).map((slot) => (
-          <span key={slot} className={`wii-thumb-phone wii-thumb-phone--${slot}`}>
-            <span
-              className="wii-thumb-phone__shot wii-thumb-phone__shot--a"
-              style={{ backgroundImage: `url(${PROJECT_SHOTS[slot][0]})` }}
-            />
-            <span
-              className={`wii-thumb-phone__shot wii-thumb-phone__shot--b${hovered ? " is-on" : ""}`}
-              style={{ backgroundImage: `url(${PROJECT_SHOTS[slot][1]})` }}
-            />
+          <span key={slot} className={`wii-thumb-phone-tilt wii-thumb-phone-tilt--${slot}`}>
+            <span className="wii-thumb-phone">
+              <img
+                className="wii-thumb-phone__shot wii-thumb-phone__shot--a"
+                src={PROJECT_SHOTS[slot][0]}
+                alt=""
+                decoding="async"
+                draggable={false}
+              />
+              <img
+                className={`wii-thumb-phone__shot wii-thumb-phone__shot--b${hovered ? " is-on" : ""}`}
+                src={PROJECT_SHOTS[slot][1]}
+                alt=""
+                decoding="async"
+                draggable={false}
+              />
+            </span>
           </span>
         ))}
       </span>
@@ -125,10 +132,9 @@ function LabThumb({ hovered }: { hovered: boolean }) {
               zIndex: i + 1,
             }}
           >
-            <span
-              className="wii-thumb-lab__bubble"
-              style={{ backgroundImage: `url(${icon.src})` }}
-            />
+            <span className="wii-thumb-lab__bubble">
+              <img src={icon.src} alt="" decoding="async" draggable={false} />
+            </span>
           </span>
         ))}
       </span>
@@ -139,10 +145,9 @@ function LabThumb({ hovered }: { hovered: boolean }) {
 function ExperienceThumb({ hovered }: { hovered: boolean }) {
   return (
     <span className="wii-thumb__art wii-thumb-exp" data-hot={hovered ? "true" : "false"}>
-      <span
-        className="wii-thumb-exp__logo"
-        style={{ backgroundImage: "url(/logos/nokia.jpg)" }}
-      />
+      <span className="wii-thumb-exp__logo">
+        <img src="/logos/nokia.jpg" alt="" decoding="async" draggable={false} />
+      </span>
       <span className="wii-thumb-exp__ticker-wrap">
         <span className="wii-thumb-exp__ticker">
           {EXP_TICKER}
@@ -158,10 +163,9 @@ function MeThumb({ hovered }: { hovered: boolean }) {
     <span className="wii-thumb__art wii-thumb-me" data-hot={hovered ? "true" : "false"}>
       <span className="wii-thumb-me__checker" aria-hidden />
       <span className="wii-thumb-me__avatar-wrap">
-        <span
-          className="wii-thumb-me__avatar"
-          style={{ backgroundImage: "url(/scrapbook/fundraiser.jpg)" }}
-        />
+        <span className="wii-thumb-me__avatar">
+          <img src="/scrapbook/fundraiser.jpg" alt="" decoding="async" draggable={false} />
+        </span>
       </span>
     </span>
   );
@@ -173,10 +177,9 @@ function BlogThumb({ hovered }: { hovered: boolean }) {
       <span className="wii-thumb-blog__page-wrap">
         <span className="wii-thumb-blog__page">
           <span className="wii-thumb-blog__lines" aria-hidden />
-          <span
-            className="wii-thumb-blog__stamp"
-            style={{ backgroundImage: "url(/scrapbook/fundraiser.jpg)" }}
-          />
+          <span className="wii-thumb-blog__stamp">
+            <img src="/scrapbook/fundraiser.jpg" alt="" decoding="async" draggable={false} />
+          </span>
         </span>
       </span>
     </span>
