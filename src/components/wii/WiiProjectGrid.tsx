@@ -43,10 +43,8 @@ export function WiiProjectGrid({ projects }: Props) {
                 type="button"
                 className={`wii-project-card${active ? " is-hot" : ""}${dimmed ? " is-dim" : ""}`}
                 aria-label={`${project.title}. ${project.role}.`}
-                initial={reduce ? false : { opacity: 0, y: 16 }}
+                initial={false}
                 animate={{
-                  opacity: 1,
-                  y: 0,
                   scale: active ? 1.04 : 1,
                   zIndex: active ? 4 : 1,
                 }}

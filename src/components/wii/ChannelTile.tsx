@@ -23,7 +23,7 @@ const spring = { type: "spring" as const, stiffness: 420, damping: 24 };
 export function ChannelTile({
   channel,
   index,
-  pageIndex,
+  pageIndex: _pageIndex,
   focused,
   hovered,
   dimmed,
@@ -34,7 +34,6 @@ export function ChannelTile({
 }: Props) {
   const reduce = useReducedMotion();
   const empty = !channel;
-  const globalIndex = pageIndex * 12 + index;
   const hot = Boolean(hovered || focused);
 
   const className = [
@@ -69,13 +68,13 @@ export function ChannelTile({
     </>
   );
 
+  // No enter opacity/scale - Safari can leave layoutId tiles stuck invisible.
   const motionProps = {
     className,
-    initial: reduce ? false : ({ opacity: 0, scale: 0.8 } as const),
+    initial: false as const,
     animate: reduce
-      ? ({ opacity: 1, scale: 1 } as const)
+      ? ({ scale: 1 } as const)
       : {
-          opacity: 1,
           scale: hot ? 1.06 : 1,
           rotate: wiggle ? [0, -1.5, 1.5, 0] : 0,
           zIndex: hot ? 5 : 1,
@@ -84,7 +83,6 @@ export function ChannelTile({
       ? { duration: 0.2 }
       : {
           ...spring,
-          delay: globalIndex * 0.035,
           rotate: { duration: 0.4 },
         },
   };

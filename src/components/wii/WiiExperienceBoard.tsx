@@ -128,8 +128,8 @@ export function WiiExperienceBoard() {
                       className="wii-exp-tile"
                       layoutId={`wii-exp-${entry.id}`}
                       aria-label={`${entry.company}, ${entry.role}, ${entry.year}`}
-                      initial={reduce ? false : { opacity: 0, y: 16 }}
-                      animate={{ opacity: 1, y: 0 }}
+                      initial={reduce ? false : { y: 16 }}
+                      animate={{ y: 0 }}
                       whileHover={reduce ? undefined : { scale: 1.04, zIndex: 3 }}
                       whileFocus={reduce ? undefined : { scale: 1.04, zIndex: 3 }}
                       transition={

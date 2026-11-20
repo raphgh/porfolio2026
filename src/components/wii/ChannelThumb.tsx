@@ -131,7 +131,7 @@ function LabThumb({ hovered, reduce }: { hovered: boolean; reduce: boolean }) {
         {LAB_ICONS.map((icon, i) => (
           <m.span
             key={icon.alt}
-            className="wii-thumb-lab__bubble"
+            className="wii-thumb-lab__bubble-wrap"
             style={{
               left: icon.left,
               top: icon.top,
@@ -152,8 +152,10 @@ function LabThumb({ hovered, reduce }: { hovered: boolean; reduce: boolean }) {
             }
             transition={{ type: "spring", stiffness: 420, damping: 14, delay: i * 0.035 }}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={icon.src} alt="" draggable={false} />
+            <span className="wii-thumb-lab__bubble">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={icon.src} alt="" draggable={false} />
+            </span>
           </m.span>
         ))}
       </span>
@@ -190,8 +192,9 @@ function MeThumb({ hovered, reduce }: { hovered: boolean; reduce: boolean }) {
   return (
     <span className="wii-thumb__art wii-thumb-me">
       <span className="wii-thumb-me__checker" aria-hidden />
+      {/* Motion wrap separate from overflow clip - Safari blanks imgs when both share a node */}
       <m.span
-        className="wii-thumb-me__avatar"
+        className="wii-thumb-me__avatar-wrap"
         animate={
           reduce
             ? undefined
@@ -201,13 +204,15 @@ function MeThumb({ hovered, reduce }: { hovered: boolean; reduce: boolean }) {
         }
         transition={{ type: "spring", stiffness: 280, damping: 12 }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/scrapbook/fundraiser.jpg"
-          alt=""
-          className="wii-thumb-fill wii-thumb-fill--top"
-          draggable={false}
-        />
+        <span className="wii-thumb-me__avatar">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/scrapbook/fundraiser.jpg"
+            alt=""
+            className="wii-thumb-fill wii-thumb-fill--top"
+            draggable={false}
+          />
+        </span>
       </m.span>
     </span>
   );
@@ -217,7 +222,7 @@ function BlogThumb({ hovered, reduce }: { hovered: boolean; reduce: boolean }) {
   return (
     <span className="wii-thumb__art wii-thumb-blog">
       <m.span
-        className="wii-thumb-blog__page"
+        className="wii-thumb-blog__page-wrap"
         animate={
           reduce
             ? undefined
@@ -227,15 +232,17 @@ function BlogThumb({ hovered, reduce }: { hovered: boolean; reduce: boolean }) {
         }
         transition={{ type: "spring", stiffness: 300, damping: 18 }}
       >
-        <span className="wii-thumb-blog__lines" aria-hidden />
-        <span className="wii-thumb-blog__stamp">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/scrapbook/fundraiser.jpg"
-            alt=""
-            className="wii-thumb-fill wii-thumb-fill--top"
-            draggable={false}
-          />
+        <span className="wii-thumb-blog__page">
+          <span className="wii-thumb-blog__lines" aria-hidden />
+          <span className="wii-thumb-blog__stamp">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/scrapbook/fundraiser.jpg"
+              alt=""
+              className="wii-thumb-fill wii-thumb-fill--top"
+              draggable={false}
+            />
+          </span>
         </span>
       </m.span>
     </span>
