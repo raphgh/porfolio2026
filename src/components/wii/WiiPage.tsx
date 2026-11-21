@@ -2,7 +2,7 @@
 
 import { useCallback, useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
-import { m, useReducedMotion } from "motion/react";
+import { useReducedMotion } from "motion/react";
 import { ModeToggle } from "@/components/ModeToggle";
 import { PageHeader } from "@/components/PageHeader";
 import { useInterfaceMode } from "@/components/InterfaceModeProvider";
@@ -27,6 +27,7 @@ type Props = {
 /**
  * Shared Wii channel-page shell for portfolio routes.
  * Modern mode keeps the existing PageHeader + shell layout.
+ * No Motion transforms around page body - Safari blanks cover <img> under them.
  */
 export function WiiPage({
   title,
@@ -34,7 +35,7 @@ export function WiiPage({
   loadingNote = false,
   thumb,
   accent = "#eef2f6",
-  channelId,
+  channelId: _channelId,
   backHref = "/",
   children,
 }: Props) {
@@ -70,17 +71,14 @@ export function WiiPage({
 
       <header className="wii-page__top">
         <div className="wii-page__top-start">
-          <m.button
+          <button
             type="button"
             className="wii-orb wii-page__back"
             aria-label={backHref === "/" ? "Back to channels" : "Back"}
-            initial={reduce ? false : { opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ type: "spring", stiffness: 260, damping: 24, delay: 0.12 }}
             onClick={goBack}
           >
             <BackIcon />
-          </m.button>
+          </button>
         </div>
         <p className="wii-page__mark">{site.shortName}</p>
         <div className="wii-page__top-end">
@@ -88,33 +86,13 @@ export function WiiPage({
         </div>
       </header>
 
-      <m.div
-        className="wii-page__scroll"
-        initial={false}
-        animate={
-          exiting
-            ? reduce
-              ? { opacity: 0 }
-              : { opacity: 0, scale: 0.86, y: 40 }
-            : { opacity: 1, scale: 1, y: 0 }
-        }
-        transition={
-          reduce ? { duration: 0.2 } : { type: "spring", stiffness: 200, damping: 26 }
-        }
-      >
+      <div className={`wii-page__scroll${exiting ? " is-exiting" : ""}`}>
         <div className="wii-page__column">
-          <m.header
-            className="wii-page__title-block"
-            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={
-              reduce ? { duration: 0.25 } : { type: "spring", stiffness: 260, damping: 28 }
-            }
-          >
+          <header className="wii-page__title-block">
             <div className="wii-page__thumb" style={{ background: accent }}>
               {thumb ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={thumb} alt="" />
+                <img src={thumb} alt="" decoding="async" />
               ) : null}
             </div>
             <div className="wii-page__title-text">
@@ -124,18 +102,7 @@ export function WiiPage({
                   .
                 </span>
               </h1>
-              <m.span
-                className="wii-page__rule"
-                aria-hidden
-                initial={reduce ? { scaleX: 1 } : { scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                style={{ originX: 0 }}
-                transition={
-                  reduce
-                    ? { duration: 0.2 }
-                    : { type: "spring", stiffness: 220, damping: 28, delay: 0.12 }
-                }
-              />
+              <span className="wii-page__rule is-on" aria-hidden />
               {loadingNote && subtitle ? (
                 <div className="wii-loading-note">
                   <div className="wii-loading-bar" aria-hidden>
@@ -147,13 +114,13 @@ export function WiiPage({
                 <p className="wii-page__subtitle">{subtitle}</p>
               ) : null}
             </div>
-          </m.header>
+          </header>
 
           <div className="wii-page__body">
             <WiiPanelProvider>{children}</WiiPanelProvider>
           </div>
         </div>
-      </m.div>
+      </div>
     </div>
   );
 }

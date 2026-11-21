@@ -31,4 +31,4 @@ export function toggleInterfaceMode(current: InterfaceMode): InterfaceMode {
 }
 
 /** Runs before paint so the first frame isn't the wrong shell. */
-export const interfaceBootScript = `(function(){try{var k=${JSON.stringify(INTERFACE_STORAGE_KEY)};var t=localStorage.getItem(k);var m=(t==='modern')?'modern':'wii';document.documentElement.dataset.interface=m;}catch(e){document.documentElement.dataset.interface='wii';}})();`;
+export const interfaceBootScript = `(function(){try{var k=${JSON.stringify(INTERFACE_STORAGE_KEY)};var t=localStorage.getItem(k);var m=(t==='modern')?'modern':'wii';document.documentElement.dataset.interface=m;}catch(e){document.documentElement.dataset.interface='wii';}try{var ua=navigator.userAgent||'';var safari=/safari/i.test(ua)&&!/chrome|chromium|crios|fxios|edg/i.test(ua);var webkit=/applewebkit/i.test(ua)&&!/chrome|chromium|crios|fxios|edg/i.test(ua);document.documentElement.dataset.engine=(safari||webkit)?'safari':'other';}catch(e2){document.documentElement.dataset.engine='other';}})();`;

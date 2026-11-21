@@ -62,7 +62,11 @@ export function WiiProjectGrid({ projects }: Props) {
                       className="wii-project-card__img"
                       src={cover.src}
                       alt=""
+                      width={1280}
+                      height={720}
                       decoding="async"
+                      loading="eager"
+                      fetchPriority="high"
                       draggable={false}
                     />
                   ) : (

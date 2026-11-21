@@ -1,7 +1,6 @@
 "use client";
 
 import { createContext, useContext, useRef, type ReactNode } from "react";
-import { m, useReducedMotion } from "motion/react";
 import { useInterfaceMode } from "@/components/InterfaceModeProvider";
 
 type PanelCtx = { takeIndex: () => number };
@@ -26,29 +25,16 @@ type Props = {
   index?: number;
 };
 
-/** Glossy Wii content panel. Pass-through wrapper in Modern mode. */
-export function WiiPanel({ children, className = "", index }: Props) {
+/**
+ * Glossy Wii content panel. Plain element (no Motion) so Safari paints cover images.
+ * Pass-through wrapper in Modern mode.
+ */
+export function WiiPanel({ children, className = "", index: _index }: Props) {
   const { mode } = useInterfaceMode();
-  const reduce = useReducedMotion();
-  const ctx = useContext(WiiPanelContext);
-  const slot = index ?? ctx?.takeIndex() ?? 0;
 
   if (mode !== "wii") {
     return <div className={className || undefined}>{children}</div>;
   }
 
-  return (
-    <m.section
-      className={`wii-panel ${className}`.trim()}
-      initial={reduce ? { opacity: 0 } : { opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={
-        reduce
-          ? { duration: 0.28, delay: slot * 0.04 }
-          : { type: "spring", stiffness: 280, damping: 28, delay: slot * 0.06 }
-      }
-    >
-      {children}
-    </m.section>
-  );
+  return <section className={`wii-panel ${className}`.trim()}>{children}</section>;
 }
