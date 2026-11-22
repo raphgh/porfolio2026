@@ -68,7 +68,7 @@ export const awards: Award[] = [
     detail: "$1,500",
   },
   {
-    title: "1st Place Team in SEG2900 2023 Engineering Pitch Competition",
+    title: "1st Place Team in SEG2900 2023 Pitch Competition",
   },
 ];
 
