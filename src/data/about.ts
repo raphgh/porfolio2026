@@ -18,6 +18,14 @@ export const about = {
 /** A few strong images - not a creative portfolio. */
 export const scrapbook: ScrapbookItem[] = [
   {
+    caption: "bike cafe!",
+    media: {
+      type: "image",
+      src: "/scrapbook/bike-cafe.jpg",
+      alt: "Standing in the doorway of Retro-Rides Bike Shop at night",
+    },
+  },
+  {
     caption: "back home in lebanon :)",
     media: {
       type: "image",
