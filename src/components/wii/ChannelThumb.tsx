@@ -171,16 +171,23 @@ function MeThumb({ hovered }: { hovered: boolean }) {
   );
 }
 
+const BLOG_POSTCARDS = [
+  "/scrapbook/fundraiser-setup.jpg",
+  "/scrapbook/fundraiser-band.jpg",
+] as const;
+
 function BlogThumb({ hovered }: { hovered: boolean }) {
   return (
     <span className="wii-thumb__art wii-thumb-blog" data-hot={hovered ? "true" : "false"}>
-      <span className="wii-thumb-blog__page-wrap">
-        <span className="wii-thumb-blog__page">
-          <span className="wii-thumb-blog__lines" aria-hidden />
-          <span className="wii-thumb-blog__stamp">
-            <img src="/scrapbook/fundraiser.jpg" alt="" decoding="async" draggable={false} />
+      <span className="wii-thumb-blog__stack">
+        {BLOG_POSTCARDS.map((src, i) => (
+          <span
+            key={src}
+            className={`wii-thumb-blog__card wii-thumb-blog__card--${i === 0 ? "front" : "back"}`}
+          >
+            <img src={src} alt="" decoding="async" draggable={false} />
           </span>
-        </span>
+        ))}
       </span>
     </span>
   );

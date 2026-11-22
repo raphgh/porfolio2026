@@ -12,9 +12,8 @@ export const blogPosts: BlogPost[] = [
     dateISO: "2026-10-09",
     summary: "Getting to be part of Ottawa’s Capital Music Awards.",
     body: [
-      "got to be part of the second edition of the capital music awards, which celebrates the local music scene.",
-      "being in that room with so many artists, tech crew, organizers, and other talented people felt really special.",
-      "super grateful i got to be part of it. more nights like that please.",
+      "got to be part of the second edition of the capital music awards, which celebrates the local music scene. being in that room with so many artists, tech crew, organizers, and other talented people was very cool.",
+      "definitely one of my favourite highlights."
     ],
   },
   {

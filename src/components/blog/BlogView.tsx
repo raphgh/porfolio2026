@@ -41,7 +41,7 @@ function ClassicBlog({ posts }: { posts: BlogPost[] }) {
     <WiiPage
       title="Blog"
       subtitle="cool things worth sharing :p"
-      thumb="/scrapbook/fundraiser.jpg"
+      thumb="/scrapbook/fundraiser-setup.jpg"
       accent="#e8eef3"
       channelId="blog"
     >

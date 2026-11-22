@@ -92,14 +92,6 @@ export const wiiChannels: WiiChannel[] = [
     accent: "#4a5560",
   },
   {
-    id: "resume",
-    label: "Resume",
-    href: site.resume,
-    external: true,
-    thumb: "resume",
-    accent: "#9fd8e8",
-  },
-  {
     id: "awards",
     label: "Awards",
     href: "/me#awards",
